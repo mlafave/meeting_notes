@@ -212,7 +212,7 @@ It turns out that cofactors may NOT be required, as the proteins bind quite well
 
 
 
-Rema Rohs - Quantitative modeling of transcription factor bidning specificities using DNA shape
+Remo Rohs (@RemoRohs) - Quantitative modeling of transcription factor bidning specificities using DNA shape
 
 TF binding using crystal structures
 
@@ -228,7 +228,7 @@ Looking at DREAM5 dataset, DNA shape improves binding specificity predictions ba
 
 
 
-Marc Santolini - Deciphering gene regulatory networks using DNA sequence
+Marc Santolini (@msantolini) - Deciphering gene regulatory networks using DNA sequence
 
 Limitations of CRM prediction:
 * Model accuracy
@@ -473,5 +473,239 @@ Gene transcriptional regulation is accompanied by eRNA regulation
 
 Squelching proposed as a regulatory mechanism as rosi.
 
+
+
+7/13/14
+
+
+KN1 - Michal Linial - Good Things Come in Small Packages - Replicators and Innovators
+
+Where are we going? Main theme is tracing the footsteps of evolution. Dobzhansky quote at the bottom of slide.
+Particulars:
+* creating MAP for proteins
+* Challenge the MAP
+* Devleop NAVIGATION
+* Hidden functions
+* Created functions
+* The lesson
+
+Or: A treasure hunt for hidden functions.
+Some guidelines:
+* Listen carefully to the "big data". Be very careful w/ regard to outliers, exceptions, etc.
+* But also listen carefully to the biology, since in that context, the "exceptions" may be the interesting part, rather than something misleading.
+
+Example of a lot of data: LOTS in UniProt, but we only understand a very small fraction of them.
+
+Often forgotten/swept under the carpet:
+Gene/DNA is essentially written in stone.
+Sequence/transcript is static, but you may have a handful of them.
+Protein variants are dynamic, and you could have 25-100.
+For protein function…context dependent, and who KNOWS how many of these ther are to find. Defining protein function is hard to do.
+
+Protein space is tough b/c it's high-dimensional, metrics poorly defined, a lot of "dark matter".
+
+The ideal is automatic assignment of sequences -> function.
+
+ProtoNet:
+All seq in UniProtKB included, do all-against-all blast, look at things even with a very weak E value of 100 (so dealing with even very remote distances).
+
+Bottom up: Agglomerative clustering
+Use the above for clustering.
+The more the merrier - adding in MORE proteins (even the weak distances) makes signals clearer. Increasing the sample size actually increased the signal per noise in this case.
+
+Merging rules make a difference. 
+Changes the number of singletons you have. You have to pick your clustering method based on the biology.
+
+Correspondence score for similarity
+
+Tree built, tested with respect to external families (various databases)
+Evo relatedness is captured
+
+A problem: false transitivity. A is similar to B, B similar to C, but A isn't necessarily similar to C (since you may be dealing with different domains). A and C definitely aren't homologous.
+
+So, how to deal with that?
+In the next merge, you use average clustering rather than direct clustering (meaning you take all the out-facing links from all the elements in the current clusters into account)
+
+MC-UPGMA outperforms other clustering methods for both families and domains.
+
+Globin example:
+The evolutionary duplications are visible on their tree - which is impressive, since they're VERY different sequence-wise (E score beyond 100)
+
+Another use of this protein map: looking for hidden connections.
+Can look at upstream nodes to look for functional connection BETWEEN families (looks like looking at most recent common ancestor of the families)
+
+Visualizing the data lets the data tell you what to do. It showed them to focus on a specific subset of the data with respect to Pfam clans.
+
+Small packages: They found a LOT (like, upper 50% of A-B pairs) of similarity between viral proteins - despite having essentially evolved in isolation.
+
+We're getting a LOT of insect genomes. Why? They're extremely diverse.
+Can use those for gain and loss of families. ProtoBug, poster C04.
+
+Switching gears to look at things with NO similarity: have to rely on the biology, here.
+Hypothesis: maybe short peptides are an unexplored regulatory mode. 
+
+Turns out the longer the protein, the more likely it is that we understand it.
+Except toxins - those are short, but we know a lot about those.
+
+ICI (ion channel inhibitor) - have cases in which many folds hit one target, AND in which one fold hits many targets. So there's no simple relation between the folds and the targets, can't really use that for inferring function.
+
+So what's common among these? 
+Compact elements, with structure shaped by cysteine bridges that hold them together.
+
+For studying this, design features that capture your intuition.
+
+TOLIPs at the origin of Metazoa -
+Cnidaria are "a factory of TOLIPs" (toxin-like proteins).
+
+Can we find TOLIPs of new function in the human brain?
+ANLP3 modulates nicotine ACh receptors.
+
+Evolution duplicates and modifies: what starts as just a toxin becomes a clan with cell signaling receptors and others.
+
+Real toxins have irreversible action. The hit channel can't recover. But the non-toxins TOLIPs ARE reversible - why whiskey doesn't kill you.
+
+Toxin-like sequences have therapeutic applications as pain relievers, etc.
+
+
+
+LBR01 - Steven E. Brenner - Transcritome targets of nonsense-mediated mRNA decay offer clues to RNA surveillance rules in human, fish, and fly
+
+NMD originally though to be an RNA surveillance system to protect against dominant negative mutations (truncated proteins blocking out full proteins, etc.)
+
+Sox10 used as an example - mutations near N-term are bad, but individuals live to adulthood. By C-term, you die early, in childhood (except by the VERY end of the protein, which isn't as bad). It's because NMD clears out the mutations near the start.
+
+The 50-nucleotide rule: model for NMD in mammals (Nagy and Maquat, 1998). Used to be the predominant model, but…
+
+Hogg and Goff 2010 - length of the 3' UTR may make a difference. A long 3' UTR may define a premature termination codon.
+
+Premature termination codons appear to be defined differently across species - what counts as a "long" UTR differs.
+
+Alternative splicing can ALOS introduce PTCs.
+
+Did RNA-seq to identify NMD targets genome-wide. used HeLa cells, some of which had NMD machinery knocked down (UPF1 knockdown). Looked via Cufflinks and JuncBASE to see novel isoforms that were degraded but are now measurable.
+
+HeLa has about 11,000 genes expressed. 3,932 had early stop codons according to the 50 nt rule in at least one isoform.
+
+2,116 genes with at least one isoform that is expressed robustly (1.5x increased) AND is being degraded by NMD.
+
+In fish" 3,945 genes of 9,492 genes had at least one transcript with >1 FPKM. 416 of those are NMD targets.
+
+50 nt rule IS a strong predictor of NMD in human. If you go more than 50 nt, suddenly you have much higher difference in expression. 
+Fish and fly are similar, but less data, so not as strong. More subtle effect, too. Fly and fish have much greater scatter beyond that 50 nt boundary, while it's sharp in humans.
+
+3' UTR length has little effect on NMD degradation. You have to remove the introns in the UTR to see that, though, since introns would cause the 50 nt rule to kick in again.
+Even less signal in fly and fish. Human is signif but modest, but fly and fish aren't even signif.
+
+So why did they think it was UTR-mediated in fly before this? They were using microarray, which had a much better means of capturing those short UTRs.
+
+So why make these proteins if you're just going to destroy them?
+Because NMD + splicing can be used for gene regulation, such as autoregulation. Srsf2 is one such splicing factor that does this.
+
+NMD is important in the dense regulatory network of splicing factors
+
+10-30% of alt spliced genes produce transcripts affected by UPF1 in fly and zebrafish.
+
+
+
+LBR03 - Daniel Himmelstein - Heterogeneous Network Link Prediction Prioritizes Disease-Associated Genes
+
+Prioritization increases GWAS power by increasing prior probability.
+
+Others have used homogenous networks (one kind of node, one kind of edge).
+So he's doing heterogeneous networks (many nodes and edge types).
+
+Network includes genes, protein-protein interactions, disease, pathophysiology, tissues, genomic positions, transcription signatures of perturbations, pathways, microRNA targets, TFBS, cancer neighborhoods, GO terms, oncogenic and immunologic signatures.
+
+Looking at the paths you can take from a gene to get to a disease. Each one gets a metric that measures it's prevalence of that path. Metric is mainly degree-weighted path count (since high degree-nodes are less specific, and thus less informative)
+
+Machine learning methodology - observations were gene-disease pairs for 29 diseases with 10+ associations, and a bunch of other stuff. 70% training set.
+Used ridge and lasso for regularization. 
+
+83% chance that a positive was ranked higher than a negative. ROC looks pretty okay to me.
+
+Perturbation signatures capture most of the useful gene set information.
+
+Degree-preserving permutation test: AUROC didn't decrease much, which was weird. Node degree accounts for the majority of performance for many network-based approaches. However, edge specificity is important for the top predictors.
+
+Predicting a future GWAS: When looking at given region, this method might help pick the predicted causal gene.
+
+het.io - decomposes predictions into components.
+
+
+
+TT02 - Enoch S. Huang - Computational biology careers at Pfizer R&D
+
+AKA Computational Biology at Pfizer: Overview and examples
+Simon Xi, Daniel Ziemek, Eric Fauman & Cristoph Brockel
+
+They'll have a booth tomorrow all day long.
+
+Brockel - overview
+Precision medicine is about lower attrition through better decision. Picking better targets, essentially.
+Also want to select the right patients, since drugs tend to not work for everyone. 
+
+
+Simon Xi - Alternative Splicing: New Opportunities for Old Genes
+
+He's the Neuroscience bioinformatics lead (been at Pfizer 13 years, 6 years since the beginning of the group)
+
+Since they're interested in working on a given PROTEIN, it's important to know which splice variant of a given gene is the one you want.
+RNA-seq helps with that. A lot of reads cross splice junctions helps determine representation of different isoforms in a given pool.
+
+Looking at GTEx dataset: >185 donors, 46 tissues including 13 brain regions. 
+Looked at all junctions to quantify alt splicing.
+
+Alt splicing is universal in all tissues. 
+
+MAG Lipase example: if exon 6 is skipped, the tether is gone, so it disperses into the cytosol. 
+
+So, the appeal of this in the Pfizer setting is that they can tell you what version is going to be in what tissue, and what's the dominant isoform.
+
+Splicing patterns also help interpret GWAS findings. For them, they need to know what's the target, do they up- or down-regulate, etc., before they can start a program. 
+
+CD33 example - likely that rs12459419 is the variant affecting splicing. Suggests LOF of CD33 receptor could be protective for Alzheimer's disease. 
+They've now found about 100 splicing QTLs in GWAS catalog for a variety of diseases and traits.
+
+
+Daniel Ziemek - Interpreting Genetic and Transcriptomic data using the causal reasoning engine
+
+Started from a CS background
+
+Can prior knowledge help with transcriptomic and genomic data?
+Many omics studies are under-powered for small effects.
+
+Basics of CRE: mechanistic explanations are causal, which implies direction. Delineation of pathways are often fuzzy.
+So, can you construct a large-scale network of casual "increase/decrease" relationships? They use curated data to do so. 
+
+Substantial causal knowledgebase based on Ingenuity pathways analysis, Thompson Reuters and Selventa data.
+
+CRE: Input is set of up-and down regulated transcript, and output is set of potential upstream regulators that caused those changes.
+
+Pfizer does encourage external publication, too.
+
+CRE analysis of Pancreatic induction stage (8- to 11-day transition):
+Standard pathway analysis helped to validate experimental protocol. Want to identify molecular drivers of differentiation. 
+So your diff. expr. genes get reduced to a smaller list of potential upstream regulators. 
+
+Pain sensitivity in the normal population: an exome sequencing study. Looked at how long subjects could keep their finger in hot water, wanted to see if there was a genetic cause for those who did for long/short time.
+There's some evidence for Angiotensin 2, which is genome-wide significant.
+
+Bayes CRE: a non-frequentist approach. Tries to model biological context. 
+A building block for a biomarker detection method (PP76 on Tuesday)
+
+
+Eric Fauman - How genotype influences phenotype: a study of human metabolic variation
+(Has a biology background)
+
+Measured 500 metabolites in plasma from 8,000 subjects, and then associated those with 2 million SNPs. That's a billion statistical tests.
+Can look at which genes contribute to individual variation in metabolism, affect levels of metabolites
+
+An atlas of genetic influences on human blood metabolites (nature genetics)
+
+In the case of the FADS1 locus, the genetic variant impacts the transcription of the gene.
+
+Sometimes these things aren't direct - for PHGDC, the genetic variant affects a key intermediate in the metabolic pathway (but you're kind of three steps removed)
+
+Interesting example of CCBL1 - KEGG missed an annotation of what it was doing within a metabolic pathway.
 
 
