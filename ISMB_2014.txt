@@ -1,0 +1,477 @@
+ISMB 2014
+
+7/12/14
+
+RegGenSIG
+(Thanks to @ramialison_lab, whose tweets have been incorporated into these notes)
+
+
+
+Jason Ernst - Opening remarks
+
+
+
+QUALITY CONTROL
+
+
+Marco A. Mendoza-Parra - A quality controls system for enrichment-based NGS data sets
+
+Works on retinoic acid.
+Want to integrate multiple sources of info for a systems bio perspective. This talk is on how the integration is preformed.
+
+Polyphemus - peak normalization for comparison
+
+Now the actual QC bit. NAR paper 2013.
+
+Same antibody, same number of reads, but different labs produce different peak intensities, background.
+
+Why? There's technical variability. Ab batches can make a difference, so does depth (though my understanding is that those don't explain the above points).
+
+Cited differences in peak callers as another concern.
+
+Their approach is different - 
+Remove a fraction of the reads, randomly, and use those to re-construct the profile. Ideally, this will reconstitute the peaks, but with a lower amplitude. Gives you an idea of the robustness.
+
+Measure the dispersion from the ideal
+
+They use quartiles to grade the enrichment. They aim for at least BBB score or better.
+
+Available at http://www.ngs-qc.org/. Integrated into Galaxy.
+
+Q: If you sample background, you'll get background peaks.
+A: Input shows up a DDD.
+
+Q: How does antibody validation work?
+A. They just look to see if they're CHiP-seq grade via automated platform.
+
+
+
+CHROMATIN/ENHANCERS
+
+
+Xiaole Shirley Liu - Using ChIP-seq and DNase-seq to identify TF binding and their target genes
+
+Started by mentioning various tools:
+ChiLin is command-line tool for peak calling
+CistromeMap: has someone done chip seq of factor X in cell Y?
+CistrtomeRadar- who else's chip Seq looks like mine?
+(Many other things listed, too)
+
+Currently running everything on Grc38
+
+Notch-r reg in T-LL: gamma-secretase inhibitor prevents notch from going in the nucleus. However, only 10% of the notch1 binding sites change upon treatment with GSI. Those sites tend to be be in enhancers, enriched for a paired motif.
+
+Dynamic NOTCH1 binding are enriched in super-enhancers (h3k27-defined) [AKA stretch enhancers].
+
+Summary I:
+Static TF ChIP-seq might not identify correct target genes
+TF and h3k27ac under perturbations might be better.
+
+Chromatin accessible profiling - DNAse treatment + seq finds regulatory sequences.
+
+DNAse-seq optimization - the short fragments tend to be the ones in the DHS peaks, so focusing on them is more cost-effective. Better signal, too.
+
+TF binding from DNAse footprinting: Footprint occupancy score (FOS).
+L and R flanks are 6-25 bp. Lower FOS score is better, predicts better TF binding.
+
+DNAse doesn't cut straight through both strands - strand-specific cutting. 
+Most likely vs. least likely cut can be 300-fold different based just on the 6mer sequences.
+bp-resolution cleavage pattern hurts TF binding prediction when it's close to what DNAseI wold be cutting anyway.
+
+Alternative to TF footprint - overall read counts + motif match. 
+
+So - DNAse data valuable, but you have to be very careful for TF site prediction.
+
+
+
+
+Guo-cheng yuan - Computational analysis of chromatin-state plasticity provides insights into cell identity
+
+Old paper from another group - chromatin states at promoters tend to be invariant, those at enhancers variant.
+
+Quantifying cross cell-type plasticity - compare lots of cells to quantify variability. But DON'T use the variance to do so, since it's not very informative. Instead, you need to do variance divided by the mean. That's the coefficient of variation, but they call it the plasticity score.
+
+High plasticity regions (HPRs) are associated with regulatory regions.
+
+Plasticity is related to DNA sequence.
+
+Pinello PNAS 2014 - pipeline to idientify regulatory TFs.
+
+Haystack almost available - plasticity analysis based on collections of ChIP BAMs
+
+Integrating multiple marks: can use mutual information to block together multiple regions.
+
+Take-home: have to look at multiple cell types
+
+
+
+Christina Leslie - Enhancer poising and regulatory locus complexity shape transcriptional programs in hematopoietic differentiation
+
+Enhancer poising
+
+Models transcription programs governing cell state transition, specifically in hematopoietic differentiation.
+
+The Foxp3 sites in T-reg cells were already accessible in normal CD4+ T-cells, with something else opening them up. Foxp3 was taking advantage of a pre-existing landscape.
+
+Divided genes into "complexity classes" - high complexity tend to have longer transcription units, higher fraction intronic (which tend to have enhancers), greater dynamic range of expression, and larger fold changes in cell-state transition.
+
+SeqGL - captures multiple seq signals from ChIP-seq, DNAse, ATAC-seq (Shirley had pointed out the lsat two have problems). A sparse group lasso model to extract K-mers.
+Want to differentiate what's in the peak from what's next to it. Sets of co-occuring k-mers suggest a motif. Setty and Leslie, under review.
+The point is that using this to compare peaks from different factors can be used to determine what peaks "explain" the peaks in a different cell type.
+
+They initially assign to nearest gene, but then iteratively attempt to improve it by masking the nearby silent genes. Doing so improves performance.
+
+
+
+Tarjei Mikkelsen - Massively parallel reporter assays
+
+Put sequence tags into gene of interest, so you can then do this in multiplex and de-convolute relative (semi-quantitative) activity.
+Useful for promoters, enhancers, silencers, etc.
+
+Interferon-B example: each subunit has much more promiscuous activity than the complex as a whole, which is very specific to viral infection.
+
+Saturation mutagenesis of the hIFNB enhancers. Turns out a single nucleotide in the WT enhancer explains the specificity, and it's not something you'd guess based on the structure.
+
+Can also use this for detection of new regulatory elements.
+
+MPRA can also be used for transcription factor recruitment, see which things actually interact.
+In his example - PPARG - you have a better ability to discern the signal in MPRA vs. ChIP-seq.
+
+(Also mentioned Eric Mendenhall, UAH, and his genomic integration assay)
+
+
+
+MOTIFS
+
+
+Gary Stormo - Improved computational and experimental methods for motif determination
+
+HT-SELEX - like ChIP-seq but with a binding protein instead of an antibody.
+Analyze with non-linear regression.
+
+He says some of the published stuff is over-specified (Taipale lab), since they focused on the strongest peaks.
+So Stormo wanted an alternative.
+
+New approach starts with a PWM (published, MEME, whatever. It's mostly for speed)
+Optimize parameters using Broyden–Fletcher–Goldfarb–Shanno algorithm.
+Machine learning.
+
+(Inverse of hessian matrix is the covairance matrix. Hessian matrix is second derivative of the objective function)
+
+Experimental - rather than sequencing input and bound, if you sequence bound and unbound and compare to a reference, you get the energy directly. That's because you only care about relative affinities.
+
+Specificity of the Lac repressor - involved randomizing various parts of the motif, both the sequence and the spacing. 
+By doing so, they detect 5% variance in affinity, with 0.1 kT variance in energy - so it's very reproducible.
+
+The high-affinity version is only SLIGHTLY better than the wild type - and the WT is best among those with 3 bp spacers. That matches up with with the structure - as WT, lac repressor acts as a heterodimer despite being a homodimer, binding asymmetrically. Visualized the motifs by plotting the energy with both positive and negative values.
+
+
+
+Yaron Orenstein - The use of HT-SELEX to infer TF binding models: comparison to PBM and an improved algorithm
+
+Models very accurate in predicting PBM (protein-binding microarray) binding, but worse in predicting in vivo binding.
+So, were those models over-fit? Yeah. Enter Selex.
+
+NAR 2014 Orenstein and Shier - PBM vs. HT-SELEX
+Looked at correlation between the top 100 8-mers.
+
+HT-SELEX derived models predict in vivo ChIP-seq biding better than PBM. Why? SELEX has longer motifs, and that flanking sequence gives it the edge.
+
+There's a strong sequence bias, too, though, so watch out.
+
+Systematic biases in HT-SELEX:
+Sticky K-mers
+The "false" oligos that don't specify a binding site can go as high as 32,000. He suggests removing them prior to the analysis.
+
+HTS-IBIS - unsupervised algorithm to predict in vivo binding
+* Choose first cycle for which KL-divergence between current and original cycle is > 0.1
+* Correct k-mer count by removing those that differ greatly from their reverse complement
+
+He notes supervised algorithms are better, of course.
+
+HT-SELEX better for in vivo, PBM better for k-mer ranking.
+
+
+
+Raluca Gordân - Improved TF-DNA binding models challenge current hypotheses about genomic recruitment of TFs
+
+In E2F family, at least, PWM are insufficient to describe binding.
+
+The consensus motif often isn't there where the actual binding occurs.
+
+Are PWMs any better? Sort of. Higher AUC, but not much higher than random. ROC curves show that, at least in the case of HeLa S3 E2F1, you can't distinguish at low false-postive rates (only can do about 35%).
+So cofactors must be involved. Work from other groups supports this.
+
+So, they're not looking genome-wise. Genomic context PBMs (probes centered on predicted sites, which eliminates positional bias).
+
+A lot of probes with high gcPBM binding signal do not contain matches to the PWM.
+
+Regression models using 3-mers good at capturing specificity for these proteins (better than PWM at predicting E2F binding).
+
+It turns out that cofactors may NOT be required, as the proteins bind quite well on their own. Poor PWM models just made it look like that wasn't the case.
+
+
+
+Rema Rohs - Quantitative modeling of transcription factor bidning specificities using DNA shape
+
+TF binding using crystal structures
+
+Method he developed: DNAshape (Zhou et al, NAR 2013). Assumes DNA shape at nt resolution is determined by identity of the base and the sequence context.
+
+Mentions SELEX-seq that found DNA shape preferences of Hox TFs. The N-terminal tail is used to read the shape of the DNA.
+
+Yang et al. NAR 2014 - TFBSshape, a motif database for DNA shape features, such as groove width.
+
+GBshape - genome browser for DNA shapefeatures.  rohslab.cmb.usc.edu/GBshape. Not yet published. Also includes electrostatic potential, but I believe they still need to validate that bit.
+
+Looking at DREAM5 dataset, DNA shape improves binding specificity predictions based on benchmark for 69 TFs. Also gcPBM and HT-SELEX.
+
+
+
+Marc Santolini - Deciphering gene regulatory networks using DNA sequence
+
+Limitations of CRM prediction:
+* Model accuracy
+* Model exhaustivity (since it doesn't catch everything)
+
+Studies three types of models: PWM, Pairwise interaction model (PIM), and mixture model.
+PIM, which incorporates correlations between nucleotides, looks to come out on top.
+
+Model exhaustivity - Imogene
+Motif-based. Takes CRMs that you KNOW are there, rank motifs based on overrepresentation therein.
+
+Imogene UI is mobyle.pasteur.fr (source is on github)
+
+
+
+VARIATION
+
+
+Stephem Montgomery - Transcriptome sequencing of large human family identifies the impact of rare non-coding variants.
+(Missed the first part of the talk due to poster session)
+
+Mentioned using the Platinum Genomes data (Illumina) to identify rare noncoding variant impact within a large family.
+They did RNA-seq on all family members.
+
+Since it's in a family, they do eQTLs through linkage, not through association.
+
+More large effect family sQTLs than eQTLs
+
+Are rare variants enriched near large effect family eQTLs? Yes. Enrichment increases with confidence that the effect is larger than in the population.
+
+large effect family eQTL genes tend to be more conserved based on dN/dS. Rare variants influence more conserved genes.
+Network approach: yup, large effect family eQTLs tend to be hub genes (degree > 10)
+
+Rare splice variance enriched for large effect family splicing-QTL genes.
+
+Large effect QTLS influenced GAW genes where expression is already likely to have a role
+
+Turns out using the family is a good way to test annotation-guided genome interpretation methods. (e.g., predicting the effects of rare alleles). Rare variant effects are apparently easier to predict than those of common variants.
+
+They filter out de novos, by the way. Only looking at mendelian variants.
+
+
+
+Gerald Quon - Investigating the functional role of varience-eQTL in transcriptional variation
+
+Decanalization: Stressful environment tends to increase phenotypic variance of a population.
+
+So if you're looking at, say, increased BMI, you can either increase the mean of the distribution or you can increase the variance. They did the latter.
+
+v-eQTLs show no enrichment for cell type specific enhancers, unlike mean eQTLs.
+
+v-eQTLs are more constitutively expressed genes compared to e-QTLs.
+
+vQTLs overlap QTTs. 
+Different mechanism of action than mean-eQTLs. 
+V-eQTLs associated with multiple genes, and their targets are involved in core processes
+Still don't know mode of action or contribution to heritability, though.
+
+
+
+Hunter Fraser - An atlas of human genomic imprinting reveals global patterns of epigenetic regulation
+
+For imprinted genes, expression depends on which parent it came from.
+
+Why? Most popular hypothesis is that it's conflict between the genomes of mother and father in non-monogamous mammals.
+
+ASE - allele-specific expression. Use reciprocal cross (switch parents' gender) to make the evaluation as to if the parent that gave the allele makes the difference.
+
+Imprinting scored using biological replicates as calibration
+
+They now have an atlas that shows mouse genes that are paternally, maternally imprinted, or not imprinted at all.
+
+2x more paternally imprinted than maternal.
+Usually not tissue-specific (95% of mouse imprinted genes aren't).
+
+Also working with humans, though obviously can't do reciprocal crosses. 
+
+Imprinting in a pedigree: can look at allelic flipping, such as when it goes from grandfather -> mother -> son.
+
+ASE validation: mmPCR-seq (Zhang et al. 2014)
+
+Human insights:
+* Most human imprinted genes probably already discovered
+* 17 strong novel candidates
+* Involved in growth, insulin response, glucagon signaling, feeding behavior.
+
+Mat/Pat co-imprinting and accelerated expr divergence is consistent with the "arms race" model.
+
+
+
+TFs/NETWORKS
+
+
+Matthew Slattery - Context-specificity in Drosophila developmental gene regulatory networks
+
+TF binding doesn't always match up with the in vitro motifs.
+
+Scalloped as an example - TF with ubiquitous and specialized functions.
+Its specialized function (in the wing disc) is more associated with the "canonical motif". But - was that really a tissue-specific enhancer?
+
+HOT regions may have an elevated mutation rate - certainly they're centered on less-conserved sequence.
+
+HOT binding is associated with enhancers in open DNA, while COLD binding is associated with "closed" (epigenetically-regulated) enhancers.
+
+HOT regions are functionally conserved. More likely to drive 'ubiquitous' or 'broad' expression, while non-HOT are roughly context-specific, patterned enhancers.
+
+
+
+Shaun Mahoney -
+
+Context-dependent transcription factor activity
+
+Venn diagram won't detect quantitative differences in peaks called in both conditions. He wants something more nuanced.
+
+He focuses on detecting CONSISTENT binding events across experiments.
+
+Mixture model of ChIP-seq binding events: regions compete with each other to take responsibility for the reads. Gives you better resolution than just looking at peaks.
+
+MultiGPS - Mahoney et al., PLOS comp bio 2014
+
+Introduced priors to encourage, but not force, binding even alignment across conditions.
+Uses motifs as positional priors.
+
+How does a TF FIND its binding site? 
+Looking at Cdx2 as an example. Can lead to three different cell types.
+Many binding sites are context-dependent, but not all.
+Cdx2 acts as a pioneer at some sites. It looks like sequence information is what discriminates between sites at which it is a pioneer vs. those at which it is not.
+
+The pioneer sites have the stronger motifs; the other sites are more opprotunistic.
+
+
+
+Michael Brent, Wash U -
+Mapping the transcriptional network of a specific biological process. Developed NetProphet to do so.
+
+NetProphet ranks all TF -> target pairs by regression coefficient and log odds that the target is differently expressed when the TF is out of the picture.
+This maps just functional, direct regulation.
+
+Applied to C. neoformans. Studied capsule size, since enlargement is a critical part of maintaining the infection.
+
+Incorporated idea of "phenologs" - genes that work together in one organism tend to work together in another as orthologs, even if the function they work for has diverged.
+
+PhenoProphet did identify relevant TFs.
+
+His overall point is that when you drive this sort of thing by biology, you get biological insights.
+
+
+
+Mirana Ramialison (@ramialison_lab) - In silico prediction of mutant transcription factor function
+
+Looking at cardiac TF targets, specifically those of NKX2-5.
+
+DamID-chip technology: When your factor binds, you digest the nearby methylated sites to see where that binding took place. Control is the same thing, but without the factor, just the methylase.
+
+Did that with WT and control, and three different mutants.
+
+Increase in severity of mutation in the binding domain decreases the TF target overlap. (But doesn't remove ALL interactions, so there may be more domains there)
+
+Then did motif discovery on the WT and various mutants. Most interesting one are the new motifs from when the homeodomain were removed, but they also needed to filter out targets of the known cofactors.
+
+
+
+EVOLUTION
+
+
+Katja Nowick - Evolution of a transcription co-expression network active in the primate prefrontal cortex
+
+Brain size increased rapidly over the last 6 million years.
+
+So what are the molecular changes underlying the change in cognition that's associated with that vs., say, chimpanzees? 
+They looked at expression and TFs in prefrontal cortex.
+
+"specific" genes in her talk means genes differentially expressed between a species the other two species (among human, chimp, and macaque), but not diff. expressed between those other two.
+
+The most links have been gained on the lineage from H-C ancestor to human (92.7). Due largely to zinc fingers.
+
+Function of the network: GO enrichment of nervous system development and synaptic transmission. This is all in Berto and Norwick, MBE, in revision.
+
+If you look just at the species-specific expression changed networks, you see highest connectivity in human (also mitochondrial function and epigenetic regulation).
+
+There's been rewiring of the TF network involved in brain development, impacting both human cognition and disorders.
+
+
+
+Anna Lyubetskaya - Evolution of regulation in Actinomycetes: Benefits of ChIP-Seq for evolutionary studies
+
+Lots of ChIP-seq on all TFs in tuberculosis genome.
+
+Does sequence conservation actually differentiate experimental sites and computational motifs? Does conserved motif = conserved binding site?
+
+Sequence conservation: Does NOT imply site conservation.
+
+The TF-target regulation is more robust than the exact site itself.
+
+Both genic and intergenic sites are conserved better than random motifs. Not just a consequence of ChIP-Seq process.
+
+What processes drive regulon evolution in bacteria? 
+Regulon represented as a sequence of states, and they estimate transition rates fro each branch of the tree (of which there are three).
+TFBS loss is strongly associated with gene loss.
+
+
+
+DISEASE
+
+
+Carl Herrmann - Transcriptional (dis)regulation in cancer
+
+Opened by distinguishing between "genetic" contribution (binding of TFs, chrom binding proteins), and "epigenetic" contribution (DNA methylation, histone mods).
+Both can go wrong in cancer.
+
+First, geneic. Looking at malignant B-cell lymphoma and medulloblastoma WGS.
+
+Non-coding mutations are not randomly distributed in these datasets. This is confirmed by FANTOM data.
+Can therefore look for evidence of selective pressure.
+
+Used a background model of randomization of local heterogeneities, which lets you look for positive & negative pressure.
+
+K-mer creation/disruption patterns: those that are created or disrupted in lymphoma are "oncomers", since they might be relevant for malignancies. For example, hi creation, low disruption is oncogene TFBS, while low creation, high disruption would be tumor suppressor TFBS.
+High creation AND disruption can find motifs for protein families with dual roles.
+
+Non-coding SNVs a sign for extensive rewiring of reg. network.
+
+
+Epigenetic - neuroblastoma dataset.
+
+Highly variable CpGs with intermediate methylation are enriched for enhancer elements. 
+
+By finding distal CpGs, can find positive and correlated CpG gene pairs (by correlating those with nearby genes within a certain window)
+
+The distal CpGs can explain changes in gene expression - a sign of possible enhancer methylation. 
+There's a Positive/neg correlation depending on the chromatin context.
+
+
+
+Hee-Woong Lim - Genome-wide analysis of enhancer-RNA transcription reveals regulatory mechanisms by and antidiabetic drug in adipocyte.
+
+Looking at anti-diabetic drug, rosi
+
+GRO-seq - Nascent RNA sequencing. Why? Steady-state sequencing isn't a direct measure of transcription rate, since it's influenced by degredation.
+
+Gene transcriptional regulation is accompanied by eRNA regulation
+
+Squelching proposed as a regulatory mechanism as rosi.
+
+
+
