@@ -710,6 +710,91 @@ Interesting example of CCBL1 - KEGG missed an annotation of what it was doing wi
 
 
 
+KN2 - Eugene (Gene) Meyers (@TheGeneMyers)- DNA Assembly: Past, Present, and Future
+
+Early career - '78-'98. Algorithm guy.
+
+"What's behind blast" - paper on the theoretical underpinnings of BLAST. If you google the term with Yandex, you'll get a video of him giving a talk on it.
+
+'03-now: Current career, imaging, etc.
+
+Mid-career: '84-'05. PE whole-genome shotgun seq & assembly
+
+Points out the first shotgun project was by Fred Sanger, back in the early 80s. Did the lambda phage (48 kb). Restriction enzymes -> DNAse I -> Sonication
+
+Roger Staden jumped off from that with the first assembly algorithm. It was greedy, not dynamic programming, but it was used to find the overlaps.
+
+'85-'90 - Esko Ukkonen et al. put out SEQAID in '84. First overlap-layout-consensus (OLC) assembler
+SCS was 89-90, saw that problem was analogous to shortest-common-superstring problem (NP-hard)
+91 - OLC + B&B optimal
+
+The bi-directional overlap graph - if you ignore all reads contained in others, you're left with reads that properly overlap. Treat each 3' end as nodes, and the edges point away from those nodes.
+A path is that in which in-degree equals out-degree, which equals 1. Sounds like no bubbles to me.
+
+Genesis of string grpahs: '94.
+Waterman & Idury were the ones who first came up with DeBruin graph assembly.
+At the same time, Myers pointed out that shortest-common-superstring isn't the right way to do it, as you compress the reads too much. Brought up a de bruijn graph approach there, too.
+
+He calls them epsilon-string graphs. You want every read in your set to match some arc of that graph (the epsilon takes care of error).
+
+You can use a graph like that to infer copy number by looking at in- and out-node.
+
+A debruijn graph is a 0-string graph (no errors)
+Pro is can build in linear time
+Con is that, if you DO have errors, you start getting bulges all over the place. The way that used to be dealt with is removing all the kmers that didn't show up very much.
+If the error rate is high (PacBio), this approach won't work at all.
+
+Unitig graph - can perform transitive edge removal on a chordal graph to get to this.
+Pro: mostly resolved at the level of reads
+Con: repeats in the sequence makes it take quadratic time to build
+
+Shotgun era ('95-'02) -
+Statistics of coverage, inspired by Fred Blattner '95: Showing that a bac at 10x isn't that much different from a bac-sized region of the human genome when the whole genome is at 10x.
+
+Weber and Myers 96 - IF you can detect the unique regions at 97% id, then you can assemble the genome with mate pairs (used an information theoretic approach)
+
+PE WGS protocol at Celera meant they only needed a factory for shotgun sequencing, rather than shotgun AND physical mapping. 
+
+98 was the advent of capillary gel sequencers. Big gains in throughput.
+At the same time, got 64-bit architecture.
+
+WGA in a nutshell - look at the graphs to get all the unique regions, with very low error rate. Then link those together by using the mate pairs that link them. That's how you get the scaffolds. Then can take the reads with one end in unique and one end in the repetitive region, and can then tell how far into that repetitive region the other end goes.
+
+After "the" genome: consequences.
+Cost became the priority, driving us to short reads, which hampers de novo genome assembly. He REALLY doesn't like assembly using short reads.
+
+Points out that, while the melanogaster genome is good, some of the others have much too low an N50 to understand evolution. Can compare genes, sure, but not structural variation.
+
+So he got excited about PacBio. High noise/error, but it's RANDOM, and read sampling of the genome is also NEARLY random. Very close to Poisson.
+
+The perfect assembly possible iff (and he tweeted this Feb 22, 2014)
+1. sampling is poisson
+2. errors random
+3.reads long enough to solve repeats.
+Error rate itself isn't actually needed.
+
+He's started a blog called the Dazzler Blog. I believe it's his work on PacBio.
+
+The problem with string graphs:
+His assumptions worked on sim data, but not the real ones. His assumptions:
+1. Reads are all contiguous stretch of the genome
+2. Some maximum error rate
+
+But in reality:
+1. Chimeric reads
+2. contaminant reads
+3. unclipped primer sequence
+excessively (…something. He switched slides.)
+
+So data scrubbing is important.
+
+In conclusion, high error rate is only a problem with respect to compute efficiency and coverage, not quality.
+
+During questions:
+With advent of CRISPR, you should be able to do biology in whatever model organism you want, but you'll need a genome.
+
+
+
 WK02 - Bioinformatics Core Facilities
 
 http://bioinfo-core.org/
