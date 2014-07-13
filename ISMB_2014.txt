@@ -709,3 +709,171 @@ Sometimes these things aren't direct - for PHGDC, the genetic variant affects a 
 Interesting example of CCBL1 - KEGG missed an annotation of what it was doing within a metabolic pathway.
 
 
+
+WK02 - Bioinformatics Core Facilities
+
+http://bioinfo-core.org/
+
+Core on a Budget vs. Enterprise-Level Bioinformatics
+
+First: Alastair Kerr (@alastair_kerr)
+
+Teaching is key - gets rid of trivial requests
+
+Very small core, just him and Shaun Webb, with some help from advanced users.
+
+So they do a lot of teaching, collaborations, and infrastructure (manage their own servers). Biggest part of infrastructure is software, but hardware and data management play a role, too.
+
+Open source software & data are a big part of how they work. Many mature projects, well supported.
+Also, have had problems with commercial software - some were dropped, some started free and went commercial.
+
+The key thing about open source software, for them, is reproducible research. Slide shows GitHub, Galaxy tool shed, ENA, GEO, etc. 
+Also makes reference to dodgy perl scripts, but at least they're reproducible dodgy perl scripts.
+
+Data sharing and visualization -
+R Shiny
+Shiny Tables - no need for excel!
+Shiny Graph - data exploration
+
+Hardware:
+500 TB disk split over backup and primary sotrage. Uses ZFS on newer severs.
+COmpute is 3 key servers
+64 GB RAM, 24 cores
+256GB RAM, 64 cores
+(and one more, but the slide changed)
+
+
+Michael Poidinger - He's at SIgN, Singapore. Focus on human immunology.
+
+He has 5 postdocs, soon to be 9. 2 have pharma experience.
+Uses commercial-grade hardware: Multi-node 64 big clusters, many terabytes of storage, and of course money for cloud space.
+
+The staff works closely with 25 PIs and 180 researchers in the institute.
+Every analysis is special - biologists ask them what they can do with the data; projects often extended due to findings.
+
+He puts a big emphasis on the BIO of bioinformatics - they're here to do the science, not algorithm design, etc.
+
+Baby food maker is a collaborator - really cares about difference in microbiome in breast-fed vs. bottle-fed babies, and what they can do to improve their formula.
+
+Many projects:
+clinical survey
+clinical tests (like allergy skin prick)
+cell based assays
+HT data
+…and more
+
+In THEIR environment, they don't push the analysis back toward the biologist - they have enough money that they don't HAVE to.
+
+(Complicated slide of "their solution" involving Spotfire)
+
+Software/tools -
+Commercial licenses for various stuff
+
+Reporting via Moin Moin Wiki (which lets you specify who has write access)
+
+Uses pipeline pilot, too - sort of seems like the pipelining in galaxy, but I'm sure it has things that are more fancy. It's certainly very human-readable.
+Can also pipe perl into python into R, etc.
+
+Spotfire used for RNAseq visualization. Like an interactive cummerbund, without the messiness of setting cummerbund up.
+
+Makes the point that commercial software is much less expensive than the machines that it's designed to analyze, so it's certainly worth it if it makes things run on time.
+
+
+
+Budget vs. Enterprise Open session
+
+Q: Which commercial bioinformatics packages have no good open source equivalent? Why? Are they worth the money?
+
+MP - This is an open version of Spotfire, though with fewer features. Spotfire does have it's own web publishing element, for one thing.
+
+AK - R shiny and all that don't cover everything Spotfire does, and takes a little more time to set up, but does sound like it has a useful GUI component
+
+
+Q: For new cores - what do you suggest? Esp. for low budget.
+
+AK - have an idea of the kind of data you'll be working with. You COULD go straight to AWS, but depending on how much you're dealing with, that might not be financially viable. 
+
+MP - first thing he did in Singapore is to carve out his niche and make it clear what resources he'd need to run a competent core.
+
+
+Q. Stephen Turner (@genetics_blog) - Suggests putting the above answers on the wiki page. Says his shop is very similar's to AK, under cost-recovery restraint. A lot of his people want the gene list, sure, but then they want pathway analysis. Ingenuity PA is expensive to get others to use - is there an alternative? He's a biologist, but will never be as good as the expert asking the question of him.
+
+AK - Talk to the scientist about what they ACTUALLY want to get out of this - they might think they want the pathway, but maybe it's not really what they're going for.
+
+ST - Yeah, people gravitate to the stuff they already know
+
+Audience member 1 - There's DAVID for enrichment analysis, Gene Mania to find papers with similar gene lists
+
+MP - Remember DAVID hasn't been updated since 2010
+
+Audience member 2 - Maybe have the library buy the Ingenuity license (guy from Tufts agrees)
+
+
+Q. Audience member 3 - does commercial software make you less agile?
+
+MP - They use freeware, too. The real goal isn't to buy everything, it's to build something that'll still work six months down the road. 
+CuffDiff gives you FIFTEEN different outputs. He wrote something to whittle it down, and they haven't looked at the full output since.
+His software improves the efficiency of his staff 20-30%.
+Why getting 4 new postdocs? 4 grants were funded that all said they needed a bioinformatician, but those PIs were smart enough to know it'd be better to not have them sit by themselves, so they're moved into the core.
+
+Audience member 4 - It makes sense for them to buy commercial software for their core.
+
+
+
+Open Session
+
+Pipelines
+
+* Commercial - accelrys, knime
+* Open Source - galaxy, taverna
+* Home grown - cluster flow, gnu
+
+Who does what? How did you choose?
+
+Audience member 5 - they did build one, since they couldn't find one that supported the systems that they were interested in. Has to do with the very specific requirements of your own local computing infrastructure.
+
+Audience member 6 - Needed to track parameters, needed logs for reports, consistency across analysis, needs to be easy to use/learn, operate across different compute environments, and robust/adaptable to changing of component software.
+So, they use the lowest common denominator: shell and perl.
+
+Simon Andrews: Sure - but that doesn't scale very well.
+
+Audience member 2 - her core is for a clinic, so the MDs want essentially a web interface. She want to python - now it's not a pipeline, it's a SYSTEM of pipelines (some of which are hard-coded, because the MDs like them that way). Open source is great, but you need to be really careful about design. Even though she built it modularly, it's now at the point that you can't change one thing without changing the whole thing. One of the pressures on her is the combination of accuracy and speed required by the clinic for, say, in vitro fertilization.
+
+
+Managing workloads -
+
+Slide on the various things you always need (run analysis, manage compute infrastructure, manage data pipelines/LIMs), jobs you need, but not all the time (training, papers, data submission), and longer term goals (develop training, develop tools, testing new tools)
+
+How do you balance day-to-day vs. longer term planning?
+
+Moderator says they spent about 10% of their time making fastQC.
+
+How do you guide users with unrealistic or unreasonable requests? (e.g., "can you make all the same figures as this paper", "can you download and reprocess these ENCODE samples", "I want all my work done by person X", repeated speculative analyses, "Quick" jobs)
+
+Get your management to back you up in saying "no"
+
+Ask them what they're going to DO with the analysis. If they can back it up, okay - but don't let them "walk through the park".
+
+Train your users. The more they understand, the more they at least get what they can and can't ask.
+
+Maybe have a ticketing system - it's split about half and half. Looks like the bigger cores are the ones that have formal ticketing.
+
+Charge for the time it takes to make the figures, and give them an estimate. They've adopted that one part of Agile, it works really well.
+
+
+Funding your core -
+
+Slide - time spent in his core is mostly advising consultancy and analysis.
+
+Cost recovery is used by a lot of cores. Can be based on analysis, fraction of staff salary, etc.
+
+But there are things done that aren't charged for, and why?
+
+Training (since they want people to come to said training); initial design work
+
+MP - you CAN charge for training, and people will come in droves. They're thirsty.
+Also…there's a perception that if the training is free, then it can't be good. So even a small fee can incentivize people.
+
+What about the time spent reading the paper that someone wants you to reproduce the figure from?
+
+Sounds like people tend to eat that time right now, and don't charge for it. Again, using what you read to figure out how hard the task will be, and using that to provide an estimate to the client, can help.
