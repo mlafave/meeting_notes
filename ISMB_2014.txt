@@ -1204,3 +1204,237 @@ A. They notify the community what the changes will be implemented, so developers
 You can also include the reference data in the app itself (in response to another question), as a workaround to get the data up there.
 
 
+
+PP40 - Menachem Fromer - Statistical challenges in whole-exome sequencing of 7000 individuals with schizophrenia and controls
+
+(Missed the first part of the talk)
+
+No significantly increased rate of mutations in schizophrena
+BUT…were there gene sets enriched?
+
+dnenrich - subset of all genes is genes with sequence coverage -> longer genes (more de novos) -> CG positions. Take this into account when modeling the genome. Need to model because you can't get a large enough set of control trios to estimate the per base mutation rate at EVERY base.
+Treat that like a dartboard, with semi-matched "darts". So if it hit GC before, it has to hit there again - but not necessarily the same gene set.
+Permute that (bootstrap?) and see what sets are enriched.
+
+Cases/controls matched for ancestry of common variants, and with respect to rare genetic variation.
+
+Need to group variants, since otherwise doing them all via 2x2 contingency tables will never give you the power you need.
+
+Need to focus on singleton nonsense variants.
+
+Burden represents rare mutations across many genes - not localized to a few genes
+
+Plink-seq - flashed URL, but took it down pretty fast
+
+
+
+LBR08 - Sara Gosline - Beyond Argonaute: understanding microRNA dysregulation in cancer and its effect on protein interaction and transcriptional regulatory networks
+
+miRNA impose a modest fold change - but are implicated in many biological processes.
+
+Can search TCGA for miRNAs with expression correlated with survival (both at high and low levels)
+
+Can then look at mRNA in those same patients. miRNA effects are observed by measuring expression ANTI-CORRELATION across patient samples
+
+Hypothesis: miRNA function is determined by NETWORK of changes caused by miRNA-medated repression.
+Also wants to identify the relevant signaling molecules
+
+Networks involves miRNA, mRNA, protein, transcription factors, and the mRNAs that THOSE produce. There are plenty of interactions in the data for all of these.
+
+Tool they use: SAMNet reduces a large netowrk of putative interactions to the most meaningful. Sh has a 2012 paper in Integrative Biology on this. Finds miRNA-specific edges in a network, and reduces them to the paths that best explains the miRNA-mRNA anti-correlation.
+Each edge has a weight and a capacity. Want to minimize based on weights. Capacity is a constraint that forces all mRNAs to share edges.
+
+iRefWeb is used to characterize the edges
+
+Protein-DNA interactions are predicted from DNase I hypersensitive regions
+
+Some edges in network are specific, while others are shared, hitting common cancer pathways.
+
+
+Using networks to ascribe miRNA function:
+
+Looked at apoptosis, cell-cycle specific stuff
+
+
+Finding proteins of interest:
+
+Signaling proteins that mediate the effect observed above.
+
+Rank nodes by flow ascribed to them. Compare across networks using a heat map.
+
+Core nodes (very high flow) are shared across all networks (Src, TP53, Myc, Brb2, Hif1a)
+
+Can identify signaling proteins UNIQUE to specific cancer networks - which make good drug targets.
+Smarca5 is unique to breast cancer. It's a target of Mir100.
+Dazap2 unique to pancreatic cancer.
+
+
+
+WK04, part C - Monolis Kellis
+
+(Talk started early, so I missed the beginning - but looked to be discription of ChromHMM)
+
+HepG2 motifs vs. tiling enhancer dissection deconvoluted signal - activator give higher reg potential; a different cell type with a repressor shows the oppose effect
+
+So we know chromatin states, etc. How to interpret disease-association studies?
+
+Focus on SNPs falling into regulatory states, for one thing. HaploReg was made to do that (compbio.mid.edu/HaploReg).
+
+Activity patterns improve GWAS enrichment. Enhancers plus DNase data, you get more enrichment than either alone.
+
+***
+
+Bayesian model for joining weak SNPs in pathways - link the genes most likely to be involved back to their regulators.
+
+Missing heritability partly due to weak variants; regulators lacking association harbor rare variants
+
+
+Experimental dissection of disease regulatory modules - 
+
+Did some cardiac study in fish using morpholinos. (…Maybe they should rethink that one, given all we know about morpholinos now.)
+
+Summary:
+1. Reference epigenomics -> chromatin states (dynamic elements in multiple cell types)
+2. Interpreting disease-associated sequence variants (mechanistic predictions)
+3. Disease networks: link SNPs -> genes -> phenotypes (link enhancers to targets; this is where the Bayesian model comes in)
+4. Genetic/epigenomic variation in health and disease (such as genetic variation <-> brain methylation <-> Alzheimer's disease)
+5. Experimental dissection of SNPs/motifs/TFs/targets (AD in mouse, heart in zebrafish [this was the morpholino one, studying SNPs that were below significant], BMI in human and mouse)
+
+
+
+LBR10 - Matthew Scotch - Utilizing a Phylogeographic Generalized Linear Model for Identifying Predictors Driving H5N1 Diffusion within Egypt
+
+Public health genetics for disease surveillance
+
+Phylogeography - sub-discipline of biogeography. You look at evolution and divergence, but with a spatial component as well as temporal.
+Focus on sequence data, but also metadata, is used in the modeling process. (like location, year, host)
+
+Popular applications - Paup*, BEAST (bayesian phylogenetic inference using Markov chain Monte Carlo; does discrete and continuous phylogeny)
+Discrete has spaces in specific bins (example: if only modeling canada and the US, you can't model spread into mexico). Continuous uses latitude and longitude, brownian diffusion.
+
+Early work focused on mtDNA polymorphisms
+Mre recent: RNA viruses: seasonal and novel influenza, rabies, WNV. Purpose is to inform public health of how the viruses spread & what factors influence that spread.
+
+KML file can be put in Google Earth to visualize the spread of a virus over time. The spread is synonymous to branches in the tree.
+
+Limitations for surveillance -
+Focus on sequence data
+Lack framework for integrating epidemiologic variables with evolutionary diffusion (demographic, climate, phenotypic traits)
+Spatial epidemiology
+
+Spatiotemporal hypothesis testing: generalized linear model works for this (GLM)
+
+Mentioned this paper: http://www.ncbi.nlm.nih.gov/pubmed/24586153
+The found that passenger airflow was a signif predictor for H3N2 diffusion
+
+
+H5N1 -
+70% of all trade of poultry via live bird markets
+Egypt has a very diverse climate (desert, mountains, populous and condense Nile delta)
+…but didn't know cause of spread.
+
+So looked at a bunch of birds, mostly chickens.
+
+Predictors:
+Avian population density (FAO, but only up to 2005, so extrapolated forward)
+Human population density
+Distance, elevation, and latitude (had to take the centroid of the various regions, though)
+Precipitation
+Case counts
+Motif identification at HA cleavage sites (known to influence transmissibility in experimental studies) using sequence viewer
+
+Used an older version of BEAST (1.8)
+
+Predictor support - used Bayes factor. BF >= 3 means they're 3 times more interested in a predictor after the posterior.
+
+Cross-species transmission: Aimed to identify species most responsible for viral diffusion. Not in GLM due to formatting requirements of the matrices, though
+
+Results of GLM:
+Avian counts are the big ones. Followed by all the density predictors of human and individual bird density.
+The motif was important, too, as well as precipitation and elevation.
+For all of them, they're confident they contribute - but uncertainly means they really don't know how much any of them contribute, as error bars all span zero.
+
+Chickens, which are the more popular birds, don't infect humans as much as the other birds. Humans, on the other hand, are much more likely to give the infection to the various birds.
+
+So factors look to be environmental, demographic, geographic, and genetic predictors.
+
+Limitations include a low number of human sequences (14)
+
+You can generalize this type of framework to studying other RNA viruses. They'd like to develop a platform to integrate this work so it's useable by others.
+
+A problem with genbank - the metadata isn't as specific as you'd like, which limits studies like this (why he had to break Egypt into governoids)
+
+
+
+KN4 - Dana Pe'er - A multidimensional Single Cell Approach to Understand Cellular Behavior
+AKA "Dimensionality in biological data: the power of single cells"
+
+"Thank you for that very embarrassing introduction; now I can only disappoint."
+
+Thinks of cells as little computers. Need to sense environment, incorporate signals, make decisions.
+She uses machine learning to learn the cell networks from data
+Perturb and observe: need to sample the cell in many states.
+Basic assumption: statistical relationships reflect underlying biology
+
+The genomic challenge for machine learning: relatively small sample size (relative to Amazon shopping cart or Netflix, for example).
+Unlike them, we have a LOT of variables d, and very flew samples n (opposite of the above).
+So…too much complexity with far too few samples to learn the correct model.
+
+Modularity can increase statistical power - Segal, Regev, Pe'er et al. Nat gen 2003 (http://www.ncbi.nlm.nih.gov/pubmed/12740579)
+Modularity has since been used to aid network learning. Gives you an interpretation of the data, as the network is better organized. More samples to learn with.
+
+Data integration (like combining DNA variation and expression) - DNA anchors causality. Modeling is key.
+
+Learning networks from single cells: certainly a way to get around not having enough samples, if you treat each cell as a sample. Idea is to use nature stochasticity within a cell population and treat measurements of individual cells as the input for learning
+
+In her example, even a small sample of single cell data did better than the average data (this was 2005). Need large number of sample and single cell resolution are needed for success
+
+Mass cytometry: a game changer. GIves 45 dimensions simultaneous in MILLIONS of indinvidual cells. Bendall, Simonds et al Science 2011
+
+Data isn't linear nor Gaussian, so you do non-linear dimensionality reduction. Perseveres distances between high dimensional and low dimensional space, persevering the shape both locally and globally.
+
+viSNE Map of healthy immune system: Clusters different cell types together, naively.
+It's robust, too.
+
+What if you assume linearity? PCA doesn't work too well, since the data is NOT linear.
+
+How does leukemic bone marrow differ from healthy? Phenotypic space is deformed in cancer, but consistent in healthy samples.
+Markers reveal the structure of heterogeneity.
+
+viSNI also detects a tiny relapse population.
+
+
+Bendall, Davis, Amir et al Cell 2014 (http://www.ncbi.nlm.nih.gov/pubmed/24766814) - How does signaling change and rewire along B-cell development? What's precise order and timing of events during B-cell development?
+
+Idea is to use the trajectory of development as a scaffold, which you can pin other things to.
+
+The challenge is, again, non-linearity. Euclidian distance is a poor measure for chronological distance.
+
+Use "graph walk" to derive trajectory - but very noisy data, many additional tricks needed to avoid the path jumping down shortcuts.
+
+How deal with it? They use randomness to overcome noise.
+Use randomization - instead of k nearest neighbors, do a kl nearest neighbors graph. That way, the shortcut only shows up in a few of the random graphs, so it gets averaged out.
+
+Wanderlust - infers "developmental clock"
+
+Refine distances using waypoints (which seem like those white dots in Google Maps when you change the route)
+
+Pinpointing the timing of VDJ recombination - CD24 consistently bisects TdT expressing cells, occurring BEFORE CD10
+
+Rewiring of signaling network - Wanderlust algorithm picked up a signal occurring in only 7/10,000 cells
+
+She wants to do for humans what was done for c. elegans, and do the fate map (or at least do it in human bone marrow).
+
+
+How does signal processing differ between subtypes?
+
+DREMI captures "edge strength" - the power of having many cells. This is from 2% cells, which would normally be thrown out as outliers - but since those are 2000 cells, you can learn something and be very confident in it.
+
+Now can compare naive and effector memory T-cells. Naive cells have more faithful transmission of the data.
+
+
+What's next?
+Put it all together to study cancer. Wanderlust to study trajectory of cells, look at edges to view rewiring in the network.
+What else? Don't want to be limited by antibodies, so RNA-seq is the answer. They're working on a better technology to do this.
+
+
