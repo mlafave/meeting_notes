@@ -962,3 +962,63 @@ Also…there's a perception that if the training is free, then it can't be good.
 What about the time spent reading the paper that someone wants you to reproduce the figure from?
 
 Sounds like people tend to eat that time right now, and don't charge for it. Again, using what you read to figure out how hard the task will be, and using that to provide an estimate to the client, can help.
+
+
+
+7/14/14
+
+
+KN3 - Isaac (Zak) Kohane - Biomedical Quants of the World Unite! We only have our disease burden to lose
+
+Says his job in the next 50 minutes is to get off your butt to get useful things done for society
+
+There's no national health identifier, there's no national payer system (here), electronic health records only really got adopted well within the last 7 years, but it's out-of-date.
+New alternative models of healthcare industry; threat/promise of accountable care (paying doctors only for the result)
+
+So doctors are seeking new finding models for research. Example: Cf.Regeneron/Geisinger.
+
+Afferent and efferent arms of healthcare information: afferent is where we get data from patients, etc., and the efferent is where we actually use that to do things.
+
+First up, the afferent axis. 
+There's a lot more than just the healthcare data (medications, radiology, examinations, etc.). There's also the social web, genomics, environmental modeling, etc. He says they're all relevant to understanding current/future state of patient. They've published this in JAMA.
+
+I2B2 - free, but requires a big investment for data extraction, but still well-adopted.
+
+Discarded samples could be used inexpensively to get information
+
+The closer two hospitals are to each other, the more they hate each other. Still, he made a distributed query system so that investigators could take advantage of data from the WHOLE system. Makes it easier (possible) to find rare patients.
+
+Brownstein, PLoS ONE, 2007 - Rofecoxib caused a huge - 18% - increase in heart attacks, but you wouldn't really know that without having done the analysis.
+
+If you're healthy at age 80, you're EXTREMELY abnormal. Tells you something about the controls you'd want to use.
+
+Naive Bayes predictor developed that detects incidence of domestic abuse based on diagnosis at various visits
+
+There's about 5,000 various co-morbidities of autism.
+Used a 5,000-element bit vector in 6 month chunks, and then clustered those.
+Able to find things like sub-divisions within autism - some with higher incidence of seizures, some with psychiatric disorders, some with what looks like innate immune diseases. His point: You'd want to study those three groups separately.
+
+Healthmap - map of all infectious disease in all locations at all times. Mines "a variety of data sources" to do so. Looks like a lot of text mining.
+
+Environment-wide association study - Chirag Patel. Mass spec of various patients from different , looking for heavy metals, etc. Accounts for effects genomics can't.
+
+
+Efferent arm - making things happen.
+
+While trying to make clinical bioinformatics happen, argument over standards arose. So they made a challenge (CLARITY challenge). So instead, they gave them the data of a really sick kid that was going to kill them, and teams came to work together to get the diagnosis.
+
+Arithmetic: If you have a disease with 1:1000 prevalence and a 5% false positive rate (but with a test that misses nothing), what's the probability that someone diagnosed with the disease actually has it? 2%. There's one person with it, and 50 false positives, so 1/51 is ABOUT 2%.
+
+Incidentalome - if you have a large N, even with a really high specificity, you'd still get like 60% false positive rate across the US population. Need to know the positive predictive value.
+Gave various examples where such false positives had disastrous results (BRCA1 leading to unnecessary mastectomy/hysterectomy; PSA; heart disease in African Americans)
+
+EHR - why can't electronic health records be more like the iPhone? Some EHR companies are coming together to use their software. 
+
+Questions he poses:
+* Who, if not the healthcare system, is actually going to do this?
+* Are we willing to slow down in the interest if worrying about patient safety?
+* How will we fix the effector arm (with a very regressive, entrenched healthcare establishment)?
+* What's the quant alternative? Disrupting from the outside?
+* Should this not be an ISMB priority?
+
+
