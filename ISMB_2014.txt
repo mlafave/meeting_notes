@@ -1022,3 +1022,185 @@ Questions he poses:
 * Should this not be an ISMB priority?
 
 
+
+PP23 - Zhaojun Zhang - RNA-Skim: A Rapid Method For RNA-Seq Quantification
+
+Related work -
+Alignment-dependent methods: reads aligned back to original transcripts (Cufflinks, RSEM, eXpress, etc.). Takes hours to finish (millions of reads, so huge search space). Estimate the abundance of transcripts.
+
+Second group is alignment-free. So far, that's only Sailfish.
+Uses k-mers instead of alignments to quantify. Does not depend on an alignment step, so it's 10x faster, but still supplies comparable results.
+
+How can RNA-Skim be faster? Showing a graph of number of reads compared to location. Can we aproximate the area under this curve? That'll give you abundance.
+Considers abundance levels of transcripts to be random variables that follow the same distribution. If variance introduced is an order of magnitude or smaller than transcript variance, he says it should still work.
+
+Sig-mers: Given a partition of the transcription, a sig-mer is a k-mer that occurs in only one cluster, and therefore uniquely identifies the cluster in which it is contained
+
+So you sample the sigmers instead of the full reads.
+
+Probability of sequencing a sig-mer from a transcript: want to maximize the likelihood of observed sig-mers.
+(align-dependent maximizes the likelihood of observed alignments, and sailfish maximizes k-mers)
+So it's the same underlying idea.
+
+Optimization I: Finding all sig-mers.
+Straightforward way is to store all k-mers in memory, which would take 50G. Instead, they use bloom filters to reduce the memory usage down to 100M. Probabilistic data structure, so you may miss some sig-mers.
+
+Detecting sig-mers in RNA-seq data:
+Multiple pattern search problem. Use Robin-Karp (rolling hash) algorithm to do so in O(N) time. Means the algorithm is invariant to the size of sig-mers.
+It reuses the overlapped values when looking at k-mers, which is how it gets down to constant time. Seems like a sliding window to me.
+
+Quantify the reads through some EM approach.
+
+Results on simulated data:
+RNA-skim has the best Pearson correlation, but the other metrics (rank correlation, signif false positive rate, signif false neg rate) are all better in other methods. No single method is best in more than one category, though.
+
+Testing on real data:
+Used 56 inbred or F1 mice. Microarray data is NOT ground truth, so can't determine false positive or false neg. All five methods are pretty similar, though RNA-skim isn't better than the other methods.
+
+It is, however, faster. About 10x faster than Sailfish.
+
+Conclusion:
+Redundancy in RNA-Seq should be considered in statistical modeling and algorithm design for RNA-Seq
+
+csbio.unc.edu/rs. Five small and independent componenet
+
+
+
+PP28 - Pankaj Agarwal - Computational Biology in Medicine: Novel Targets and Drug Repositioning Use Cases
+
+Nature Reviews Drug Discovery, 2013 Aug; 12(8):575-6 - http://www.ncbi.nlm.nih.gov/pubmed/23903214
+
+Cancer drug targets: the march of the lemmings - are drug companies just all trying to hit the same targets?
+
+Active projects from Informa Pipeline/Pharmaprojects
+247 proven targets
+712 novel targets (no approved selective drug)
+These were the ones that they looked at.
+
+42% of targets had only one target looking at it (out of 1,027 targets). 26% are being looked at by FIVE OR MORE companies.
+The proven targets are 64% looked at by 5+ companies (since everyone knows it works, but could be improved)
+For novel targets, that value is only 13%. 54% of novel targets are only being looked at by a single entity.
+
+More validation leads to more competition. As you progress through the phases of clinical trials, the percentage of targets looked at by a single entity shrinks, and the 5+ value grows.
+
+Centre for therapeutic target validation - Ewan Birney is in charge of it
+
+The kind of validation he (Pankaj) is interested in is drug repositioning.
+Given a compound/drug, what new disease applications is it relevant for?
+
+The data that goes in: Molecular assays, phenotype assays, in vivo models, clinical trials, prescriptions. Hurle and Ararwal, Clin Pharmacol Ther 2013. - http://www.ncbi.nlm.nih.gov/pubmed/23443757
+
+First method: connectivity map. Lets you look at a drug and visualize a whole bunch of phenotypes associated with it, and compare to the phenotypes associated with the disease (expected changes). Lamb, Golub 2006, Science. http://www.ncbi.nlm.nih.gov/pubmed/17008526
+Cheng, Agrawal PSB 2013. - http://www.ncbi.nlm.nih.gov/pubmed/23424107
+
+Want to build a standard dataset.
+Example: Does Cmap work for repurposing?
+AUROC isn't that useful - want high precision, not a million things to go test.
+
+GWAS - can insert SNP data into the connectivity map, via ENCODE, FANTOM5, nearest gene, eQTL.
+Looked at overlap of GWAS and known drug targets. Sanseau, Agarwal. Nat. Biotech 2012.
+
+Combining screening data - if you have a target for on disease, and it turns out it affects a phenotype for another disease, maybe the clinical compound that binds to the target, designed for the first disease, could be relevant for the second.
+
+Clinical asset repurposing triage - use experimental validation to review and refine evidence you're culling from the data.
+
+Progressing the hypothesis - likeliest decision is to STOP. Need to know if the drug itself is progressable, and incorporate learnings into priors (patent position, target, disease, drug history). Constrained by time, too.
+
+They welcome collaborations, interns, new colleagues. Contact is Parkaj.Agarwal@gsk.com.
+
+
+
+PP31 - Michael K. K. Leung - Deep Learning of the Tissue-Regulated Splicing Code
+
+Cassette splicing - alt splicing in which a given exon is included (or not)
+PSI - percent of transcripts with alternative exon spliced in.
+Goal is to predict alt splicing patterns.
+
+Neural networks - 
+feed-forward: inputs go to outputs, passing through hidden nodes. You have a cost function
+
+For a given hidden state, you sum the inputs and pass them through a non-linear function.
+
+Deep learning an neural networks - exploiting many lays of those hidden, non-linear layer. 
+
+GPUs important to machine learning.
+Neural networks have been successful in various domains (computer vision, audio processing)
+
+But is it applicable to the relatively small datasets used in biology?
+
+
+Alternative splicing dataset - RNA-Seq data from mouse in five tissues, 11,019 cassette exons studies. Want to look at PSI and change in PSI between tissues.
+
+DNN for splicing prediction predicts two things: low, med, or high PSI, and tissue difference.
+
+Training:
+Stochastic gradient descent with momentum, balanced mini-batches, dropout regularization
+Hyperparameter search, GPU acceleration (15x speedup to actually accomplish said search)
+5-fold cross-validation. 3 for training, 1 for validation, 1 held out for testing.
+
+Interpreting the DNN -
+Can use class saliency to do so. Forward propagate your data to get the output, then perturb the data and back propagate.
+
+Large model with sufficient capacity.
+
+Splicing code with improved predictive performance, and yes, deep architectures can help with small datasets.
+
+
+
+TT14 - Raymond Tecotzky (Dir. of Illumina informatics marketing) - Sequencing and Genomic Analysis Onsite and in the Cloud
+
+Focus areas:
+Cancer
+Enterprise informatics (where he's from)
+Life scinces
+New oproutities
+Reproductive and genomic health
+
+Tip of the iceberg - challenges & opportunity for discovery. The large amount of data, basically.
+
+Last year, Google formed a company called Calico - entering life science realm.
+
+A LARGE percentage of the money spent is spent on bioinformatics.
+
+As throughput scales up, so does compression. Remember when we used to save the IMAGES from the illumina machines? Now we save BAMs, but soon we'll likely only save the VCFs.
+
+BaseSpace - cloud-based genomic sequencing.
+Wants to be an "app" based interface, and anyone can develop for them.
+
+"cloud in a box" - basespace onsite. Which…obviously isn't a cloud anymore at that point.
+
+Role of basespace for bioinformaticians - sounds like he's pushing the fact you can push the analysis to the biologists by making the analysis software user-friendly. Says it'll remove our role in "mundane analysis".
+
+45,000 apps launched (with 8,000 logins every week)
+
+FDA uses uses MiSeq and BaseSpace to stream data and share it to cloud, which is sent to NCBI. Sounds like it isn't being analyzed in the cloud, though.
+
+Or, wait - now he says there are over 30 apps in basespace. 
+
+Sharing and collaboration is the most popular app, of course.
+
+How is data stored an analyzed in basespace?
+.bcl, the raw reads, are sent to basespace. Then demultiplexed to fastq, then stored as projects. The apps operate on the projects.
+
+Native apps - execution-friendly environment.
+
+e-commerce infrastructure supported, handled by illumina, in case you want to make a pay app. Uses "iCredits", which is basically US dollars.
+
+Can publish software on basespace, so any researcher is one click away from being able to run the program there.
+
+To learn more as a developer, see developer.basespace.com
+
+Questions:
+
+Q: Are there plans to allow uploading of different programs, genomes?
+A. Yeah, they're working on it. Right now, basespace only takes date from the instrument.
+
+Q. What kind of motivation is there for someone to develop apps for basespace?
+A. Some apps are private, so you can just share it with your colleagues if you want. 
+
+Q. As the API evolves, what happens to apps that break?
+A. They notify the community what the changes will be implemented, so developers know what to change. In the future, the native app environment will help with that, as it doesn't rely on a single API.
+
+You can also include the reference data in the app itself (in response to another question), as a workaround to get the data up there.
+
+
