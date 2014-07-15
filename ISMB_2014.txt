@@ -1484,3 +1484,180 @@ Also using it to grow new ears for army vets.
 Also showed an implant for spinal chord injuries, getting rats and monkeys to walk (somewhat correctly) again
 
 
+
+WK05 Part A - Levi Waldron - An overview of genomic data analysis in Bioconductor
+
+Bioconductor conference: July 30 - Aug 1, Boston USA (register.bioconductor.org/BioC2014)
+
+Application areas:
+* Microarray analysis (expression, copy number, SNPs, methylation, etc.)
+* Sequencing
+* Annotation
+* Epigenetics
+* Gene set enrichment
+(and more)
+
+Many levels of documentation.
+Top level: bioconductor.org/help
+Workflows: bioconductor.org/help/workflows (sequence analysis, RNAseq differential expression, oligonucleotide arrays, variants, etc.)
+Package vignettes: Working "literate code" demonstrating the use of a package
+Function man pages and reference manuals
+
+Additional sources of documentation:
+bioconductor.org/help/course-materials - also has the slides from today!
+BiocViews - hierarchical controlled vocabulary for easier searching of what's available
+
+Key data structures - as a submitted, expected to use these.
+Containers: Expression set (matrix of samples and results, but also containers for metadata), SummerizedExperiment (similar, but for genomic positions), GRanges (coordinates, and additional data)
+
+Microarray analysis - what bioconductor cut its teeth on. 300 packages for this, all kinds of arrays supported. If you have a weird array, see Arrays workflow.
+
+RNA-seq differential expression analysis - 55 such packages
+
+Slide on string-related data structures and tools - useful, because sometimes it's hard to tell where to go to see how to use these things. Most rely on Biostrings.
+
+Annotation resources - you have regions, you want to annotate with genes, pathways, identifiers, ENCODE stuff, etc. That's what this is for. Pre-built packages give you fast local analyses.
+Web access packages give access to UCSC and BioMart. Annotationhub is a new addition.
+
+There's an RStudio IDE, and also online courses. Boilerplates for making presentations and web documents are all there, too.
+
+R can be slow or fast, depending on how you use it. Vectorization speeds things up, as does Rcpp (which lets you put in C++ code)
+The other things on the slide list additional things that speed it up. library(data.table) can speed reading of large files.
+library(sqldf) builds dataframes from SQL queries
+knitr can also speed things up via caching.
+
+
+
+
+PP59 - Jeroen de Ridder - Chromatin landscapes and long-range interactions or retroviral and transposon integrations
+
+PLOS genetics - chromatin landscapes of retroviral and transposon integration profiles - dx.doi.org/10.1371/journal.pgen.1004250
+
+Last few slides will explore long-range interactions
+
+Looking at Retroviruses and DNA transposons. Relevant for gene therapy, study of gene regulation (akhtar and de jong et al, cell 2013, using sleeping beauty - http://www.ncbi.nlm.nih.gov/pubmed/23953119)
+
+Mutations can affect genes, either activating nearby genes or inserting within them.
+
+In mice, you can either introduce new elements or activate the ones that are there already, and you'll eventually get a tumor. Some are drivers, selected for in tumor development.
+Can they distinguish between the drivers and passengers?
+
+One way to address that is to do the experiment a lot, so you're relying on selective pressure to find common insertion sites (CS).
+
+Ah, here we go. That method assumes a random distribution. If you don't have that, the biases give rise to "spurious" CIS.
+
+Looking at integrations without selective pressure, in the following cells:
+SleepingBeauty: mESC
+PiggyBac: mESC
+MMTV: NMuMG cells
+
+They analyzed about 80 features, and histone mods are apparently among them
+
+Looked at signal compared to signal some distance d away. Get a t-score for each.
+
+SB and PB are similar for some features, opposite for others.
+
+Some features are significant only at larger scales, or smaller.
+
+Do they NEED macrofeatures to explain the distribution, or do microfeatures take care of it all? Used a Markov blanket analysis to do so. Lets them estimate confidence, via bootstrapping, of finding a feature upon which a given node depends. Found macrofeatures are relevant, and often shared between systems.
+
+Target site selection is similar between PB and SB at large scale, but differ at small scales.
+
+So can you use it to detect spurious CIS? Yup.
+
+Co-localized insertion clusters - do you find different hotspots when you take 3D nature of genome into account?
+
+Kool et al cancer research 2010 - http://www.ncbi.nlm.nih.gov/pubmed/20068150
+Uren et al Cell 2008 - http://www.ncbi.nlm.nih.gov/pubmed/18485879. Two big MLV integration datasets. Well, they were big at the time, anyway.
+
+Used that data and compared bins under different clusters to the Hi-C clusters of things at approx. the same linear distance.
+
+Dixon et al., Nature 2012 - http://www.ncbi.nlm.nih.gov/pubmed/22495300. Use of Hi-C.
+
+Found 874 CLICs, some of which you wouldn't see without taking this 3D nature into account.
+
+Taking 3D chromatin confo. into account, you can find additional insertion hotspots.
+
+Q. Some guy claimed that AAV and MLV have very strong sequence biases, and asked if they saw any of that (but, of course, the sequence bias isn't THAT strong, at least for MLV).
+A. They didn't look at MLV in the assay he was referring to.
+
+I looked for the paper the questioner was referring to - something by Bushman? - but I don't see one where they looked as far out as he said.
+
+
+
+PP62 - Serghei Mangul - Accurate viral population assembly from ultra-deep sequencing data
+
+RNA viruses exist as a quasispecies. ~10^4 mutation rate, combined with recombination between different viral genomes, make them…tricky.
+
+Want to assemble a large number of highly similar but distinct viral genomes. Specifically, want to assemble the population.
+
+Of course, you have errors in the data, which makes it look like there are some viral genomes in there that are from seq errors, not actual defining mutations.
+
+Needed for a good assembly:
+* Read quality (minimal seq errors)
+* Read length (long enough to resolve conserved regions)
+* Coverage (enough to cover the rare viral genomes)
+
+Errors result in inaccurate assembly IF you do the normal protocol.
+
+High-fidelity sequencing protocol:
+Use barcodes. (Wu, Nicholas C. et al. High-throughput profiling of influenza A virus hemagglutinin gene at single-nucleotide resolution, http://www.ncbi.nlm.nih.gov/pubmed/24820965, or at least a modification thereof)
+Amplify every fragment with the barcode, then group by barcodes. Now you know which things came from the same fragment, and you can throw out those that weren't amplified enough.
+
+With that, then go to viral assembler (VGA).
+Map reads to a consensus - though you don't care about the reference itself, so SNVs are only among the reads, not relative to the reference.
+
+If two reads overlap, but disagree on the overlap, they're probably from different genomes (remember, we're assuming the above protocol gives us error-free reads)
+
+Conflict graph - reads connect to reads with which they are in conflict.
+It's like the color the map problem - you want the colors to not touch itself. Colors here are independent sets of non-conflicting reads. Reads of the same color end up not being in conflict.
+You want MINIMUM coloring, though, which is NP-complete. Use heuristics, partitioning, to deal with this.
+
+If you get non-continuous coloring, you give it a second chance. If it still doesn't work, just say it's not enough coverage, and you throw it out.
+
+Expectation maximization, not just mapping, is used to separate the genomes from each other.
+
+What about recombination? There will be common regions between these genomes, after all. If it's longer than the fragment length, that's a problem. They use expression profiles to try to get around this.
+
+genetics.cs.ucla.edu/vga
+
+scales to millions of PE reads
+Able to discover ultra-rare viral genomes
+suitable for clinical applications
+
+
+
+WK05 Part D - Michael Love - RNA-Seq workflows in Bioconductor
+
+As before, these slides will be available. They're at http://mikelove.github.io/biocrnaseq/.
+
+Preparing gene models - can load from GTF files, annotationhub will be able to do this soon, etc.
+
+Super useful - to convert from chrX to X and back: seqlevelsStyle(gr) <- "NCBI" (or "UCSC"). It's in genomeinfodb.
+
+Extracting exons - list structure, every element in the list is a g-range. We'll use these exons to count reads to do differential expression.
+
+yieldSize helps control memory, to tell it how many reads to read at a time
+
+Saving as an SE - a summarized experiment.
+First row of col data is first column of assay data (I think)
+
+Exploratory data analysis (EDA) - see preprint for deseq2. A logarithm that's better for stabilizing variants.
+The image is an example PCA plot
+
+The first five packages on his list use a GLM to analyze the counts. For each gene and each sample, counts K are distributed as a negative binomial. 2 parameters, mean and dispersion. Separate out the size factor, which is the sequencing depth. You don't care about depth differences, only differences based on condition.
+Instead of specifying the size factor, can also just specify the matrix.
+
+Differential expression analysis - wrapper that simplifies things. 
+
+Plot counts - not in the release yet, but soon. The example is pulling out the gene with the lowest P-value and looking at the counts.
+
+Controlling for unknown batch: give counts and condition of interest, and it does a PCA after removing said condition to find other axes on which the counts vary, which could then the batch effects. Returns a matrix.
+
+Reporting tools - really nice software for visualization. Can make boxplots, etc. From Genentech.
+
+browseVignettes("pkg") will give the documentation for the version you're USING, not whatever the current release it (if you're not on the cutting edge)
+
+It's worthwhile to contribute to Bioconductor - they go through your code and improve it.
+
+
