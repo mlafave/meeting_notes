@@ -1438,3 +1438,49 @@ Put it all together to study cancer. Wanderlust to study trajectory of cells, lo
 What else? Don't want to be limited by antibodies, so RNA-seq is the answer. They're working on a better technology to do this.
 
 
+
+7/15/14
+
+KN5 - Robert Langer, Sc.D. - Biomaterials & Biotechnology: From the discovery of the first angiogenesis inhibitors to the development of controlled drug delivery systems and the foundation of tissue engineering
+
+After grad school in 1974, he had 20 job offers from oil companies, but 40 academic positions didn't even write him back.
+
+Needed an assay to test factors that stop blood vessel growth (due to relevance to tumor growth). Decided to use a rabbit eye - it's big, and has no blood vessels in it.
+
+Delayed drug release - originally told it couldn't be done, and his first NINE grants were turned down. He did show that it IS possible, though.
+
+A large molecule working its way through one of these pores is like driving through Boston - high tortuosity, takes a long time to wind its way through.
+
+Starting in 2004, angiogenesis inhibitors started being approved for clinical use.
+
+Getting the patent for delayed release involved showing the patent examiner an article citing their previous paper, showing it was a surprising and useful result. The examiner was impressed, and asked him to get signed affidavits from the five authors of the other paper, stating that they had actually written what they published. True story.
+
+Single compound release, using a chip: electric signal causes the cover to fly off in seconds.
+Idea was to activate it remotely, so doctor can dial the dose up or down.
+Gates foundation has also funded them to do the same sort of thing on fertility control.
+
+"Something that was designed to be a ladies' girdle may not be the best blood contact material" - things like the artificial heart were designed because of household objects that seemed like that'd be an okay material, not because that's optimal.
+
+Designed a polymer that erodes in water, but not by enzymes - because we all probably have excess water, but different enzymes.
+Ratio can be used to change percent degradation.
+(This is all taking place in the 80s, by the way)
+
+Laundry list of reasons they were told things won't work:
+Polymers can't be synthesized (1981)
+Polymers will react with encapsulated drug (83)
+polymers are fragile (85)
+polymer-drug system would be toxic (86)
+The drug will not diffuse far enough to kill remaining tumor (88)
+Even if it does, it is a very poor drug (90)
+The drug delivery systems cannot be manufactured (1993)
+
+But of course it DOES work. 
+
+Another anecdote - had two bloody slides of implants in brain, which he once showed to chemical engineers for 12 minutes with no warning. They didn't like that, so he went to giving a warning, and only keeping them up briefly. Later, he was invited to give a talk to neurosurgeons. They didn't mind the bloody images - but found the slides with chemical formulas to be excruciating.
+
+Polymer fibers plus liver cells - trying to grow a liver. Still early stage, but they've used it to grow cartilage in mice.
+Also using it to grow new ears for army vets.
+
+Also showed an implant for spinal chord injuries, getting rats and monkeys to walk (somewhat correctly) again
+
+
