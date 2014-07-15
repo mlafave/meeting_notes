@@ -1661,3 +1661,118 @@ browseVignettes("pkg") will give the documentation for the version you're USING,
 It's worthwhile to contribute to Bioconductor - they go through your code and improve it.
 
 
+
+WK06 Part A - Ciaran O'Neill - Peering into review: innovation, credit & reproducibility
+
+Works at BioMed central
+
+Speaking about open peer-review. Reveals the names of reviewers visible to authors, and to some extent, to reads (along with the reviews themselves)
+
+Biology Direct - Authors can choose reviewers, and ALSO make the decision about going to publication or not - so the editor is effectively removed.
+Reviewer pool is editorial board - so since they're primed, it doesn't take long to find reviewers.
+
+PeerJ - reviews are each given a DOI, so you can get credit for doing said reviews.
+
+F1000Research is the one doing post-publication review: publish, THEN review, and then only AFTER that is it sent to pubmed.
+
+(speaker change - Amye Kenall)
+
+How to combat irrepoducibility from the journal side?
+
+Dynamic documents - like knitr and IPython - can be used to make your process more accessible for those trying to reproduce your work
+
+Giga science is journal + database + computational tools
+
+Example: authors submitted in knitr, which allowed reviewers to rerun analysis; also updates things automatically
+
+Why stop at publication? If you could launch the cloud instance from the journal, that could help keep it relevant, and bring discussion back to the journal (which is nice to keep centralized)
+
+
+
+WK06 Part B - Alejandra González-Beltrán - What was the plan? A role for data standards models and computational workflows in scholarly data publishing
+
+Metadata - often created at the end of the workflow. They work to create it at the beginning. Intended to help reproducibility.
+
+Experimental plan - life sciences case: need to describe all methodologies used.
+
+For computational case, worked with SOAPdenovo2.
+3 x 3 design - 3 algorithms, 3 genomes of different sizes.
+Response variables is genome coverage, memory consumption & computational runtime.
+
+In both cases, they've used the isa-infrastructure to describe experimental design. Based on isa-tools.org, isatab, and isacommons.org.
+
+isacommons.org - the community, members of which use the other isa tools to track metadata
+
+isatab - tabular representation of the experimental workflow.
+
+isatools.org - curate, store, analyze, share and publish your bioscience experiment. 
+
+isa-tools.github.io/soapdenovo2
+
+Nanopub - represent in a structured way the main output of the article
+ResearchObject - holds the whole workflow, all necessarily to re-run the results.
+
+Nano publications of the three response variables mentioned above. It looks like the nanopubs are labels on edges of the graph of the workflow, but I could be mistaken about that.
+
+This approach - using isatab, for example - can start from the experimental design stage, and then you can build on that with things generated from a galaxy workflow, and label things with nanopublications. 
+
+github.com/ISA-tools - repo
+blog: isatools.wordpress.com
+@isatools - twitter
+
+
+
+PP79 - Peter Robinson - Improved exome prioritization of disease genes through cross-species phenotype comparison
+
+(missed beginning)
+
+Comparing human and mouse - mutations in orthologous genes are often associated with similar phenotypes.
+Can use that to prioritize candidate genes (also looking at zebrafish and mouse)
+
+Many ways to compare disease models:
+a. inferred by orthology asserted models
+b. phenolog mapping
+c. direct phenotype mapping with ontologies - what he's talking about today
+
+Human Phenotype Ontology - terms are subclasses of higher terms. about 110,000 annotations for about 7000 mendelian, mostly monogenic, diseases.
+
+http://www.ncbi.nlm.nih.gov/pubmed/24217912
+
+similarity score - For all terms annotated in disease 1, find those closest in disease two and sum them. Do it from both sides, as it's not symmetric. Similarity visualized as clusters.
+
+Semantic web of the human phenome - using an OWL class definition
+Gkoutos GV et al 2009
+(and other papers, but then he left the slide)
+
+http://www.ncbi.nlm.nih.gov/pubmed/24358873.1 - reasoning over phenotypes.
+
+Interspecies mapping - http://www.ncbi.nlm.nih.gov/pubmed/22293552. Groups homologous anatomical structures. 
+
+Phenodigm - now we have a means of calculating similarity between phenotypic concepts based on OWLSim
+http://www.ncbi.nlm.nih.gov/pubmed/23660285
+
+Exomizer uses PhenoDigm semantic analysis to improve candidate gene prioritization in the setting of WES.
+You upload a list of HPO terms, filter by allele freq, how to deal with pathogenicity, etc. Can filter on pedigrees, if you have those.
+Click submit, VCF is uploaded. Program annotates variants to transcripts, remove things that are common or off-target, then do variant scores based on predicted pathogenicity (from polyphen, mutation taster and sift). Then take those and do phenotypic profile vs. 30,000 mouse models.
+Those that have a good phenotypic match AND a good variant match get a good overall score.
+Get back a ranked list of candidates.
+
+Pheno + variant > either alone
+
+Collaborates with the UDP - yeah, NIH UDP.
+
+Monarch Initiative - Multiple organism, integration of many phenotypes
+
+
+
+WK06 Part D - Kaitlin Thaney (@kaythaney) - Software Review audience participation
+
+(Started before I came in)
+
+One guy saying he has to talk to his university's tech transfer office before he's allowed to publish on GitHub
+
+How many have a code review system in place in your lab? Five hands go up. 
+
+Otherwise, most of the discussion revolved around being unhappy with the current system, such as lack of credit for the data analysis people, and roadblocks to releasing things as open-source.
+
+
