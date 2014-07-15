@@ -1776,3 +1776,92 @@ How many have a code review system in place in your lab? Five hands go up.
 Otherwise, most of the discussion revolved around being unhappy with the current system, such as lack of credit for the data analysis people, and roadblocks to releasing things as open-source.
 
 
+
+KN6 - Russ B. Altman (@Rbaltman) - Informatics for Understanding Drug Response at All Scales
+
+www.pharmgkb.org
+(Disclosure: co-founder, Personalis Inc.)
+
+Focus of his work is drug action at multiple scales - molecular, cellular, and organism. Nice thing about informatics is that you're not tied to scale.
+Toolkit (also at many levels): Population, literature, cellular, molecular.
+
+PharmGkb is to understand phenotypes and molecular stuff with drug response
+Has nice pathways, available for download. Can use in publications if you want.
+
+PMID 20435227 - there are 10s to 100s of drugs per person for which human genetic variation can affect response, and thus influence what should be prescribed.
+
+FDA Adverse Events reports - can also be used to find new effects of drugs (or new interactions between drugs)
+
+Synthetic associations confound things. If drug X causes side effect A, and drug Y is usually used with X, Y LOOKS like it causes A, but doesn't.
+Even worse, if disease B has side effect C, drug X used to treat B, it LOOKS like X appears to cause side effect C (like diabetes being associated with high glucose - that's not the fault of the drugs)
+
+Removing those associations: Need to pick controls with similar expected correlation structure (similar disease background, similar drug background). FDA database has millions of entries, so doing so is possible.
+Matched controls are MUCH better than random. Takes care of age effects (like drugs mostly used in the old, or in the young), and several other things, like sex of the patient.
+
+Two databases from this:
+OFFSIDES: off-label side effects. 438 THOUSAND new side effects.
+TWOSIDES: drug-drug interactions. Subset validated in electronic medical records.
+www.pharmgkb.org/downloads/
+
+Currently no ranking of side-effects, so they're working on that. Gottlieb in his lab using amazon's Mechanical Turk (crowdsourced) to decide which side effect is worse. Also spike in which side effect is worse from a KNOWN set, so you can tell if they're not doing a good job.
+
+How do you get a rank order from pairwise comparisons? Cool algorithm, but he's not going to talk about it today. Uses linear programming, though.
+
+Mild and severe effects were consistently ranked as such.
+
+This project cost only $6000, not counting postdoc labor.
+
+
+Literature mining
+
+(Perecha et al., under review)
+
+Want to dissect the RELATIONSHIP between gene and drug by looking at pubmed abstracts.
+Used Stanford parser, from Manning et al. Creates a dependency graph with the verb as the root of the tree, and the subject and object, etc., descending from that. There's a path connecting the gene and node (though the direction of the edges point away from each other). The edges are all labeled with what type of relationship it is.
+
+Turns out there's not an infinite way to express the relationship between gene and drug, and some way are more common than others. Reduces the search space.
+
+Biclustering of gene/drug space and dependency paths. Clusters mean similar sentences for those across the literature.
+
+He put up a list of about 25 gene-drug interaction types, which essentially constitutes all ways that genes and drugs can interact.
+
+SO they took that and compared it to drugbank. Look within the same cluster to find other drugs that might affect the same gene, but currently aren't listed as such in drugbank.
+Can ALSO look for finding completely new effects that aren't within the same cluster for those with potentially new effects.
+
+
+Effect of drugs on gene expression
+
+Looking at "first responders". Drugs go to the liver first.
+
+DrugMatrix database measures rat liver expression in response to drugs
+
+Trying to predict genes based only on the small molecules that induce them.
+
+Top performing gene classifiers predict PK and other liver proteins
+
+
+Knowledge-based ID of fragments for drug design
+Tang & Altman, PloS comp bio 2014 - http://www.ncbi.nlm.nih.gov/pubmed/24762971
+
+Doesn't use physics.
+
+FragFEATURE - given a query protein with a pocket, represent portions of the pockets as a set of balloons. Each balloon is a microenvironment that is associated with the types of fragments it like to be near.
+Use stats to find association of protein neighborhoods with various features.
+
+Each balloon is a vector of 400 numbers summarizing that space.
+
+For every co-crystal in the PDB, they write down all the fragments each environment is next to.
+
+Then, take a new protein, identify pockets, make feature vectors. For each feature vector, look up five nearest neighbors. Take hypergeometric P value (so you don't always predict the common fragments), and also do it from the features near THAT. They each get a vote as to what that piece of the pocket wants to be near.
+
+Validation of performance with various pockets, compounds. Potential to find compounds that bind VERY tightly - if they exist.
+
+
+Conclusions:
+Informatics good for:
+* Inferring and triage of side effects
+* Gene-drug interaction characterization via text
+* Predicting expression from chemical structure
+* 3D structure to predict fragment binding
+
+
