@@ -153,6 +153,124 @@ Summary:
 
 
 
+###################################
 
+
+
+Plant Genome Engineering
+
+(Note: this session had a small, low screen in a crowded room, so I was only able to see about the top half of each slide.)
+
+
+
+W597 - Dan Voytas & Bob ??? - Strategies for the Targeted Modification of Plant Genomes
+
+Research dedicated to developing SITE-DIRECTED DNA sequence modification metrologies and applications. Modifications often stimulated by DSBs.
+
+Desired outcomes: mutagenesis, gene replacement or edition, targeted gene insertion (like from the transgene world, creating molecular stacks), targeted structural changes.
+
+Example: targeting soybean Dcl1a and 1b with ZFNs (dicer family). Used one ZFN with two paralogous targets, and recovered two T0 plants with multiple mutations. Able to "stack" double mutants.
+
+CRISPRs deleted a 76.7 kb region in Medicago. That's 4 CRISPRs, not just one.
+
+Dan Voytas -
+
+He's going to talk about using a "homologous template" to serve in repair, so you're able to put in your desired modification.
+
+Using Agrobacterium to achieve gene targeting: the bacterial T-DNA goes from the bacterium to the plant nucleus, and has the machinery to make the cut. It ALSO contains, on the same construct, the modified template you'll use for HR repair.
+
+Harnessing plant DNA viruses (geminiviruses) to get efficient targeting. Similar to before, but now the tDNA has the viral replication machinery. That lets it circularize in the plant nuclease, AND replicate so you have more copies to work with.
+
+Replicons enhance gene targeting frequencies 10 to 100-fold. Partially due to increase in donor molecules, AND by pushing the host cell into S-phase, making HR more likely.
+
+Introduced a promoter to drive Ant1. Since this is plants, you can take the part that was modified (explants) and grow it back into a whole plant. 
+
+Questions: larger donor plasmids have less efficient rolling-circle replication, so keep that in mind.
+
+Have they changed GC content of the replicons (lowering it) do geminivirus has an easier time b/c it'll be less methylated? They haven't done that yet.
+
+
+
+W598 - Caixia Gao - Developing Genome Editing Technologies for Crop Improvement
+
+Working in rice and wheat. 
+
+SSNs enable efficient genome engineering. Their research focuses on ZFN and CRISPR/Cas9.
+
+4-5 months from TALEN or CRISPR design to produce knock-out mutants.
+
+Showed example of a ~1.3 kb deletion from TALEN
+
+CRISPR: Rice uses OsU3 promoter, wheat uses TaU6 promoter
+
+Homology-directed repair (HDR) in rice: Just inserting some restriction sites, but it works.
+
+Creation of fragrant rice by genome editing. Done by making deletions in Badh2. TALEN-induced mutations in OsBADH2 gene, which were transmitted to T1 and T2 generations. Making these deletions increase 2AP content, the fragrant compound.
+
+Interestingly, new indel mutations were detected in subsequent generations. Looks like 1 bp deletions were expanding in T1 and T2.
+
+They also used CRISPR for OsBADH2, and found similar results.
+
+Powdery mildew - a very destructive disease in wheat. They combated this by targeting three TaML homoeoalleles with TALENs. Knockout of all siz alleles of TaMLO in wheat confers resistance to powdery mildew. (She later noted that this does run into regulatory challenges in the US)
+
+NHEJ-mediated GFP insertion into wheat protoplasts.
+
+
+
+W599 - Puchta Holger - The CRISPR/Cas System can be used as Nuclease for in planta Gene Targeting and as Paired Nickases for Directed Mutagenesis in Arabidopsis Resulting in Heritable Progeny
+
+Nuclease-induced genome engineering
+
+Background: years ago we were using I-SceI to introduce DSBs - at least to show what happens when you make that break. You could put T-DNA in the break, and it needn't be homologous for it to integrate (why sometimes you get the CRISPR transgenes integrating therein). Lower frequency than homologous, of course.
+
+In planta gene targeting technique - gene targeting that takes place during the life cycle of the plant. Idea is to do the targeting in all cells, and then going to the seeds to get what you want. The donor is integrated into the donor via transformation. The way they do this still involves I-SceI in his example - your donor has the same homology arms as whatever flanks your I-SceI site of interest, and that's how you get HR.
+
+The idea now is to do the same sort of thing with targeted nucleases (like the CRISPR system). Turns out it works efficiently. Verified with Southern blots.
+
+Used the agrobacterium approach on ADH1, TT4, etc. They work.
+
+Germline transmission in their hands is 15-20%.
+
+Off-target effects: To deal with this, they converted CRISPR/Cas into a nickase. Did that by knocking out one of the nuclease motifs, so it only cuts on one side. Make two nicks and you get the DSB you needed, but with twice the specificity.
+(I am surprised that this solution also works in plants, with with multiple genome duplications, etc.)
+
+Mentioned at the end - we now have the tools to make a synthetic plant genome.
+
+
+
+W600 - Feng Zhang - Highly Efficient Genome Editing in Crops
+
+From Celectis. Idea is to create better food products through genome editing.
+
+Efficient delivery methods are key to success. There are a couple way to do it: agrobacterium, particle bombardment, PEG or electroporation, and RNA or DNA viruses.
+
+Protoplast transformation: what people did before agrobacterium.
+
+Targeted gene editing in N. benthamiana. They do TALEN transformation, regeneration, and mutant screening. No need to select the plants on selective media because the transformation efficiency is very high.
+
+Multiplex gene knockout in one generation: Trying to knock out four genes at once; 17% of screened plants did.
+Results in a significant reduction of N-glycosilation in mutant plants.
+
+Potato: trying protoplast transformation in commercial varieties. 
+Cold-induced sweetening reduces potato storage quality, so they're trying to tackle that.
+TALENs to knock out the gene responsible for the sweetening. 
+Transgene-free mutant plants were identified, and did have reduced reducing sugar (not a typo) and acrylamide levels.
+This substantially reduced the darkening of the color after CIS.
+
+
+
+W601 - Sandeep Kumar - A Modular Gene Targeting System for Sequential Transgene Stacking in Plants
+
+SmartStax has 8 transgenes stacked into one product. Crops with multiple traits. Typically, the transgenes reside on different chromosomes, so it's tricky to put them together and KEEP them together. 
+
+The solution is the molecular stack since transgenes can be stacked into a single locus.
+
+They're heavily invested in ZFN, so that's what they're using.
+
+They use a modular and sequential gene targeting and stacking strategy. Involves switching back and forth between selectable markers every other generation. Can keep using the same ZFN to do this.
+
+Particle bombardment used to insert donor and ZFN. Done on a T1 homo target (T0 is selfed to get homo). Looks like about 30% mutational efficiency overall.
+
+Targeting confirmed via Southern.
 
 
