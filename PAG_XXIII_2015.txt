@@ -1,0 +1,158 @@
+1/10/15
+
+W786 - C. Titus Brown - How Well Can We Reconstruct Metagenome Content? Thoughts and Data on Metagenome Assembly
+
+Reconstructing metagenomes from shotgun data.
+
+Not talking about 16S. Shotgun is collecting samples, extracting DNA, sequence fragments,  and then you analyze it. "Sequence it all and let the bioinformaticians sort it out." That is, don't try to fiddle too much with the molecular biology - much can be sorted computationally.
+
+To assemble or not? If the goal is to reconstruct phylogenetic content and predict functional potential of ensemble, you can either analyze short reads directly, OR you can assemble and THEN analyze (with weighted contains). So which to do?
+
+Assembly is a bad bioinformatics technique - uses a lot of heuristics, bad software.
+
+But - it can be useful. For stuff like this, you want to assemble. The length of the alignment means that you're passing a better single to blast for homology searches. Specificity is much better than just short reads.
+
+Few assembly benchmarks have been done. 
+We usually take unknown data and run it with new software & publish on it - which is a terrible way to do software.
+
+Shakya et al 2013 - built a mock community so they KNEW what it was, then did real sequencing of the mock community. 101 bp PE reads, as well as other comparison sequencing.
+What they found:
+* Metagenome seq outperformed rRNA primer sets
+* Illumina is good if you already know what you're looking for and you're just counting
+* 454 with MG-RAST doesn't work very well at all with default parameters. So don't do that. Can change the perimeters.
+
+What about assembly? His lab has been making a tutorial (since otherwise, there aren't really standards). Kalamazoo Metagenome Assembly protocol.
+
+They used that to benchmark that mock community dataset. Tried three different assemblers (Velvet, IDBA, SPAdes). Also applied three different filterings. Since they have a known answer, they can compare with Quast.
+Note - if something works on mock communities, it might not work on real ones (and probably won't).
+
+IDBA and SPAdes outperform Velvet for genome fraction recovered (90-91%). Those two are pretty similar overall.
+
+Computational cost - Quality takes a lot of RAM, which is why they do Diginorm and Partition.
+
+Project is still in progress.
+What is NOT being assembled, and why? Low coverage? Strain variation? Something else?
+The mock community also gets 10 MB of sequence that isn't supposed to be there - probably contamination.
+MEGAHIT is a good assembler.
+
+90% recovery is pretty good - relatively few misassembles, too.
+
+* You don't misassemble sequences (not systematically)
+* You DO need big computers (for now)
+* It's still technically tricky, but there's hope.
+
+Everything they did here is reproducible and open. Search for "khmer protocols"
+
+During questions, again stressed the importance of having better known standards, so we can actually trust our protocols.
+
+
+
+W038 - Alexandre R. Caetano - De Novo Genome Assembly of the South American Freshwater Fish Tambaqui (Colossoma macropomum)
+
+(Talk started before I arrived, so I don't have the beginning)
+
+First round of assembly - one lane with shotgun and one lane with mate-pair
+Partial assemblies using ~25% of each MP library size class and all 400+800 shotgun data available (if you throw out a lot of mate pair entires, the N50 drops)
+That's only the case for the 10 kbp library - it's better than 15 kb, and much better than 5 kb.
+
+Second round - additional reads. One lane with 400 bp SG, one with 800, and one lane with mate pair.
+# of N's in the assembly was initially 33% of reads, but after gap filling, it dropped to 10%.
+
+Quality check:
+Detection of "universal" genes using CEGMA (run prior to gap filling)
+85% of CEGMA core genes found complete
+9% found partially
+So pretty good.
+
+Automated annotation: used MAKER2. Used the Mexican tetra to serve as the source of ESTs, since they don't have them for the actual species they're sequencing.
+
+MAKER2 found 23,632 gene models found, ~20,000 shared with the tetra.
+
+Variant calling - After filtering for Q20, have 3.6 million high-quality SNPs, and I think about 300,000 indels.
+
+Future:
+Data from other assemblers
+RNA-seq to improve gene prediction
+Detection of markers within and between related species
+
+Used Nextera, so it doesn't go through PCR.
+
+
+
+W788 - Mick Watson - The Microbial Proteome Associated with High Methane Emissions in Cattle Determined By Shotgun Metagenomic Sequencing
+
+Food security - Everyone in the world having access to the food they need to survive. We don't do this well - despite all the obese people, there are a LOT of hungry people. Lots of challenges coming down the pipe, too - population increase, changes in consumer demand, globalization, climate change, competition for resources (like water), and Westerners who want to eat "happy chickens".
+
+Three gorges damn - just to show that humans change the environment. It shifted so much mass that the day is now 0.06 microseconds longer.
+
+Similarly, humans have changed our livestock, even over just ~45 years. That's all just through breeding. See van der Steen, Prall and Plastow, 2005 J. Anim Sci.
+We need to keep this up, since we need these improvements to feed our species.
+
+He studies gut rumen metagenomics. Why?
+* Energy from food - microbiome could perhaps be used to get MORE energy from the food by manipulating microbiome.
+* Novel enzyme discovery - Scientifically, it's a novel environment
+* Methane emissions - entirely microbial in origin. And the cows burp it out, not from the other end.
+
+No relationship between methane emissions and metaGENOMIC abundance of methanogenic archaea, but there is with metaTRANSCRIPTOMIC abundance. That was in a GR paper, anyway. Mick's data doesn't support this. (The Shi et al. paper looked at sheep, though, and Mick looked at cattle)
+
+Matched steers based on breed and diet, looked at methane emissions. Also separated high and low methane emitters.
+High methane emitters DO correlate with high archaeal abundance.
+
+Enzyme abundance - matched for breed and diet, the abundance of several enzymes is associated with methane production.
+
+What's in there? Assembled all 8 metagenomes from the cattle using MetaVelvet, predicted genes with Prokka, annotated using Pfam domains. 1.5 million gene/protein predictions, less than half have any known domain (and that includes domains of unknown function). Even in 8 samples, thousands of novel enzymes to look at.
+
+Figuring out what all those enzymes DO is hard - as biologists, we don't really have a good system for tackling this (at scale?).
+
+Metagenomic assembly - Working on a cattle metagenomics dataset, tried various assemblers
+
+Mick: "There's regular velvet, and there's version specifically for metagenomics."
+Titus: "But you're the only person who uses it now."
+Mick: "...Yeah."
+
+But you can't do the whole dataset - as Titus warned, you'll run out of RAM. 
+
+So they did a smaller dataset. When you map back to the assembly with BWA, IDBA-UD works reasonably well.
+
+Need to use complete genes in these studies, which is tricky in metagenomics, as orthologs often look like repeats, so a LOT of contigs start or end in the middle of a gene.
+IDBA-UD did well relative to the others, BUT it still mostly found fragmented genes
+
+Metagenomic assembly is an unsolved problem, need lots of RAM, and assemblies fail in the middle of genes.
+IDBA-UC looks to be the best assembler so far.
+
+
+
+W789 - Timothy P.L. Smith - Characterization of the Bovine Nasopharyngeal Microbiome in the Context of Respiratory Disease and Treatment
+
+Dealing with Bovine Respiratory Disease Complex (BRDC) - 25-30% morbidity after feed lot.
+
+Multi-factorial, stress-related disease. Mortality associated with bacterial pleurpneumonia.
+
+Control measures - vaccination against the disease, vaccination against specific pathogens. Limited protective ability, though, and antibiotics not always effective.
+
+First experiment - stress the cattle so they'll get sick (since they need to study sick cattle). Mixing and highway transport are big sterssors, make them "high risk" cattle.
+
+Some were metaphylactically injected, and the rest weren't. Three sets of these treatments, from cattle from separate sources.
+
+Studies nasophyryngial swabs, rectal samples, blood phenotypes (cytokines and immune repertoires)
+
+Profiling the microbial community with 16S. The problem, though, is that most of the DNA you get is cow, not microbial. Bustamante's selection technique gets rid of too much DNA, and it costs them too much to just sequence everything, so they're punting on that and just doing 16S.
+
+Can now also do full-length sequencing of 16S with PacBio.
+
+Analysis: WebMGA vs Greengenes give somewhat different answers. Lots of mycoplasma, though.
+
+Substantial animal-to-animal variation, even within the same sale barn.
+
+All animals that received metaphylactic macrolide treatment had increased mycoplasma (N=7)
+
+Summary:
+* Full-length 16S does achieve species-level discrimination
+* Nasopharynx is relatively low-diversity compared to, say, rumen.
+* (And there were more, but the slide changed)
+
+
+
+
+
+
