@@ -274,3 +274,163 @@ Particle bombardment used to insert donor and ZFN. Done on a T1 homo target (T0 
 Targeting confirmed via Southern.
 
 
+
+###################################
+
+
+
+C01 - Gary Saunders - The European Variation Archive at EMBL-EBI
+
+Many ways to GET data (generate it, get from a paper, the web, colleagues), BUT - it’s not accessioned, no metadata, and no links to core data.
+
+That’s where Eva comes in. Centra repository for VCFs. Any variation is represented as a change against a reference sequence.
+
+www.ebi.ac.uk/eva
+
+Study browser - can filter by free text search, checkboxes for organism, or experiment type. 
+There’s only one curation study - maize - and that’s where they picked what parts of the genome to analyze.
+
+Clicking the left box on an entry expands the metadata.
+
+Going to the study view has an FTP link at the bottom.
+
+EVA variant browser - select organism/assembly, and can put the region in which you’re interested in looking.
+SNP IDs are from dbSNP. The “view” column links out to various external ways to look at it, like ensembl and dbSPN.
+
+There's a way that parses the VCF genotype info to make it a little more human-readable.
+
+Can submit in any file format, though VCF is preferred. It's all described in their online documentation. 
+You can contact them via email to get their various submission templates, etc.
+Data submitted to EVA is also brokered to NCBI, so no need to submit again. Once NCBI accessions it, it's sent to Ensembl.
+
+
+
+C02 - Nathan A. Dunn (LBNL) - WebApollo 2.0: A Scalable, Distributed Sequence Annotation Editor
+
+Designed for collaborations across large groups
+
+His example: log in, search "Group1.3", which takes you into the annotation editor. Can add annotations locally or via URL.
+
+Can use BLAT to search the whole genome OR just the scaffold you're currently on.
+
+Check boxes on the right can be used to add various other pre-loaded tracks.
+
+Drag any feature up to the yellow area to see the annotation that you can start modifying. When you modify something, you're not REALLY changing the reference sequence, you're adding metadata to show that something has been added or removed.
+
+If you make a change, the ORF is recalculated.
+
+Option-click opens the information editor.
+
+Can add in RNAseq data, and I believe dragging exon boundaries will snap to those supported by RNA-seq.
+
+New UI adds sidebar to help with sharing to specific individuals, among other things.
+
+He'll be at P1154.f
+
+
+
+C03 - Jodi L. Humann - GenSAS: A Web-Based Platform for Automated and Manual Curation of Genomic Sequence
+
+Wrapped a bunch of command-line tools into a GUI. It's for non-bioinformaticians. Integrates with JBrowse and WebApollo for visualization and editing.
+
+genesas.bioinfo.wsu.edu
+
+Log in, click "use GenSAS" tab. All steps therein have the directions/instructions in a tab. This is in lieu of external documentation.
+
+All projects have a 120 expiration date. You can always reset the expiration, but if you don't, it'll disappear to free up space.
+
+Uploads must all be in FASTA format. If you put all the sequences in a multi fasta file, then ALL those sequences will have to get the same analysis.
+
+Can also upload GFF3 files, apparently.
+
+After upload, you filter repeats. If you go back and give it a different name, you can run it with different settings and pick the one you want.
+
+After that is masking, then gene prediction (Transcript alignment is via BLAST or BLAT, I believe).
+
+Don't need to stay logged in after your jobs are submitted.
+
+Consensus: Pick the gene finding jobs you want to use, and assign them a weight.
+
+"Refine" and "Functional" aren't available yet, but will be in the future.
+
+Annotate
+
+Publish - GeneSAS exports in GFF3 and FASTA formats (sequence of the features, not the genomic sequence).
+
+
+
+C04 - Kim D. Pruitt - Sequence Viewer and Genome Workbench - Sequence Display and Analysis Tools
+
+Sequence Viewer is web-based, Genome Workbench is what you download.
+sviewer designed to look at one accession number at a time. Also exports high-quality PDFs.
+
+sviewer - basically a genome browser. For example, when you go to NCBI Gene, sviewer is what appears on that page.
+
+Can display custom data, including BLAST RIDs.
+
+If you select two annotation objects, the system with automatically highlight regions of difference. Good way to compare, say, ensembl and ncbi.
+
+gbench - learning curve, but does have documentation and videos. It's used by RefSeq curators and the GRC.
+
+GCF - refseq; GCA - genbank
+
+
+
+C05 - Emily Perry - Analysing SNP Consequences on Genes and Proteins with Ensembl's Variant Effect Predictor
+
+www.ebi.ac.uk/~emily/Workshiops/2015/PAG - everything from this talk, including the demo files.
+
+SIFT scores - based on protein conservation and the chemical change.
+
+Two ways to use the VEP: web interface and standalone perl script.
+
+If they DON'T have a species in Ensembl, you can make a cache.
+
+Her example vcf doesn't have a header, but should still work.
+
+Web-based: click on the VEP link on the main Ensembl page, then Launch Vep. If you have a bunch of variants, probably better to upload file or provide URL, rather than paste.
+
+Output: Summarizes output.
+Can then filter by, for example "consequence" and "missense".
+Can download the data, or send them to BioMart and get them that way.
+
+Perl script version: Just follow the instructions. Pretty much just a matter of installing and then specifying your vcf on the command line. You can also download a cache of your genome of interest.
+
+You get a local vcf output, and an html file that should give you the summary images.
+
+
+
+C06 - Hugues Roest Crollius - Genomicus: Fast and Intuitive Comparative Genomics in Plant and Animal Genome
+
+239 species in their database.
+
+Search for a gene, and the default view pops up, called PhyloView.
+Click arrow in upper left to select which genomes it's compared to.
+
+Can change color scheme to view protein similarity by clicking near the top of the screen. The similarity scores come from ensembl.
+
+View -> AlignView lets you view alignments of the other genomes, such that if there isn't a homologous gene in the same locus, a gap appears.
+
+There's also a view (karyotype?) to see the orthologous chromosome segments between two genomes - just mouse over.
+
+
+
+C07 - Justin T. Page - BamBam: Genome Sequence Analysis Tools for Biologists
+
+sourceforge.net/projects/bambam. Recently published in BMC Research Notes.
+
+For manipulating and summarizing BAM files. Only going over some of the tools today.
+
+Bam2Consensus: returns a consensus sequence for every contig in the reference. If you give an annotation via a BED file, you can pull just those regions.
+
+Counter - Breaks it down by BED region, counts up how many things were there.
+
+InterSNP - straightforward SNP caller. Just looks at a single basepair and counts up how many A, C, G, and T in one BAM vs. another BAM. Default output is a genotype table.
+
+SubBam - Takes a subset of a sorted BAM file. SAMtools does something similar. Lets you make a smaller BAM if you're not interested in most of what's covered.
+
+HapHunt - uses k-means clustering. Needs continuous coverage for it to work. 
+
+MetHead - summarizes bisulfite sequencing data
+
+
