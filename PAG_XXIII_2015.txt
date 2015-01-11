@@ -577,3 +577,131 @@ Neo-functionalization: slc1a3 is in brain in gar. Teleosts have it in brain AND 
 
 
 
+###################################
+
+
+
+1/11/15
+
+W243 - Beat Keller - Lessons Learnt from Transgenic Gene Pyramiding for Classical Resistance Breeding in Wheat
+
+Standing-room only, so I wasn't able to type up notes.
+
+
+
+W245 - Jay Shockey - Sanding the Rough Edges: In Search of Enhanced Performance of Engineered Enzymes in Transgenic Systems
+
+Novel oil plants - the oil-producing plants we’ve bred are for eating, not for industrial use. For that, we turn to novel oil-producing plants.
+
+The downside is that those plants have poor agronomic traits, so that’s where they come in.
+
+Putting transgenes from the exotic plant into target plants like arabadopsis doesn’t work too well. Fatty acid production goes from about 80% in exotic plant to around 20% in the target, which is unacceptably low.
+
+Their goal is to find ALL the genes required for the biosynthesis of an oil with high amounts of an exotic fatty acid. This also involves promoter optimization, etc.
+
+Castor oil - makes a very good lubricant that stands up to high temperatures, but you can’t cultivate the host plant at industrial scale because those plants produce ricin.
+
+Diacylglycerol acyltransferase (DGAT) - catalyzes the committed step in TAG formation.
+
+Castor bean DGAT2 strongly prefers dircinolein in vitro.
+
+RcDGAT2 coexpression drives dramatic increases in seed ricinoleate levels.
+
+Tung tree - Oil has conjugated double bonds, and contains trans double bonds. Unusual - and makes it easily oxidized.
+
+FADX involved in biosynthesis of tung oil.
+
+Design of a flexible cloning and expression system - what he's been up to. Hopes to share with the community soon.
+Also adapted for CRISPR/Cas9.
+
+Testing it - promoter optimization of tung FADX expression.
+
+DGAT2 prefers eleostearate-containing substrates.
+
+As in yeast, VfDGAT2 outperforms VfDGAT1 in planta.
+
+Summary:
+* DGAT, especially DGAT2, improves HFA and ESA production.
+* Promoter choice suppression of competing processes, and the use of engineered enzymes all help.
+
+
+
+W242 - Jian-Kang Zhu (not really, but someone presenting on his behalf) - Gene Editing in Plants using CRISPR/Cas and TALENs
+
+Begins with explaining CRISPR, etc.
+
+They use two sets of CRISPR vectors. One for arabadopsis, and one with a different promoter for rice.
+
+Testing if CRISPR/Cas9 in Arabadopsis protplasts
+
+Endogenous targets of CRISPR/Cas9 in Arabadopsis - testing three visible phenotypes. RFLP assay.
+
+Successfully targeted two sites in the same gene simultaneously
+
+Mutation is usally a single bp change - and drops off quickly in either direction.
+
+Transmission:
+T1: chimeric
+T2: homozygous, bi-allelic or hetoerzygous
+T3: homozygous or bi-allelic
+They find that no new mutations or modifications arise as generations progress.
+
+Did WGS to look for off-targets. No off-targets detected in T1 or T2. I believe he said there's a paper that contains this information (PNAS 2014? Might be http://www.ncbi.nlm.nih.gov/pubmed/24550464)
+Ahhh, it's not quite what he said. They did WGS, yes, but they only looked for mutations in PREDICTED off-target sites. There's been other work published that has shown you can get off-target effects in sites you wouldn't predict based on sequence similarity.
+
+CRISPR in rice: Similar RFLP results
+
+Trying to knock out all PYLS in rice (and there are 13 of them).
+Multiplex targeting or rice PYLS - one vector contains multiple sgRNAs.
+
+
+
+W244 - Yinong Yang - Plant Genome Editing and Precision Breeding with CRISPR-Cas9 System
+
+Nice figure indicating the 20mer is called the protospacer (which is why the PAM is called the protospacer-adjacent motif)
+
+Made vectors for plant genome editing, some of which are already available through Addgene.
+
+For off-target concern, made genome-wide prediction of specific gRNA spacers. Mol Plant 2014, http://www.ncbi.nlm.nih.gov/pubmed/24482433
+That's the CRISPR-PLANT website.
+
+Transgeneic rice lines with targeted mutation of OsMPK5. Got single base indels and frame-shifts, and you can cross out the transgene.
+
+Developing advanced mulitples editin tools for functional geneomics and precision breeding. For example, expressing for more than one target for offset nicks, or just trying to hit multiple places with DSBs.
+
+PTG technology - array gRNAs tandemly in a singe polycistronic gene and utilize endogenous tRNA processing system for precise cleaving and production of numerous gRNAs in vivo. Submitted to PNAS.
+Didn't quite catch this, but sounds like connecting the guide RNAs to tRNAs.
+Because it's a single transcript, you get identical expression of all the guides.
+
+DNA fragment deletion at a frequency of 4-45%. Fragment deletion efficiency is negatively correlated to its size. (This is with multiplex targeting)
+
+PTG:Cas9 has a higher mutational rate than sgRNA:Cas9.
+
+For working in crops, you can do it by providing transient information, or using stable information and then crossing it out.
+
+For example: regeneration of transgene-free potato plants from protoplasts after targeted mutagenesis of AS1.
+Hopefully, he says, this sort of thing will alleviate concerns about genetically modified crops.
+
+
+
+W246 - Vai Lor - Targeted Mutagenesis of the Tomato PROCERA Gene Using TALENs
+
+Gibberellins (GAs) are phytohormones. Promote pant height, flowering, leaf size
+
+You don't necessarily want TALLER plants - can lead to net yeild loss. Semi-dwarf GA mutants were therefore important during the "green revolution", increasing yeild.
+
+GA relieves DELLA repression of the GA response. Combines with other proteins to ubiquitinate (and therefore degrade) DELLA.
+
+The tomato DELLA gene is PROCERA (PRO), and the mutant is tall.
+Two possibilities: Either the mutant isn't really a null, or there's a DELLA-independent function.
+
+Designed TALENS to destroy a diagnostic restriction site to make mutant identification easier.
+
+Seven pro alleles were recovered. proTALEN mutants are parthenocarpic (no seeds). They're male sterile.
+So, if you cross WT male to proTALEN female, you do get fruit with seeds.
+
+proTALEN mutants are not responsive to GA and Paclobutrazol (PAC). Suggests that proTALEN mutant is likely null.
+
+GA signaling is fully activated in proTALEN mutants.
+
+
