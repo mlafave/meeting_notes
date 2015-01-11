@@ -827,3 +827,225 @@ Determining the number of factors: k-fold cross-validation. That gives you a vec
 He's used this method to predict hybrid yield and grain weight in rice.
 
 
+
+###################################
+
+
+
+Degraded DNA and Paleogenomics
+
+
+
+W234 - Ian Barnes - How Do You Know When You Don't Have Any Ancient DNA?
+
+Meridiungulates - extinct super-order. Variously identified as mono or polyphyletic.
+
+Two end Pleistocene survivors. Toxodon plantensis - like a hippo-rhino.
+
+Macrauchenia patachonica. Like a…camel-tapir.
+
+Material tested for collagen preservation (since that sticks around more stably than DNA, I think he said)
+
+NGS is nice for ancient DNA - no primer sequences, can work with small fragments, should be able to detect contamination and measure damage.
+But it also has problems - not much good unless there’s a fairly close genome available. Also you tend to pick up a lot of non-endogenous soil bacteria. Also, it costs a lot.
+
+Their BEST sample was still only soil biota. How do they know there’s no ancient DNA?
+1) de-novo assembled into contigs, threw out the short ones, BLASTed to a local nucleotide database.
+b) (didn’t catch this part)
+
+But the samples they got were actually pretty far north, and in the southern hemisphere, (South America), that means you wouldn’t expect the DNA to last too long. Anything below 40-45N latitude is likely to have poor DNA recovery for the pleistocene (unless high altitude).
+
+When is there not enough endogenous DNA to proceed? Depends on read length and proportion of endogenous DNA. 
+Read length depends on burial environment, time, extraction method, library build
+Endogenous DNA content is dependent on skeletal element, burial conditions, other things we don’t yet know.
+
+Anyway, what they decided to do what look at the amino-acid sequence of type I collagen, and put that into a phylogenetic tree. Collagen is hard to sequence (repetitive), BUT it lasts about 10x as long as DNA.
+
+The MS-MS data give a collagen phylogeny with high support for placement with Perissodactyla. Also, they're monophyletic. Share common ancestor with tapirs, horses.
+
+
+
+W235 - Daniel G. Bradley - The Best Bones, Imputation and Ancient Genomics
+
+Inspired by the Denisovian sequence - which was complete & came from a small finger bone - they ask what are the best bones for these studies?
+
+They say is't the petrous bone. It's the bone that houses the inner ear, and is the hardest bone in the human body. Survives cremation. Human petrous is attached, sheep and goat are much easier to snap off.
+
+Other bone elements get 10% endogenous reads if you're lucky. Petrous can be over 70% (though those data points are from more recent bones, but it still tends to out-perform other bones when older, too)
+
+Imputation: Take phased reference haplotypes & your experimental partial haplotypes, and use that to call imputed haplotypes.
+Might not work in aDNA, though, since ancient DNA can have different haplotypes.
+Turns out they were able to bootstrap their data for imputation to get haplotypes out.
+
+
+
+W236 - Jake Enk - Time, Temperature, and Tiling Density When Capturing Ancient DNA
+
+R&D scientist at MYcroarray.
+
+Enrichment through hybridization.
+65 degrees C is sort of industry standard for modern DNAs, but there's also lower temperatures, touchdown, etc.
+Lots of different times & tiling densities used, as well.
+
+They simulated ancient DNAs (short fragment length - mode of 50 bp - which are shorter than the bait length of 80 bp). Embedded those in a soil bacteria background, such that the mix was about 6% endogenous.
+
+Temperature: Bait length usually determines optimal temp, but since target is shorter here, it's the TARGET that dictates that. 
+Hypothesis is that an increase in time will raise specificity and lower sensitivity.
+
+For mito:
+Specificity DOES go up - to a point. Looks like above 65 degrees it drops off (at 70 C)
+Sensitivity looks to slightly peak around 50-55 degrees, then goes down. That's as measured by % of X raw reads that are unique sequences.
+Optimal sensitivity looks to be at 55 degrees.
+
+For nuclear:
+Similar.
+
+Time: Target aDNAs tend to be rare in the library. Hypothesis is that more time means more sensitivity (with caveats), and specificity MIGHT go down.
+
+For mito:
+Specificity not significantly different.
+Sensitivity does go up with time, but not by much.
+Probably want to avoid really short times, but anything beyond 16 hours is probably unnecessary.
+
+Tiling density:
+Hypothesis is that more tiling density means more sensitivity, and lower specificity (more likely to capture background).
+Higher density doesn't change specificity in mito, and doesn't affect sensitivity much, either (except for a outlier at the low end).
+So a little redundancy (2x) is good.
+
+Conclusions:
+Temp - if want highest % on-target, do 55 C. If want to capture as much as possible, go lower.
+Time - avoid 4-6 hr, but no need to go longer than overnight.
+Density - 2x is good, but no need to go beyond 4x.
+
+
+
+W237 - Ludovic Orlando - Ancient DNA: From Genomes to Epigenomes
+
+(There's now a 781 kya horse genome they published last year)
+
+How they look at ancient epigenomes - nucleosome protection after death. By looking at depth of coverage, that should tell you where the nucleosomes were.
+As for methylation, CpG should degrade to UpG, and mCpG will turn into TpGs. Old Illumina library building process couldn't extend through UpG, and CpG to TpG conversion should indicate there had been methylated.
+
+That was the hypothesis, anyway. They looked at nucleosome arrays to see how well they matched up.
+
+Nucleosomes were spaced about 193 bp, which is what was expected. They're also where you would expect based on exon boundaries.
+
+ancient nucleosomal phasing and methylation, as well as ratio of methylation between gene body and promoter, can be used to predict ancient gene expression levels.
+
+Methylation disappears pretty fast from ancient genomes.
+
+Pulling down methylated DNA from ancient genomes may help you call SNPs in those regions.
+
+
+
+W238 - Eleftheria Palkopoulou - Genomic Diversity and Population Dynamics of the Woolly Mammoth Prior to Its Extinction
+
+There's an island north of Siberia (Wrangel island) that wasn't an island back in the last ice age. When seas rose, it became an island, the population on it was isolated.
+
+Compared to Oimyakon sample - mainland siberian wooly mammoth.
+
+Population history inferred by PSMC. Siberian and Wranger are a bit offset. Siberian is ~ 45,000 yBP, Wrangel is ~4,300 yBP (so substantially younger).
+If you shift the curves so they line up, you can see how many mutations occurred in the Wrangel genome since the death of the mainland sample. Lets you calculate mutation rate. 
+
+Both samples were males, meaning all their X sequence is phased. Used that to see that the population split was about 48,000 years ago, or about the time of the death of the mainland siberian individual.
+
+Genome-wide diversity: Wrangel had lower het. per 1000 bp (1.00 vs. 1.25). It's not SUPER low (like snow leopards), so it's not THAT big a bottleneck.
+
+So was there inbreeding?  Look at runs of homozygosity to find out. Higher number and longer ROHs for the Wrangel individual indicative breeding between distant relatives, rather than recent inbreeding (like between siblings, etc.)
+
+Summary:
+* Two severe population declines in the history of wooly mammoth
+* Recent pop split between the ancestor of of the two individuals
+* Decline in the genome-wide diversity of the Wrangel genome
+* Increase in runs of homozygosity in the Wrangel genome
+
+
+
+W239 - Peter D. Heintzman - Resolving the Evolutionary Relationships of Two Enigmatic Ungulates from Pleistocene North America
+
+Camelops - extinct North American camel
+
+Camelids actually originated in north america. Those that went to the old world became dromedary and bactrian camels, and those in south america became llamas and alpacas.
+
+Camelids stuck in what is now Western US for most of pleistocene - but when the ice sheet wasn't there, they're found as far north as the Yukon. Better fossil samples up there, of course. Suspected to be ~125 kya.
+
+Why care? Want to resolve phylogenetic tree, for one thing. Camelops currently thought to split from SA camels after they had split from old world camels - but not everyone trusts that model.
+
+Extracted DNA in a way specifically designed to enrich for short fragments & did illumina shotgun sequencing. That worked.
+
+Mitogenomic reconstruction - had to use iterative assembly methods, aligning to FOUR different extant camelid genomes. Required multiple rounds of assembly. Reads from each sample were aligned to the final draft with BWA and visually inspected for accuracy.
+
+Made phylo trees in various ways, but the mito data always puts the camelops next to the OLD world camels, not the new world camels.
+
+Phylo reconstruction inferred from low-coverage genomes: Mapped to Alpaca and wild Bactiran camel genomes, then Alpaca mapped to wold Bactrian camel and vice versa.
+Again, camelops is on the old world branch. Evidence of a DNA damage artifact, too - gives you a bias toward mapping the more conserved reads.
+
+Had they just relied on PCR, they would have found nothing, and excluded interesting specimens.
+
+
+
+W240 - Christina Warinner - Direct Evidence of Milk Consumption from Ancient Human Dental Calculus
+
+Milk is very nutritious, but it's hard for adults to consume because of lactose. Lactose is hard to break down, and requires special enzymes (lactase) to break down. If you CAN'T break it down, it gets all the way to your colon - where your bacteria then have a field day and use it to produce 8 liters of hydrogen gas.
+
+Europeans have a super-high rate of lactase prevalence. That variant is the one that's been studied the best.
+
+Buuuuut, it's not entirely clear how that variant got to northern Europe (and Spain) in the first place, since that allele doesn't show up when you'd expect it would in neolithic populations.
+She points out that the way the milk is processed (think cheese) might make a difference, here.
+
+So - they started looking at dental calculus. Shotgun metaproteomics.
+
+Found BLG, a milk protein.
+1. Humans don't make it, so it must be from some other animal.
+2. It's ONLY in milk, not blood, etc.
+3. It's hard for bacteria to break down
+4. BLG lacks close orthologs in bacteria, so easy to identify
+5. Many polymorphisms among species, so you can tell what animal it came from (except camels)
+6. It's very abundant
+7. Shows up a lot in products with high lactose content - so not so much in butters and aged cheeses, but really high in milk and whey.
+8. Since it's sequenced based, it's a much more direct way from tying milk consumption to a specific individual.
+
+On average, 20% of individuals tested positive for BLG from the skeletons from the milk-drinking regions.
+
+Found goat milk in Italy, sheep and goat in Great Britain 
+
+
+
+W241 - Beth Shapiro - The Rise and Fall of the Passenger Pigeon
+
+There used to be a LOT of passenger pigeons - but they were tasty and cheap, too, and easy to trap.
+
+So what happened? 
+
+Stuff we (think) we know:
+
+1. Pigeons are old
+2. Ectopises is an old pigeon lineage.
+3. Closest living relative is band-tailed pigeon.
+
+When did they become so abundant in the first place? An open question. 
+Hypotheses:
+1. Post-glacial warming and forest expansion
+2. Agriculture
+
+So they tried out ten different models, and got 41 mitochondrial genomes.
+Rapid, massive, star-like expansion. So none of their ten models fit.
+
+They got scooped - another group showed that the carrier pigeon population already fluctuated a lot to begin with.
+But they couldn't recapitulate it. Why not?
+
+Well, the other group used the default settings on the analysis, which wasn't a good idea. The most important one is the C50 setting, since you don't want to use too strict a mappability criteria, since you're not able to use the ACTUAL genome you want to map to.
+
+But, the big fluctuations don't tell you what happened in the last 20,000 years anyway, since you have no power there.
+
+So, what do we know?
+There's little diversity in the mitochondrial genome.
+The other group made another mistake, which was making consensus sequences, which squashes heterozygosity.
+So what her group did was create artificial haplotype sequence by picking a random base (from good reads) at each site, and then integrate.
+
+Rather than nuclear heterozygosity of 0.1%, it's 1% - that's more diverse than chickens, which are incredibly diverse.
+
+Don't know what's going on, but a few guesses:
+Demographic history - could be (relatively recent) hybridization from something distantly related - but the bantail doesn't live anywhere near where the passenger pigeon.
+
+
