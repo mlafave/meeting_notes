@@ -705,3 +705,125 @@ proTALEN mutants are not responsive to GA and Paclobutrazol (PAC). Suggests that
 GA signaling is fully activated in proTALEN mutants.
 
 
+
+###################################
+
+
+
+Statistical Genomics
+
+
+
+W799 - Qishan Wang - An Empirical Bayes Method for Genome-Wide Association Studies
+
+Most popular model is a linear mixed model. Combo fo fixed and random (random controls for the polygenic background). There are both exact methods (GEMMA, FaST) and approximate (EMMAX and P3D).
+
+Two major issues:
+1. Genomic background noise (marker density too high). Increase false positive.
+2. Bonferroni correction is too conservative, leading to low power.
+
+For example, if you had 2287 subjects with ~509,000 SNPs, you wouldn't be able to detect FGFR2 in breast cancer, despite actually being associated.
+
+So they came up with Empirical Bayes (EB) method. Reduces noise and allows FGFR2 to show up as significant.
+
+Their model has a different covariance matrix. Random marker effect approach.
+
+Gamma k is the parameter of interest, and phi k squared is just prior variance.
+
+Advantage 1: shrinkage nature.
+
+Advantage 2: can calculate an "effective number of tests", and use THAT to perform Bonferroni correction to increase statistical power.
+Note the effective number of tests only applies to the random model approach, not the fixed model approach. Testing in this way has a higher type-1 error (false positives) than using the usual Bonferroni correction.
+
+Advantage 3: improving the computational speed
+
+
+
+W800 - Lauren M. McIntyre - Using Path Analysis to Reveal Novel Components of the Sex Determination Hierarchy in Drosophila melanogaster
+
+Example of retinitis pigmentosa - there are a LOT of SNPs in there that can cause it. But since they're all in the same gene with low frequency, they'd be really hard to find with GWAS.
+
+Working on a "known" fly pathway - sex determination.
+
+Building off the work of Sewall Wright. Supervised GRN Reconstruction.
+
+Begin with baseline models, using two datasets (DSPR from King, and F1-Hybrid from Mackay).
+DSPR shows no covarnaince, but F1-hybrids have some evidence of full or partial covariance.
+
+Go through and add in all possible paths, asking if they improve model fit.
+Found 12 putative new relationships.
+
+Similarly, you can add new genes and see what happens.
+Here, the datasets are VERY difference. 0 genes added to the DSPR model, but F1-Hybrids had 1,390 genes were added to the model.
+
+Why? The number of alleles matters (allelic combinations). DSRP has fewer alleles, so the model becomes saturated sooner.
+
+Of those 1,390 genes, they're enriched for sex-based splicing effects.
+
+Now, corn.
+
+Idea is to zoom to the relevant part of KEGG pathway, see what fits, and then see what else there is to improve the model.
+
+Metabolomics - challenging and new. They have money for it that must be given to people outside of UFL.
+
+
+
+W801 - Zhiwu Zhang - Getting Power Back from Population Structure and Kinship in Genome-Wide Association Studies
+
+If you have linkage equilibrium, random mating will let you distinguish between the causative mutation and others that are just there not doing anything. 
+If it's linkage disequalibrium - like if they're geographically isolated - then you can't necessarily do that.
+
+Y = SNP + Q (or PCs) + e. Q or PCs captures population structure, and the other two terms is phenotype of individuals.
+
+MLM for GWAS adds in kinship, to capture unequal relatedness. (Yu et al 2005, nature genetics)
+
+GWAS does not have power for traits associated with structure.
+
+PLINK is a GLM, but has 75% of the publications. Why don't human geneticists use MLM instead of PLINK? Well, in humans, you don't gain much power. You do in arabidopsis, though.
+
+FarmCPU outperforms both GLM and MLM in terms of power, and that's for Arabidopsis AND human.
+
+FarmCPU: P1158
+BioGPU: P1163 & C28.
+
+
+
+W802 - Deniz Akdemir - Locally Epistatic Genomic Relationship Matrices for Genomic Association and Prediction
+
+Semi-parametric mixed model - SPMM
+
+Multiple Kernel Models - use multiple kernels by combining them int a single one via a combination function.
+
+Genetic data comes in natural hierarchies. At the bottom level, you have the SNPs, which you can block together. 
+
+Breeding value is distinct from commercial value - commercial is what THAT generation does, and breeding is how much you can pass on. So if you have a genome-wide effect that can be lost due to recombination, that's not of much interest to breeders.
+
+So, working more fine-grained, here. Locally epistatic values.
+
+Only a small fraction of genomic regions are used in the final model and the importance scores for these regions are readily available as a model output.
+Dimension reduction via feature extraction, block interactions.
+Tests for regression coefficients, or hierarchical test variable
+Robust for a few missing markers in a region.
+
+
+
+W803 - Shizhong Xu - A Tutorial of Partial Least Squares Analysis
+
+There are many methods for prediction, and some may work better in some populations than others. This is one such method.
+
+PLS is a prediction of multiple response variable form multiple predictor (independent) variables.
+It's a predictive model, not for variable selection. Don't use it for QT mapping or GWAS.
+
+Related to:
+1. Multiple linear regression
+2. Principal component regression
+
+You're trying to maximize the covariation of the scores of the Xs and the Ys
+
+(Most of the rest of the tutorial is outside of my depth)
+
+Determining the number of factors: k-fold cross-validation. That gives you a vector of observed and a vector of prediction, and then you calculate r squared between them.
+
+He's used this method to predict hybrid yield and grain weight in rice.
+
+
