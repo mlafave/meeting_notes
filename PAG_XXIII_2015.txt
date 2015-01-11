@@ -434,3 +434,146 @@ HapHunt - uses k-means clustering. Needs continuous coverage for it to work.
 MetHead - summarizes bisulfite sequencing data
 
 
+
+###################################
+
+
+	
+Next Generation Genome Annotation and Analysis
+
+W522 - Shin-Han Shiu - Nuances in Plant Genome Annotation: Those Duplicated and Dead Genes
+
+Recent whole genome triplication of Brassica rapa hasn't resulted as three times as many genes, since the rate of pseudogenes goes way, way up.
+
+But are pesudogenes really "dead"? They're expressed in certain conditions, and when they ARE, they're expressed around the level of canonical genes. About 20% are transcribed.
+
+Some likely are translated - about 20%, depending on the dataset. They checked via ribosome pull-down.
+
+Some of the pseudogenes are under surprisingly high evolutionary constraint, and evovle as slow as housekeeping genes.
+
+Comparing the 5' and 3' parts of pseudogenes, before and after the first stop/frameshift. 5' is under slightly stronger constraint than 3' meaning it's maintaining a bit of function.
+
+Though duplicates tend to die, quite a few duplicates remain. That's after 25 million years, which is quite a long time, even evolutionarily.
+
+How did they stick around? Might be sub-functionalization.
+
+What they see if asymmetric partition of function. It's not half and half, but one-or-nothing. 
+
+At the expression level, they found that one of the duplicated genes would be the same as the ancestor, and the other is on but lower. One seems to be decaying.
+
+For example, DDF2 has lost function over time. Doesn't bind as well anymore, either.
+
+Of duplicates that are still around, one copy seems much like the ancestor, and the other tends to decay (rather than becomes neo-functionalized).
+
+
+
+W523 - Joshua Puzey - Transposon Density Affects Homeolog Specific Gene Expression in Allopolyploid Monkeyflower (Mimulus)
+
+Adaptation to polyploidy. It CAN have a lot of benefits, but polyploidy doesn't happen that often - many rapidly go extinct.
+
+Major problems:
+* Chromosome pairing at meiosis
+* Control of gene expression - especially during hybridization, where things from genome A may try to regulate things from genome B.
+* Competition with diploid progenitors
+
+Autopolyploidization - within a given species
+Allopolyploidization - two species make a hybrid
+
+He's focusing on gene expression.
+
+Number of proximal TEs inversely correlated with gene expression in arabadopsis. Another paper found that when genes had methylated TEs upstream, it's not expressed, but if they're not methylated you're fine.
+
+Homeologs - sister genes from different parental genomes.
+
+He predicted that expression differences in homeologs may be explained by local TE density.
+Also, this expression bias should be less in early generations than later.
+
+M. guttatus has undergone multiple polyploidizations, some of which have happened multiple times independently in the field.
+
+Mimulus peregrinus - a hybrid that formed in the UK, as botanists brought it two other plants back from California and Chile.
+
+Gene expression in M. peregrinus - called SNPs to give confident mappings, since they needed to know which parental genome a given transcript came from. Demanded 100% identity.
+
+But first - looking at how TEs affect expression in the parental species. Again, local transposon load is negatively correlated with expression, and that hold for both parents.
+
+Homeologs with more TE bases UPSTREAM are less expressed than the other homeolog.
+
+The skew of the Homeolog Expression Bias (HEB) toward the luteus homeolog increases with more generations. The bias comes from hybridization, not the initial duplication.
+
+
+
+W524 - Daniel D. Ence - Transposable Element Islands Facilitate Adaptation to Novel Environments in an Invasive Species
+
+He's from Yandell's lab.
+
+TEs can be effected by effective population size.
+Looking at Cardiocondyla obscurior, and invasive ant species. 
+
+The smaller the effective population size, the more impact of genetic drift relative to natural selection. Any new TEs that arise in the "new" population can go to fixation much faster than they otherwise would in the previous, larger population.
+
+C. obscurior - originated in SE asia, and has spread throughout the globe (though looks to be mostly warm climes). 
+
+Made a reference genome with 454 and Illumina, annotated with RNAseq from all castes and developmental stages, and filtered for prokaryotic scaffolds (important, since it has symbiotic bacteria).
+It's the smallest genome assembly of any ant.
+
+Repeat annotation - C. obscurior has about the same proportion of TEs as other ants.
+
+TEs are organized into TE islands. 
+
+TEs in this species are organized differently than in other ants. It's more similar to Nasonia (a wasp) than other ants (that's another inbreeding species). 
+
+TE island genes are overexpressed in adult queens compared to queen larvae.
+
+Brazilian vs. Japanese colonies - Japanese larger, same number of workers, more queens. 
+B aggressive to B, J, and external ant; J is only aggressive to external ant. Due to different cuticular compounds.
+
+How do they differ genomically? 
+
+TE island regions are enriched for SNVs. Since the individuals were pooled HAPLOID genomes, that means they're polymorphic at those loci. Since odor receptor genes are there, that affects their behavior.
+
+Other points:
+Genes important for development are excluded from TE islands.
+TE islands preferentially expressed in adult queens
+
+
+
+W525 - Ingo Braasch - The Spotted Gar Provides Connectivity Among Vertebrate Genomes and Insights into Evolution By Genome Duplication in Fish
+
+Begins by reminding us of teleost genome duplication (after the split from the branch leading to tetrapods, so we don't have this). This complicates assignments of orthology between, say, zebrafish and humans.
+Coelacanth is a lobefin fish, and doesn't have that teleost gene duplication (since it's from after the split, on the same branch as tetrapods).
+Tetrapods have lost over 50 genes with known function in zebrafish.
+Coelacanth is highly endangered, though, so can't do much work on them.
+
+Duplicate retention and loss after the TGD (teleost genome duplication event): Majority of orthologs lost right after the TGD.
+
+So, we need something on the rayfin branch from BEFORE the TGD. Hence, spotted gar. There are other species that could have been used, but spotted gar has the fewest problems.
+
+GARNOMICS: genomic tools for the spotted gar:
+* Fosmid/BAC libraries
+* RNA-seq
+* miRNA-seq
+* High density genetic map (RAD-tags) - shows that it has an unduplicated genome relative to the human genome.
+
+Broad Institute made an ALLPATHS-LG assembly.
+
+Genome is available on ensembl. Repetitive elements only 20% (Zebrafish is 51%, medaka is 16%)
+Probably around 21,000 genes.
+
+Reconstructing ancestral vertebrate genome: use synteny database to compare species. You can see rearrangements between fish and humans (though not so much between the gar and chickens - so humans are the weird ones, here).
+Further analysis shoes there is a history of microchromosomes in the vertebrate genome.
+
+Resolving unclear gene family relationships: Like Prrx genes. Tetrapods have Prrx1 and 2, zebrafish have prrx1a and 1b. Prxx2 is in coelocanth - AND in the gar. Predates the divergence and was lost by teleosts, probably before the TGD.
+Well, not QUITE - it's present in the basal teleosts. One copy lost right away, and then the other copy lost at a later split.
+
+Connecting vertebrate cis-regulatory elements: LastZ -> pairwise -> phastCons to identify conserved noncoding elements. Can find CNEs specific to teleosts this way, for example.
+Many CNEs appear to be lineage-specific - can't necessarily align CNEs between fish and humans, for example.
+You can't align the things from human and pufferfish, but if you align both to the gar, THEN you can see that things line up.
+The evolutionary rate in teleosts is very high, but gar has a much slower rate of evolution - so it's closer to humans than zebrafish.
+Because of that, you can align zebrafish to gar and human to gar, and THEN you can see 24,926 CNEs that you wouldn't see otherwise - about 40% of which are orthologs.
+
+How did gene expression evolve after the TGD? 
+gpr22 is in brain and heart in gar. In teleosts, one ortholog is in brain, and the other ortholog is in heart. Sub-functionalization.
+Neo-functionalization: slc1a3 is in brain in gar. Teleosts have it in brain AND liver.
+
+
+
