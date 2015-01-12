@@ -1049,3 +1049,130 @@ Don't know what's going on, but a few guesses:
 Demographic history - could be (relatively recent) hybridization from something distantly related - but the bantail doesn't live anywhere near where the passenger pigeon.
 
 
+
+###################################
+
+
+
+Sequencing Complex Genomes
+
+
+
+W712 - Thiru Ramaraj - De Novo Assembly of Plant Genomes: Hybrid Approaches for Heterogeneous NGS Data
+
+National Center for Genome Resources (Santa Fe, New Mexico)
+
+They use Illumina, PacBio, Oxford Nano, and (for mapping) BioNano Genomics.
+
+Medicago truncatula - Want 25 genomes.
+22 get just Illumina and ALLPATHS-LG.
+For 3 of them, they want higher quality, so all of the above technologies are thrown at it.
+
+Just with Illumina, it's decent - 80% proper pairs, 84% of reads map to assembly. Brought in PacBio to improve it.
+
+P0756 - their Illumina/PacBio Hybrid workflow
+
+Bottom line is that the hybrid approach is better in just about every measure. Helps prevents gene fragmentation in the annotation, too.
+
+BioNano whole genome map - convert the images to molecules, and create consensus genome map. Can align against reference to look for structural variations, can use it for scaffolding, etc.
+
+Cotton - a work in progress. They'd like to add in PacBio and BioNano stuff.
+
+
+
+###################################
+
+
+
+G001 - Philip Bourne - NIH as a Digital Enterprise - Implications for PAG
+
+Relevant for many funders, not just NIH.
+
+So what is a digital enterprise? Before that, a look at how far we've come in one researcher's career (his).
+Back when he started working with the PDB, they used to ship tape to Australia via ship, and it took three months. We've clearly come quite a way since then.
+
+Biomedical data is becoming more FAIR: Finding, Accessing, Integrating, and Reusing digital research objects.
+But the idea here is to make things more efficient so we can do these things easier and better.
+
+The move from an observational science to a more analytical science (though still observational) is being driven by ever-increasing amounts of digital data.
+
+Cites "The Second Machine Age" - things like Google car, 3D printers, Waze, and Robotics as things that all showed up sooner than expected. All involve ingesting a very large amount of data.
+
+Further perturbation: The Story of Meredith )http://fora.tv/2012/04/20/Congress_Unplugged_Phil_Bourne
+As editor of PLOS comp bio, got a paper on pandemic modeling. Written by a single author. Sent the paper to Simon Levine, who also liked it. Meredith was 15 years old at the time - and was able to leverage a lot of public data, open literature, etc.
+
+Four weeks ago, they had the gaming community workshop, to see what they might contribute to data analysis. It was great & productive - and they're going forward with a funding call - but then got stopped by a congressman writing an op-ed piece.
+
+More perturbations - Begley and Ellis published in Nature that 47 of 53 "landmark" cancer publications could not be replicated.
+
+ADDS mission statement - similar to NIH mission statement, but specifically about research conducted as a digital enterprise.
+
+Some goals of the digital enterprise:
+* Cost savings through sharing of best practices
+* Sustainability
+* Collaboration
+* Reproducibility
+* Integration of data types
+
+Some of Today's Observations -
+The good news:
+* Genuine willingness to address the problem
+* Global communities are emerging
+* Efficiencies can be achieved
+* BD2K is the beginnings of a plan
+* We are beginning to quantify the issues
+
+Bad news:
+* Still no sustainability plan
+* Global policies define the WHY but not the HOW (in terms of accessibility)
+* We do not know how all the data we currently have are used - funding opportunities to look into this are upcoming. Gives the example of a netflix- or amazon-like predictive system that suggest data to look at based on the usage of others
+* We can't estimate future supply and demand
+* We need to ramp up training programs in data science
+
+Sustainability 101 - NIH budget is effectively flat, but biological databases keep growing. This sort of thing does not scale.
+Need to think about how much we spend on getting new data vs. keeping the data we already have.
+
+What is the NIH doing to fulfill the promise of increasing the utility of biomedical research data?
+He sees it as a three-legged stool: community, policy, and infrastructure.
+Says this has to come from the community, but needs to meet in the middle with top-down policy.
+Virtuous research cycle - what you do in your research is the motivating factor, not the infrastructure. But, the three legs of that stool can be of benefit to you.
+
+Policies - now & forthcoming
+Data sharing plans on all research awards, along with enforcement (machine readable plan, repository requirements to include grant numbers).
+
+Data citation - legitimize data itself as a form of scholarship.
+
+Infrastructure - BD2K has funded 12 centers of excellence, all of which are working with data in various forms.
+Also funding DDICC - data discovery index consortium. That needs to exist so that data can be found (can't google data very well), so you need an index.
+Software needs to be given credit the way data needs to be given credit - and also findable.
+Standards are also being funded.
+
+All of that - along with bringing in extramural labs - comprise The Commons.
+
+The Commons - idea is that it'll be system agnostic, so it can be in the cloud, PHC platforms, or any other kind of platform (like in house compute solutions). Just need to have things be commons compliant.
+
+The business model - switching things up. There's currently not a good sense of supply and demand, so they're trying something as a trial. Rather than awarding money, they give you credit to spend in commons-compliant resources. That should drive supply and demand.
+
+How might PAG participate?
+Consider contributing objects to the commons, regardless of who funded it (data, software, standard, narrative, course materials...). Working toward a more open framework.
+
+Training goals - 
+1. Build an open digital framework for data science training
+2. Develop short-term training opportunities
+3. Develop the disciple of biomedical data science and support cross-training - OPEN courseware
+
+
+Questions from the audience:
+Is there incentive to USE deposited data?
+Answer: He's not a big fan of sticking data somewhere and just leaving it without tracking usage. Need at least some level of light curation.
+
+What about SBIRs for "smart kids from California"?
+Answer: Clearly useful, but nothing in BD2K. The institutes have various things that are applicable, but we need to do more.
+
+Carl Schmidt - Research & scholarship is not business, and business models have been destructive to collaboration. Also: senior faculty need to be educated about how important data sharing, etc., are, so young faculty aren't hurt or denied tenure for doing the right thing.
+Answer: There's a partnership that needs to take place here, as we're in a very dire situation. Some things are going to have to change to solve these problems. 
+
+Data curation costs money, and some are forced to charge users. Is that sustainable?
+Answer: Subscription is a possibility, certainly. Services that are on top of the data...well, the question is if there's a market for that, and that sort of thing should be explored. Maybe we can do better.
+
+
