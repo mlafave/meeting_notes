@@ -1299,3 +1299,157 @@ How complete does a PPI network need to be to be useful?
 A: They're working on it. In a recent paper, they removed edges to see how robust it is, and it's pretty robust. Likely due to lots of redundancy.
 
 
+
+###################################
+
+
+
+Thermo Fisher Scientific (Formerly Life Technologies&trade;) - Genetic analysis approaches in agriculture biotechnology
+
+
+
+Jenny Xiao - Solutions for plant and animal research and breeding
+
+Works out of Carlsbad
+
+Where GBS fits into marker development workflow: discovery -> trait mapping -> screening. ThermoFisher has things for all three (Discovery Ion, Mapping Ion, and Validation/TaqMan).
+
+
+Dr. Anoop - AmpliSeq workflow
+
+Business unit that manages library products. Representing R&D here.
+
+AmpliSeq is for target enrichment, and is the start of a workflow with stuff like the ion proton downstream.
+
+ampliseq.com - has genomes preloaded, and you can upload your own genome.
+
+After that is automated library prep.
+
+Then Ion Chef: libraries in, loaded chips out. No hands-on time needed.
+
+Ion Proton - fastest sequencer. 384 samples in 3 hours.
+
+
+
+Lex Flagel - The genetic architecture of western corn rootworm resistance to the Cry3Bb1 Bt protein
+
+Adults live in the pollen-containing parts. The larvae spend the winter as eggs, but then they eat corn roots as larvae. In aggregate, they can do a lot of damage.
+
+Tough to control - resistant to crop rotation, several chemical insecticides.
+
+Cry3Bb1 Bt toxin - developed by Monsanto to kill the WCR. Builds a pore that destabilizes the gut membrane, thus killing them.
+In 2011, first reported resistance to this (in an area with low crop rotation).
+Resistance appears to be persistent.
+
+His goal was to map the resistance - understand the genetics & identify markers to track the trait in the field.
+Need to know if it's heritable, and develop a genetic toolbox for the WCR.
+
+H^2=R/S (survival of offspring divided by survival of parents).
+Here, H^2 = 0.69, so high heritability. Good news it's mappable, bad news is it builds up fast in the field.
+
+No difference between reciprocal crosses, so probably not sex-linked. Resistance allele predominantly recessive. 50-fold fitness advantage.
+
+WCR is 2.5 Billion BP, with many young repeats. Challenging to assemble, so they did transcriptome instead.
+
+But they just want to genotype.
+
+PoolSeq - populations for SNP discovery. Combined individuals in a library, sequenced to 25x.
+Picked the rare SNPs & made a genotyping platform from that.
+
+AmpliSeq basically does amplicon PCR over your SNPs of choice.
+Cross parents, then sib-cross F1s to get F2s.
+
+Randomly partition to F2s, put some on Cry3Bb1 corn, and others on a similar plant with no transgene. Basically just a chi-squared.
+
+Resistance clearly maps to LG8. They looked at many families to confirm this.
+
+Are these markers relevant in the field? Yup.
+
+Conclusions:
+* This is a fast way to find markers - use pooled population sequencing, and GBS with the Ion machines.
+
+This is also in Flagel et al. 2015, G3.
+
+
+
+James C. Schnable - Fast turn-around genotyping without a reference genome using the Hi-Q™ sequencing kit on the Ion Proton™ System
+
+Data2Bio:
+* tunable Genotyping By Sequencing (tGBS)
+Testing Hi-Q in Maise; reference-free tGBS in Hi-Q Maize.
+
+Conventional GBS - kind of scattershot, so sometimes you don't hit the sites you want.
+tGBS - more stringent, you pick the sites & have an easier time dealing with heterozygosity.
+
+Instead of a dsDNA adapter, they add an ss oligo.
+
+Hi-Q upgrade for the ion proton: intended to reduce deletion errors (and they do). Also allows wet lab time to be used much more efficiently. Also increases sequencing quality.
+
+Assessing per base error rates: For each individual select only sites covered by >5 reads; identify SNPs and InDels present in only individual reads.
+
+Required one and only one alignment to avoid problems with paralogs.
+
+In his univserity job, looks at proso millet.
+tGBS discovers many extremely rare alleles (even if the SNP had to show up in at least 3 accessions)
+
+Combining tGBS with Hi-Q gives you a really fast turnaround genotyping.
+
+
+
+Jason Boone - 300 Strong: Leveraging Ion AmpliSeq™ and Ion Torrent™ sequencing for targeted genotyping studies
+
+From Floragenex, which does RAD-Seq. They discovery SNPs, genotype them, or help with the analytics.
+
+Some of the people they work with don't need 10,000-100,000 SNPs, only like 100-1,000, but they want to pick them specifically.
+That's why they use the AmpliSeq - not the only solution, but a really good solution, he says. Targets between 12-24,000 targets.
+
+AmpliSeq integrated workflow:
+Oligo design
+Make primer pool
+Prepare template with Ion Chef
+Run sequence on Ion PGM sequencer
+Analyze with Torrent Suite analysis software (with native variant caller, or Floragenix's own genotyper)
+
+So they wanted to test the accuracy and reliability of the AmpliSeq.
+Test population of OrNe Barley introgression population
+
+340 targets, mostly 140 bp long (for the insert; total is 187 bp).
+
+Performance: Reads per sample around 40,000, coefficient of variation 0.57 (meaning all targets get a reasonable amount of reads per sample); modal seq depth is ~45x coverage (median 102x).
+
+You hit the same regions whenever you run this (or 86% of them or something)
+
+Concordance between this and other platforms is about 99.4%, so extremely accurate.
+
+Early access service for this begins now.
+
+
+
+Li Song - Application of digital PCR in analyzing transgenic soybeans
+
+Using QuantStudio 3D Digital PCR System
+
+Some parts of the world are more strict on GMOs than others, so we need to detect them in seed lots and food stocks.
+
+Roundup Ready Soybeans - from Monsanto. Resistant to the pesticide, and the 2nd generation of these also have a higher yield potential.
+
+TaqMan assay - specific for detecting RR1 and RR2 soybeans using dPCR. Nothing else rises above background.
+Using sheared DNA leads to similar results. Lower copy number per microliter, but similar specificity, at least based on the bar height in the graph.
+
+Good accuracy and sensitivity in detecting/quantifying the RR1 soybeans by dPCR. That means you can find RR even when it's a small fraction (1%?) of the sample.
+
+The designed soybean RR TaqMan assays could not detect RR maize DNA using dPCR.
+
+So, dPCR is similar in accuracy/sensitivity to qPRC.
+
+
+Q3D PCR method can effectively identify the positive T0 transgenic events.
+dPCR gives a negative result for chimeric plants (they're not REAL transgenics).
+
+T1 generation DNA analysis - Find Gene/Lec ratios of 0.5, 1, 1.5.
+
+If ration is around 1, probably homozygous. 1.5 is het.
+
+dPCR can identify homo or het plants in T1, while the regular method can't distinguish - so dPCR lets you save time, space, greenhouse labor.
+
+
