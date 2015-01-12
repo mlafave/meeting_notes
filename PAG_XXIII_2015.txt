@@ -1176,3 +1176,126 @@ Data curation costs money, and some are forced to charge users. Is that sustaina
 Answer: Subscription is a possibility, certainly. Services that are on top of the data...well, the question is if there's a market for that, and that sort of thing should be explored. Maybe we can do better.
 
 
+
+###################################
+
+
+
+G002 - Beth Shapiro - The evolutionary consequences of interspecies hybridization: insights from ancient and modern bear genomes
+
+Talking about when we find out things that we thought were distinct species actually hybridize - or, in general, when we find surprising things in the data we collect.
+
+So maybe, by now, we shouldn’t think of this hybridization as a surprise. After all, as two populations diverge into separate species, there IS a point where they can no longer reproduce - but there’s gene flow before that, and sometimes it’s only an environmental barrier that’s preventing reproduction.
+When that barrier disappears, you can get gene flow again. So, what does that mean evolutionarily?
+
+There have been an increasing number of polar/brown bear hybrids accidentally killed. Finding these in the wild is new - there are polar/grizzly hybrids in zoos, but that's it.
+
+Polar bears are larger than brown, adapted to swimming; brown adapted to running and climbing. Brown bears are very diverse, and are all over the world. Polar bears are pretty similar to each other, and brown pretty different from each other.
+
+So - 1) is hybridization a new phenomenon?
+2) What are the evolutionary consequences in admixture?
+
+For 1) -
+Initial work was in mitochondrial DNA. If you look at just this, everything is very geographically clear - clades clump together very nicely. All polar bears are in clade 2, which is otherwise just made up of brown bears.
+Back then, the hypothesis was that polar bears were recently diverged from brown bears (like, 20,000 years ago, which is not very long all).
+
+But then polar bear fossils much older than that were found.
+
+So then a group published on nuclear DNA in polar bears, and things got messy. Another paper interpreted things differently, and it was all very confusing.
+
+So they decided to sequence more bear genomes.
+Polar bears are nearly identical to each other - even less than diversity within humans. Brown bears have more than polar, and the ABC island brown bears are ever so slightly closer to ABC polar bears than to brown grizzly bears. So something weird is going on.
+
+They did a D statistic test - detects incomplete lineage sorting or admixture. Looking for an excess of shared, derived alleles different from what you'd expect based on the species tree.
+
+Is there a difference among polar bears with how close they are to mainland brown bears? Nah. Same with ABC brown bears.
+But - comparing mainland brown, polar, and ABC brown, they do detect gene flow - but not the direction.
+
+To determine the direction, see if they can "hide" polar bear DNA in brown bears via simulation. They can, so that's the direction.
+
+The Dx/Da ratio is more indicative that brown bear males moved to the ABC islands, where there were female polar bears, than vice versa. (Cahill et al. 2013)
+But it's still not QUITE right.
+
+So they sequenced MORE bears. This time, they got an extremely pure brown bear from Sweden. That revealed that the mainland brown from Denali they were looking at actually IS admixed.
+
+So hybridization is not "new", but is it common?
+
+Mitochondrial clade now has SOME of the now-extinct Ireland brown bears in the same clade as polar bears & other browns (though Ireland browns also show up in another clade). These ancient Irish bears ARE also hybrids of polar/brown bears.
+
+2) What are the evolutionary consequences?
+
+There's quite a lot of admixture, yet effectively no brown bear DNA in polar bears. So maybe they can't tolerate brown bear DNA to survive in their environment. When hybrids survive, they survive as brown bears.
+
+How much of the ABC genome is polar bear?
+Well, there's WAY more polar bear-polar bear homozygotes than you'd expect under HWE, so something is selecting for this polar bear DNA. That's despite these multiple rounds of back-crossing
+
+Most of what was retained looks to be olfactory receptors. Huh. They don't really know why.
+
+One final point - this is a weird way to think about what constitutes a species. You get gene flow from polar bears to brown, but not really in the other direction.
+
+
+Questions from the audience:
+
+Is this maybe a pheromone thing?
+A: Maybe! A good idea.
+
+What is the maximum diversity genome that still allows hybridization?
+A: Don't know - other that, as long as things can mate, they do.
+
+Did they actually find a phenotype for the hybrid?
+A: The F1's look like the ones the hunters killed, and all the others just look like brown bears (and the Ireland ones are extinct). So they don't really know.
+
+Are F1s sterile?
+A: No.
+
+Any evidence of imprinting?
+A: Female polar bears are induced ovulators, female brown are seasonal ovulators. Also, male polar tend to kill female brown, while male brown are more likely to run in to 
+
+Implications for polar bear conservation?
+A: Don't think so. Polar bears aren't threatened by this hybridization.
+
+
+
+G003 - Trey Ideker - Interpreting genome variants and mutations using a unified human genetic network
+
+What if, instead of going from gene to phenotype (in GWAS), you add a middle layer to integrate genes with networks, and then go from network to phenotype? That's the network knowledge base.
+Today, he's focusing on methods to use networks to translate genotype to phenotype.
+
+Hahn and Weinberg, Nat Rev Cancer 2002 - cancer as a subway map. What it's trying to get across, though, is that we need a much more complete map.
+
+Everything he's showing is visualized via Cyctoscape.
+
+He works on cancer. Why is it hard to cluster/stratify cancer genomes? No two patient tumors look alike. About 100 somatic mutations per exome per patient, including about 10 drivers of cancer.
+These cancer exomes are extremely sparse, so you can't cluster them.
+
+So that's where they help prior knowledge of molecular biology in the cell might be helpful. Want to go through protein interaction databases to get robust clusters.
+
+An intuition for network smoothing - put the genotype for two patients on a network, you'll see they mostly don't overlap. What you then do is have each point "bleed out" in a decreasing function the further it goes. That's network propagation, and it lets you see the things that are NEAR mutations in network space. THAT's what lets you do the clustering.
+The idea is what seems random is not random if you have prior knowledge of cell biology.
+
+Association of ovarian tumor subtypes with patient survival (since that's the output data that was available) - They divided survival into three subtypes, and saw clear relationship. Hypothesis was that most severe group, subtype 1, had platinum drug resistance - and it looks like that's the case.
+
+Hofree et al Nat Methods 2013 - can focus on the part of the network most responsible for the clustering of the aggressive subtype being called as such.
+
+Validation - ICGC Ovarian cancer cohort found basically the same kind of thing.
+
+Same sort of thing applied to Corticospinal Mortor Neuron disease, a complex Mendelian disease (usually just one gene, but not the same gene as in other pedigrees)
+
+Networks aren't just modular, but also hierarchical and multi-scale. Shouldn't really be represented as flat. Nested modules.
+
+For example, a "hairball" that incorporates physical interaction, high co-expression, and genetic interaction (Carvunis and Ideker, Cell 2014). But it's hard to see the sort of interactions you can see by looking at the physical structure. Network models do not visually resemble the contents of cells.
+
+nexontology.org - takes advantage of nested ontology of gene ontology. Problem with GO is that it's hard to scale.
+This slide is constructed not by literature, but by database protein interaction information.
+
+Looks like it's aiming to make the visualization of functional components more obvious. Again, supposed to be a nice middle link between hairballs and protein structure.
+
+
+Also key to all this is a network-enabled candidate gene approach based on prior knowledge of "seed genes"
+
+
+Questions:
+How complete does a PPI network need to be to be useful?
+A: They're working on it. In a recent paper, they removed edges to see how robust it is, and it's pretty robust. Likely due to lots of redundancy.
+
+
