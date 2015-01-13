@@ -1453,3 +1453,122 @@ If ration is around 1, probably homozygous. 1.5 is het.
 dPCR can identify homo or het plants in T1, while the regular method can't distinguish - so dPCR lets you save time, space, greenhouse labor.
 
 
+
+###################################
+
+
+
+It's not just the data, it's the analysis; - Why a Biology Cyberinfrastructure is the Best Way to Meet the Challenges of Large Datasets
+
+
+
+W483 - Kapeel Chougule - Flash Demo: Atmosphere Cloud Computing - Applied to Visualizing RNA-Seq Data
+
+Definitions for cloud computing:
+Image - an alternative to copying the files. Here, you take a snapshot of the current system and load it onto the new one. That way, you can clone it completely, which helps you keep standard tools.
+Instance - Disk, CPU, memory, plus the image.
+
+Atmosphere features:
+One-click access to hundreds of machines, customizable.
+
+Can choose an existing image or customize. Instances up to 16 cores/128 GB of RAM.
+Can access via shell or VNC
+Images are sharable
+
+Things to remember:
+Images don't have auto access to your iPlant Data store (can use iDrop or iCommands to get it there)
+Users have monthly allocation limits
+All dat on terminated instances are destroyed.
+
+Demo:
+Log in, it launches an image. It loads instances you've been running, resources you've been running.
+Can search for other images - say, if you want one for RNA-seq.
+
+Visualization of RNAseq data using IGV - load in the BAM, just as you'd expect.
+
+
+
+W484 - Donovan Bailey - Using iPlant Tools and Plastome Sequencing As a Springboard into Comparative Genomics: Plastome Organization and Sequence for the Mimosoid Legume Leucaena trichandra
+
+"I have a confession to make - compared to most of the other speakers here, I don't know much bioinformatics." But that's one of the target groups of iPlant.
+
+Working on legumes and plastomes.
+
+Variation among legume plastomes - more variation than other angiosperm families. However, all 11 genomes they had so far were all closely related.
+
+So they dove in, using Illumina data to assemble and annotate the species they were looking at.
+
+Sources of plastome size variation - 
+Mononucleotide repeats: small percentage.
+Dispersed repeats: up to 30-fold variation, but it's not responsible for the Mimosoid large size.
+Tandem repeats: These expansions look to be a significant part of the size of Leucaena and the other two.
+
+Conclusions:
+iPlant resources and training can represent an important stand-alone and/or springboard into serious bioinformatics analysis
+
+
+
+W485 - Jeremy DeBarry - Flash Demo: Secure, Collaborative, Management of Your Life Sciences Data with the Data Store
+
+This is the backbone of the iPlant infrastructure, and contains metadata capabilities.
+
+Can view through a browser (or, I believe, the command line), and can load from local files or URLs.
+
+Sharing: If with iPlant users, can share within the system. Otherwise, can make public links.
+
+Fairly powerful file search integrated, and only searches file you have permission to access. You can create smart folders that update based on your search criteria.
+
+iDrop Desktop - parallelizes file transfer.
+
+
+
+W486 - Andrew D. Nelson - Utilizing iPlant to Unearth Long Non-Coding RNAs and Characterize Their Evolution in the Plant Family Brassicaceae
+
+For his purposes, lincRNAs are the 99% (of your genome). Difficult to distinguish between background noise and "functional" long non-coding RNAs.
+
+So he wants to find those that are functionally significant, those conserved across a family.
+Mining genomic and transcriptomic data (where possible).
+
+What are the mechanisms by which lincRNAs are gained or lost in a genome?
+
+Do lincRNAs evolve in a manner similar to protein-coding genes following an polyploidy event?
+
+How he found them in the first place: in iPlant, used public reads. TopHat, Cufflinks, Cuffmerge to group transcripts form multiple experiments, filter transcript for linkRNAs, then moved to CoGe for lincRNA genomic comparison.
+
+lincRNAs are lost from genomes at a higher rate than protein-coding genes (what you'd expect). Faster rate of loss than in vertebrates.
+
+lincRNAs are much more likey to be single copy, even in polyploid genomes.
+
+lincRNA loci are more likey to be lost from polyploidy genomes. Supports polyploidy -> faster evolution.
+
+
+Genomic conservation of a lincRNA locus across a family strongly correlates with expression. They'd like to know if function is also conserved.
+
+
+
+Nirav - Image Analysis in BisQue
+
+Can handle 300+ image file formats - including Geotiff, which has gps data integrated in the images (like drone photography of fields)
+
+It does look pretty neat, especially for something in a browser. You can rotate z-stacks in 3D, for one thing.
+
+
+
+W488 - Daniel B. Taylor - Life Sciences Cyberinfrastructure at Your Fingertips: Using Internet2 to Power Scientific Collaboration
+
+Best-in-class national 100G optical network with 8.8 Tbps capacity.
+Pushes the limits of networking.
+
+Full range of networking options:
+Layer 1 - point to point wavelength networking
+Advanced layer 2 services - open virtual network with connecting spreads up to 100 Gbp
+Advanced Layer 3 services - advanced IP connectivity to the world
+
+Life sciences challenges - among other things, lack of metadata.
+
+GridFTP is much faster than ftp
+
+Cyberinfrastructure on demand -
+Made a link from China to UC Davis. The mail would be 2 days, internet would be 26 hours, but the internet2 link took 30 seconds.
+
+
