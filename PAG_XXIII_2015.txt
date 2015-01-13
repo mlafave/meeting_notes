@@ -1889,3 +1889,139 @@ F in their log-likelihood function (which they're trying to maximize) can stand 
 Validated with simulated data. NPEST outperforms TAIR when identifying TATA boxes.
 
 
+
+###################################
+
+
+
+PacBio Workshop
+
+
+
+Marty Badgett - PacBio Latest Developments & Grant Program
+
+Sample prep: 2 new protocols enabling low-input prep, for both short and long inserts
+
+384 new 16 bp barcodes for SMRT sequencing. Can order them through IDT and make your own adapters.
+
+New protocol for 15 kb cutoff: longer reads, therefore more throughput
+
+P6-C4 chemistry: 88-90% accuracy (and they’re random, so they wash out anyway). Helps get longer reads, I believe, too.
+
+HGAP 3 - Genome polishing, de novo assembly, BAC assemblies. Faster now.
+Iso-Seq (cDNA) Analysis - RNAseq isoform transcript sequencing
+Long Amplicon Analysis (Targeted) - like for studying HLA. Support for amplicons of up to 10 kb; flexibility for mixed insert sizes.
+Falcon: on github. It's for advanced users, and is a diploid-aware assembler.
+
+Looking ahead:
+Aiming to increase insert sizes in the library, so looking to make large-insert library improvements.
+Library QC metrics (R scripts)
+Streamlined Iso-Seq protocol
+Barcode kit (universally tagged barcodes for use in PCR amplification, for example)
+Chemistry - active loading
+
+
+
+Robert VanBuren - De novo assembly of a complex panicoid grass genome using ultra-long PacBio reads with P6/C4 chemistry
+
+Last year's winner of the SMRT grant program.
+
+Draught is a problem for agriculture. Different plants deal with in differently, including "resurrection plants" that basically die and come back to life. We don't really understand the genomics of how that works.
+
+Oropetium thomaeum - the resurrection plant they studied.
+Smallest genome of the grasses (250Mb) Diploid 2n=18. The plant itself is quite small.
+
+Initially did an Illumina assembly, which didn't work so well. Only assembled 60% of the genome.
+
+They used the new P6/C4 chemistry when doing it with PacBio. Very long reads, good read depth. They key is to provide very high quality high molecular weight DNA.
+
+HGAP assembly (BLASR) -> Celera assembler.
+After that, 98% of the genome assembled. Gapless assembly.
+
+QC using Illumina data: Very low PacBio error rate and low within-genome heterozygosity is extremely low (which they got lucky with - that's unusual for wild species)
+
+There's a high repeat content (which is probably why Illumina had such a hard time). 47%.
+
+They also found almost all of the telomeres, which are 5-10 kb repeats in plants. They identified 18 telomeres that were 2-8 kb.
+
+It has a very compact genome structure, in general.
+
+RNAseq of dessication: Not much clear yet. Only presented GO term analysis, which was enriched for draught-response stuff you'd expect.
+
+
+
+Susan R. Strickler - Genome assembly strategies of the recent polyploid, coffea arabica
+
+C. arabica is a tetraploid, with variation within and across the sub-genomes. That makes assembly tough.
+
+They sequenced a di-haploid plant, and they had a high-density genetic map to work with.
+
+They used HiSeq, MiSeq, and PacBio. PacBio was at - I think - 53x depth.
+
+Assembly approach 1: short read data - SOAP de novo & SGA, SSPACE, SOAP gapfiller.
+Approach 2: PacBio long reads, using a modified Falcon assembler.
+
+Illumina and Pacbio have similar genome size in total, but PacBio obviously gives you longer congig length, fewer contigs.
+
+Also, there's a lot of redundancy in the Illumina assembly. 67% of the PacBio assembly was unique (again, because Illumina has trouble getting through repeats)
+
+PacBio assembly has more full-length genes than the Illumina.
+
+Isoform sequencing - done on one sample, with 72 SMRT cells. They're currently doing isoform clusters, (already classified sequence reads), but still need to do consensus calling and quality filtering. Will improve their annotation of the genome.
+
+
+Q: Why was Illumina so bad?
+A: Only 400 bp insert size, and the mate pairs had a lot of repeats. May just be that coffee's repeats make it particularly troublesome.
+
+
+
+Timothy P.L. Smith - A genome assembly of the domestic goat from 70x coverage of single molecule, real-time sequence
+
+There's been a goat assembly from BGI, but there's room for improvement.
+
+So ARS initially attempted a combo of 454 and Illumina WGS/mate pair. Did this on these super-inbed goats from an island near San Diego.
+Later, wanted an all-pacbio assembly.
+
+Ran the same prep twice on PacBio - don't do that. If it didn't work the first time, it's only going to get worse the second.
+
+Falcon-based assembly was run more conservatively than PBDAGCON-based v2 assembly, which used relaxed parameters. Looks like PBDAGCON is slightly better.
+
+Most of the gaps you fix v.s Illumina are small, less than 500 bp. But you also fix a couple hundred that are over 5 kb.
+
+Pre-scaffold is pretty good, but you can improve on it with fosmid data.
+
+Improved assembly via more sensitive error correction parameters has increased the contig N50 to around 4Mb
+
+
+
+Michiel van Eijk - Genome assembly and Iso-Seq transcriptome sequencing of tetraploid cotton
+
+Gossypium genus has 46 diploid species and 5 allotetraploid species.
+
+Wanted to separate out ancestral transcripts from those in the allotetraploids.
+
+Results: haplotypes - splice variants
+Exon skipping also detected
+
+De novo genome sequencing: LRA5166 cultivar. 40x (well, 38x) coverage using ~20kb insert libraries (using Blue Pippin); 242 SMRT cells.
+Falcon assembly in the Amazon cloud.
+
+Initial result - almost identical to 300x coverage Illujmina Platanus assembly.
+
+Whole Genome Profiling (WGP) - see http://www.ncbi.nlm.nih.gov/pubmed/21324881
+
+WGP analysis - lower than 37% of WGP tags did not have a 100% match. That's still not great, and he thinks that maybe 38x coverage is at the low end of what you can get away with for a plant.
+
+Very low level of misassembly, though, and useful to validate assembly accuracy and identify (putative) ancestral recombination breakpoints in polyploid organisms.
+
+Scaffolding of the de novo assembly -
+They did the melon genome with 454 and 44x PacBio, and naturally PacBio is better.
+
+For integration of PacBio assembly with WGP 2.0 BAC contigs, see P0940.
+At 6x BAC coverage, it already helps a lot. 23x improvement in number of superscaffolds.
+
+Now, with cotton, adding in 10x WGP BAC contigs also greatly helps 38x PacBio coverage.
+
+Toward gap filling/resequencing - based on restriction enzyme-mediated approach. Do partial digest, ligate adapters to those digests, circularize, and then do whole genome amplification of the circles & PacBio sequence them. It's not PCR-based. They tried it out with maize.
+
+
