@@ -1572,3 +1572,132 @@ Cyberinfrastructure on demand -
 Made a link from China to UC Davis. The mail would be 2 days, internet would be 26 hours, but the internet2 link took 30 seconds.
 
 
+
+###################################
+
+
+
+G004 - Xuemei Chen - Plant microRNAs: biogenesis, degradation, and modes of action
+
+UC Riverside
+
+Small RNAs are central players in PTGS and TGS.
+miRNA and siena associated with members of the Argonaut clade, and piRNA is associated with a member of the Piwi clade.
+
+Transposable elements are both the source and target of 24 nt siena to silence themselves (in the case of AGO4).
+
+Small RNAs impact nearly all biological processes.
+
+miR172 has a role in flower development (Chen, Science 2004). miR172 inhibits AP2.
+
+Steady-state levels of miRNA is a combo of biogenesis and degradation. Little is known about the mechanism of degradation.
+
+Hen1 deposits a methyl group on miRNAs and siRNAs - in plants, anyway. Animal miRNAs are not methylated, but siRNAs and piRNAs are (by Hen1 homologs).
+
+What’s the function of this methylation?
+Methylation protects miRNAs from 3’ truncation and 3’ tailing. Completely protects from necleotidyl transferases, and partially protects from exonucleases (SDN proteins).
+
+The SDN family of exonucleases participates in miRNA degradation in vivo.
+
+Are SDN proteins responsible for miRNA 3' truncation in hen1? Checked truncation via HTS. At least for some miRNAs, yes. Based on measuring length of truncation & length of tailing in various mutants.
+
+HESO1 tails miRNAs in hen1. HESO1 and UTR1 act coordinately to tail miRNAs in hen1.
+Looks like HESO1 does some of the longer tails, but even when knocked out, you still get some short tailing. That's what URT1 is responsible for.
+
+The two have different substrate preferences. URT1 wants a substrate ending in A, HESO1 wants one ending in U - but both of them add on a U, which is why HESO1 is the one that adds longer tails.
+
+Are 3' tailed species functional, despite being bound? She has an answer for one such tailed species.
+The 22 nt miRNAs, rather than 21, can be functional & trigger the production of secondary miRNAs.
+But, URT1 can turn an 21mer into a 22mer (as is the case with miR171), and then that can make functional secondary miRNAs.
+
+De-methlylation may not be necessary for degradation if an exonuclease like SDN can just chew through it.
+
+Target RNA incudes miRNA degradation.
+
+3' truncation and 3' uridylation are conserved processes in small RNA metabolism - that is, conserved between plants and animals.
+
+But it's different for miRNAs. Plant miRNAs are very similar to their target along their whole length. Animal miRNAs just use nucleoties 2-7 to do "seed match". That means the 3' end of the miRNA is still hidden by the PAZ domain - so it's still protected, and doesn't need methylation for protection.
+BUT, if you make animal miRNA with high complementarity, then yes, you get 3' truncation and 3' tailing.
+Animal piRNAs, on the other hand, already have high complementarity targets, hence the need for protection.
+
+Different modes of action for plant and animal miRNAs - Plants guide the precise cleavage, while animals cause deadenylation and degradation.
+
+Nucleotidyl transferases associate with AGO1 (maybe why they need to be protected in plants). Animal miRNAs don't associate like that, but she best piRNAs do.
+
+ONe last bit - RNA uridylation is increasingly recognized as a signal for degradation in general.
+
+
+Questions:
+Why uridylation before degradation?
+A: She doesn't know, but maybe some nucleases prefer them that way.
+
+URT1 prefers truncated targets - is that maybe because it's seeking out erroneously-cleaved targets?
+A: Yeah, probably.
+
+
+
+G005 - Michael Goddard - The Evolution and Genetic Architecture of Complex Traits
+
+How does genetic architecture we see today come about?
+
+It's tricky, since we see heritability everywhere, but most of the models incorrectly predict that these will be due to rare alleles, and that's not the case.
+
+New data may help - lots of GWAS out there, and cattle offer another perspective. As human diversity increases, cattle have decreased, so they're about the same as humans now in terms of diversity.
+
+There's a lot of long-distance linkage disequilibria in cattle, so you get a LOT of SNPs associated with a given trait.
+
+Can't really test one SNP at a time.
+A better model is to fit all SNPs simultaneously and treat them as random effects. "Genomic selection" (Meuwissen et al 2001).
+BayesR for mixing normal distributions to get whatever distribution you chose.
+
+Applying BayesR does a much better job of positioning the genes related to the trait (in this case, weaning weight)
+
+Most SNPs have no effect, but a very few come from distributions that explain as much as 1% of the variation (or more - about a third of those go beyond 1%). The more complex the trait, the fewer large effects and the more small effect SNPs.
+
+The largest proportion of genetic variance are those between 10^-4 to 10^-3 variance each - since there are so many of them, that sums to about 52% of variance explained.
+On average, anyway. Again, some diseases/traits are more complex than others, and those less complex have more large effects.
+
+So, could they create a simulation that could match the experimental results?
+Components of simulation:
+Constant Ne
+Mutation U per gamete (infinite sites model)
+Effect ~ + or - Gamma (shape = 0.1)
+Recombination
+Fertilization
+Selection
+
+Ne = 20,000
+Assumed 12 million sites that could effect a trait. A huge number, he thinks, but apparently you need to assume that many.
+(More that went by too fast)
+
+Tuned such that distribution of variance across effect sizes is what was seen experimentally - lots of small effects, very few large, mostly around-ish the middle.
+
+Combining the variance across variance explained by individual QTL - again, 10^-4 to 10^-3 of variance explained is the biggest class.
+
+On commercial chip, small effects are underestimated, because the minor allele frequency of all the SNPs on that chip are above 10%, and you can't have that in LD with something that's less than 10%.
+
+But lack of large effects doesn't quite fit, so need to modify the model.
+As you decrease the number of millions of mutation targets, you fix that, but then you shift the central tendency incorrectly.
+He can't make the model fit, probably because in neither humans nor cattle is there actually an equilibrium situation. Things either go to fixation or are lost.
+
+He says that the reason for the different shifts of rare vs. common alleles has to do with different "target size" - fewer sites that COULD affect those traits. That's how you get diseases/traits with  more or less complexity than others.
+
+In conclusion, the model (with some quite striking features, he says) reasonably approximates what we see in the genome.
+Selection against the mutations increases more than linearly as the size of the mutation goes up.
+But real data has more small and big effects than predicted.
+
+
+Questions:
+Can we overcome sample size restriction?
+A: You don't need genome-wide significance. Don't even need to find the QTLs. If you're using a block method of genomic selection. The relevant number is the number of genomic effects segregating in the population. So - answer is different for genomic selection vs. trying to prove you have the right QTL.
+
+What about epistasis?
+A: There's certainly some there, but it doesn't explain a large proportion of the total variance. The additive part looks to be the more important part. But it's hard to estimate epistatic variance.
+
+Are the QTLs young, or rare & recently selected?
+A: When we talk about the age, it's the age of the MRCA, not necessarily where it originated.
+
+What about coming at this from the phenotype direction?
+A: If we had less complex traits, there'd be less complex architecture. But, in the past, trying to break phenotype down into sub-traits tends to not be very successful.
+
+
