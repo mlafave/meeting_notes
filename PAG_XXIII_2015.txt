@@ -1701,3 +1701,191 @@ What about coming at this from the phenotype direction?
 A: If we had less complex traits, there'd be less complex architecture. But, in the past, trying to break phenotype down into sub-traits tends to not be very successful.
 
 
+
+###################################
+
+
+
+Bioinformatics
+
+First 3 assembly, last 3 annotation or gene finding.
+
+
+
+W088 - Michael Schatz - Perfect Long Read Assembly and the Rise of Pan-Genomics
+
+Also talking Tuesday at 4, pacific salon 1.
+Today, he's talking about Hybrid Error Correction and De Novo assembly with Oxford Nanopore.
+
+MinION has capacity for 512 reads at once. Ions flow through a pore. Idea is that molecules of different sizes block the pore differently, give different signal.
+
+Prep: high mol weight DNA, ligate hairpin adapter to one end, motor protein to the other (kind of like a helicase).
+Motor protein separates the strands, docks to the pore, and then you read each strand in turn.
+
+Pore is about 5 nt thick, so you don't look at one base at a time - and methylation, etc., may be making that state space even larger.
+Viterbi-like algorithm parses the different states.
+
+Tested it on a strain of yeast for which they had pacbio data. 
+30 runs, 267k reads, 122x total coverage. Between 11 and 73k reads per run (not 11k - eleven total).
+Mean flow cell: 50 Mbp in 2 days. Max flow cell 446Mbp in 2 days
+
+Nanopore sequences has a high error rate, though, so trying to correct for that.
+
+Alignment quality with BLASTN (using tiny seeds), and tuning the scoring matrix to tolerate high error rate (and it's also filled with indels)
+Of reads that align, average ~64% identity
+"2D base-calling" improves to ~70% identity (taking both strands into account). That requires brand-new algorithms to work with, though.
+
+Error rate is pretty consistent - about 35% throughout.
+
+Created a new error-correction pipeline: uses illumina data for hybrid error correction.
+github.com/jgurtowski/nanocorr
+Align short reads to the long reads (though you get a lot of incorrect alignments). Go back to score them, pull out only the alignments you want (dynamic programming algorithm). doi: 10.1101/013490 (I think? DOI not found...)
+
+Long read assembly -
+The Illumina MiSeq 300 bp PE reads are too short for structural information, but can be used for error correction.
+N50 and contig redundancy are both improved 10-fold when adding in oxford nanopore
+
+PromethION - the grown-up version of this.
+
+iGenomics - they wrote an app to genotype on your phone. Coming soon to the App Store.
+First application: handheld diagnostic and therapeutic recommendations for influenza infections. (Need to load the data via dropbox)
+
+
+
+W089 - Sergey Koren - Efficient Assembly of Large Genomes Using Single-Molecule Sequencing and Locality Sensitive Hashing
+
+With microbial genomes, that's solved (though metagenomics still challenging)
+
+Larger genomes: starting with Drosophila melanogaster
+Genome is 160Mbp, and PacBio closes gaps that were still there after 10 years of manual finishing.
+There's JUST enough unique sequence near the centromere to be able to sequence near it.
+
+Long runtimes, though - 629,000 CPU hours. Takes a small compute cluster a month, so there's a need for a faster solution.
+
+That faster solution is the AltaVista algorithm (initially developed to detect duplicate web pages). What it does is quickly estimates the jaccard similarity, comparing unique to non-unique k-mers. 
+But that still looks at everything, so need to do better than that.
+
+MinHash Sketch: convert a kmer into a number, hash, keep the smallest value (I think).
+That's somehow proportional to the Jaccard similarity.
+
+MHAP two recommended options: They assessed "sensitive and fast".
+No benefit from increasing sensitivity past 70x.
+
+Doing it this way only took 1,086 CPU hours. Better assembly, too.
+
+Rapid chromosome-scale assemblies: Consistently outperforms BLASR on five long-read whole-genome shotgun sequences.
+
+Much better continuity than Illumina alone.
+
+"Closed" human gap details: 51 gaps potentially closed; 43 gaps potentially closed by reference-based alignment in Chaisson et al.; 11 gaps closed by both, so you could close 80 gaps or so by combining the two methods.
+
+Also working on goat genome assembly
+
+The program and preprint are available, as well as the assemblies, but the slide went too fast to get the URLs copied down. Probably this? https://github.com/marbl/MHAP
+
+
+
+W090 - Iain MacCallum - Rapid De Novo Assembly and Visualization of Plant and Animal Genomes Using Single-Library, PCR-Free, 250-Base Illumina Reads
+
+Idea is to get the cost of reference-quality genomes down to ~$25,000, and for many organisms (either lots of the same species, or many different species)
+
+We can currently get high contiguity and accuracy for about 10k, and want to push forward to ref-quality for 25k 
+
+ALLPATHS-LG doesn't give you ref-quality.
+
+New low-cost model is:
+0.5 ug of DNA, PCR-free library, single flowcell in HiSeq 2500, 50x coverage with 2 x 250 reads
+
+Use DISCOVAR de novo to correct errors, form graph, simplify and patch graph, and gives you a do novo assembly. It's push-button assembly, which seems...potentially not good to me.
+
+At any rate, DISCOVAR de novo gives you much better N50 than ALLPATHS-LG.
+
+Measuring accuracy: need gold standard truth set to compare to. Used the NA12878 fosmid library, sequenced by Illumina and PacBio, assembled into 40k haploid references.
+If the assembly contains a fosmid path -> there's no errors in the assembly (remember, assembly-as-graph)
+
+Edges are DNA-seq, bubbles are het sites (typically); you keep the bubbles around, not flatten them.
+Joined together in global assembly graph, which can be stored as simple FASTA records if need be (though I'm not sure how - I think that version IS flattened)
+
+There's an online demo, so check it out. Also blog posts about it.
+
+DISCOVAR captures highly divergent haplotypes.
+
+Gives you better N50 than ALLPATHS-LG, runs faster, costs less.
+
+Maize is trickier, but at least you get contiguous chucks, even if the path isn't quite resolved (since it hits repeats every 10 kb or so)
+
+Among goals for 2015:
+Phase the bubbles
+
+They'll also add in BioNano genomics.
+
+http://www.broadinstitute.org/software/discovar/blog/
+
+When they calculate N50, that includes bubbles within the assemblies.
+
+
+
+W091 - Mark Borodovsky - Gene Prediction in Transcriptomes, Metatranscrptomes, Metagenomes, and Microbial Genomes
+
+GeneMarkS - gene predictor.
+GeneMarkS-T - gene prediction from eukaryotic transcripts. Tested on four species, works well.
+
+Dealing with assembly errors in transcripts: dividing them into "concordant" and "conflicting".
+More than one coding region could be predicted in a transcript.
+Multiple predications are frequent in incorrect assemblies.
+Assembled transcripts are quite good for training.
+
+MetaGeneMark: gene prediction in metagenomes.
+Uses reconstructed codon usage patterns
+
+MetaGeneMark-T: gene prediction from metatranscriptomes (again for eukaryotes)
+
+GeneMarkS+: Integration of homologous protein mapping to genome into while genome prokaryotic gene prediction
+
+
+
+W092 - Ana Conesa - The Stategra Initiative Develops Novel Methodologies for the Integrative Analysis of Multiple Types of NGS & Omics Data
+
+Looking at mouse B cell differentiation.
+
+Did a time course, measured 7 different "omes" on them.
+RNA-seq
+sRNA-seq
+DNAse-seq
+ChIP-seq
+RRBS-seq
+proteomics
+metabolomics
+
+Found multiple degrees in the relationship among features; different statistical power per data-type, since varying number of features recovered.
+
+Pre-processing and normalization: watch out for batch effects, which will always be there. Best thing is to randomize everything from library prep to sequencing, so you can estimate batch effects and statistically remove them from the analysis.
+
+Power analysis: sample size vs. mean stdev. Tells you how many replicates you need to do to be able to detect a given fold-change when combining the data together.
+
+Joint data exploration: fusion method JIVE/DISCO-SCA. Tells you what data is common for all technologies, in terms of principal components (I think)
+
+Discovering regulatory programs - cluster analysis, enrichment; then approach based on classification trees. Uses various predictive variables for each feature, define common regulatory variables.
+
+Software tools for multi-omics comparison:
+She was out of time, so whipped through this pretty fast.
+
+
+
+W093 - Alyona Kryschenko - Nonparametric Methods for Prediction and Analysis of Promoters in Model Organisms
+
+TSS detection is not a solved problem.
+
+Previous methods use longest 5' transcripts or weight matrices for most significant motifs, or positional frequencies of 5' of ESTs.
+
+Their goal is to predict TSS more accurately in terms of higher nucleotide consensus.
+
+She's showing it using EST data, but it can be any data that has 5' end of transcriptomes.
+
+They map it, use nonparametric maximum likelihood method to find peaks of where the transcripts start, and then the peaks tell you primary and alternative TSSs.
+
+F in their log-likelihood function (which they're trying to maximize) can stand for any distribution (why it's non-parametric - no assumptions about the distribution)
+
+Validated with simulated data. NPEST outperforms TAIR when identifying TATA boxes.
+
+
