@@ -2025,3 +2025,146 @@ Now, with cotton, adding in 10x WGP BAC contigs also greatly helps 38x PacBio co
 Toward gap filling/resequencing - based on restriction enzyme-mediated approach. Do partial digest, ligate adapters to those digests, circularize, and then do whole genome amplification of the circles & PacBio sequence them. It's not PCR-based. They tried it out with maize.
 
 
+
+###################################
+
+
+
+Illumina
+
+
+
+Mike Thompson - Welcome Remarks
+
+Agricultural Greater Good Initiative - supporting programs that focus on solving food insecurity by donating reagents.
+This year's recipient - African Orphan Crops Consortium
+
+Global Consortia Manager is switching from Cindy Lawley (who's moving to handle the aquaculture stuff) to Jason Downing.
+
+
+
+André Eggen - 1000 Bull Genomes Project
+
+Genomic selection outlined in 2001
+Bovine genome assembly came out in 2006
+In 2007, there began access to whole genome SNP beadchips for cattle
+
+Using WGS overcomes current limitations for genomic selection:
+Including causal mutations affecting traits of interests, to get persistence of accuracy generation over generation improvement.
+But...you can't sequence every animal. So you can sequence key ancestors in the population & impute the variants.
+
+That's where the 1000 Bull genome project fits.
+Looking for mutations that compromise animal health, welfare, and productivity.
+
+Workflow: Seq data -> variant calling -> phasing and imputation (QC) -> VCF files sent to partners.
+
+SNP annotation - obviously need to do that if you want to find missense variants, stop gain/loss, etc.
+
+Identification of an SMC2 mutation causing embryonic loss - They found there was something in holstein haplotype 3 causing abscence of homozygous individuals. They verified an effect on fertility, so sequencing and filtering turned up one candidate mutation responsible.
+
+Identification of a dominant mutation - "bulldog" calves. They knew the gene was BTA5, but not the mutation. They sequenced two calves, found variants common to the two but absent from 1000 bull genomes, and found it. It was a germline mosaic in the father.
+
+Imputation of sequence: 
+Medium density genotype + high density genotypes merge to a new high density.
+Add high density genotype with whole genome sequences.
+
+Merging NGS with bead chip technology allows highly accurate imputation among related individuals in a combined data set.
+
+
+
+Richard Finkers - A de novo assembly for the 16GB Allium cepa genome, tears of joy
+
+Sequencing the onion genome
+
+They had double haploid lines (homozygous).
+Why sequence? Onion is effectively grown worldwide.
+
+But the Onion genome is 16 GB, which is pretty enormous.
+
+So they had to pick between gene space vs. WGS. Higher lab costs in the lab for gene space, but lower cost for sequencing.
+But then the HiSeq2500 came out, so they decided to do WGS BUT focus the assembly on the gene space.
+
+Another thing to consider before sequencing - genome organization.
+They didn't know if there would be large gene regions seperated by gene deserts, or genes interspersed between repeats.
+If you have long repeats, mate pair may not be enough. If you have short, then mate pair libraries will span them.
+
+They did 2x125 bp sequencing. Did kmer analysis with k=31, estimating a genome size of 15.8 GB, 37x coverage.
+
+Original hypothesis was that kmer analysis would let them pinpoint the gene space (5-10% of the genome).
+But it turns out they would have had to do 40%.
+Loblolly pine used MaSuRCA pipeline, so they tried that, as well, attempting to assemble the whole thing.
+
+And they did. Assembly validation: CEGMA & RNAseq data
+
+The interspersed genes between repeats hypothesis seems to be closer to what's actually going on in onion.
+
+In the future, they plan to improve the assembly using long reads and BioNano genome maps.
+Right now, about 2/3 of the genome is assembled, which is a lot more than they expected.
+
+
+
+Timothy J. Close - Development of a 60k iSelect to Facilitate Cowpea Breeding
+
+Cowpea is native to Africa, 623 Mb genome; 2n=2x=22.
+It's also very important to African diets, economy and cropping systems.
+
+The genome had been completed prior to them having to design the iSelect
+
+Genotyping purposes:
+* pedigree verification
+* reference of cross parents
+* marker-trait associations (QTL mapping with RILs, GWAS)
+* maker-assisted breeding
+* supports anchoring of sequences for improving reference genome
+
+They previously made a GoldenGate assay, and mapped several cowpea traits.
+But, they're not tightly-packed enough to define a haplotype.
+
+So for iSelect, they wanted to up the marker density.
+
+56,719 SNPs intended, 51,128 represented. 1,832 DNAs applied.
+96% of the SNPs were successful.
+
+As long as you have ENOUGH DNA without salts or ethanol, it works on the assay - even if it's just an ugly smear on a gel.
+
+
+
+Giovanna Prout - Illumina Concierge service
+
+Launched last August. Product content service, for projects that aren't out-of-the-box.
+
+Tier 1: A design expert or bioinformatician works with client for 2-4 weeks.
+Tier 2: That, as well as a personal product manager & product optimization. 6-10 weeks.
+
+TruSeq Custom Amplicon assay v1.5. Through concierge, they can go up to 10,000 amplicons. Can also tweak the amplicon sizes or target SNPs. Can do whatever genome you want, too. 
+
+Nextera paired capture custom - normally just human, but concierge can do any genome.
+
+Infinium iSelectHD or Infinium Semi-Custom and Add-On content: Gave example of multi-member group that wanted each sub-group to have custom content private to them, but still leverage the pricing of consortium-scale stuff.
+
+
+
+Kevin Meldrum, PhD - What's new from Illumina
+
+The new stuff, announced yesterday at JPM15. Theme is sequencing power for every scale.
+
+X Five - it's like the X Ten, but more affordable and less throughput.
+Patterned Flow Cell Technology - nanowell substrate organizes the clusters, so it's much easier to image.
+
+That same tech has been levered into the HiSeq 3000 and 4000. 
+4000 is same price as 3000 per Gb, but has more output per day.
+
+The price of exomes and genomes is converging (which makes sense - we knew this would happen eventually). 
+
+NextSeq 550 - Sequencing and array scanning together. Basically an NextSeq500 that also does arrays.
+It has array scanning performance comparable to iScan.
+
+NextSeq v2 Reagents - Improved data quality. Looks like it shifts the "A" signal so you get better signal-to-noise, and less trouble in AT-rich regions.
+
+TruSeq cancer panel run on both NextSeq & MiSeq - very high concordance. Both around 98% somatic variant calling.
+
+Library Prep - NeoPrep library prep system. Idea is to be load-and-go. Currently beta testing. Commercial availability supposed to be in the first half of 2015.
+
+BaseSpace - Genomics Cloud Computing (though can also be run onsite). Currently has over 50 apps, which have been used 39,000 times.
+
+
