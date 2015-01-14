@@ -2290,3 +2290,160 @@ Urban vs. Rural - what does it look like today?
 A: Most work have been done with saliva, but that's not a true microbiome. She'd like to look at dental calculus.
 
 
+
+###################################
+
+
+
+GMOD
+
+
+
+W407 - Scott Cain - The Future and GMOD and Chado
+
+GMOD is a set of interoperable open-source software components for visualizing, annotating, and managing biological data.
+Also an active community of developers and users asking diverse questions, and facing common challenges, with their biological data.
+
+Funding is a problem - went from 2 FTEs to a third of an FTE.
+Several of the GMOD projects (JBrowse, Tripal, Galaxy, WebApollo) have their own funding, though.
+
+http://gmod.org/wiki/PAG for a sampling of how widely used GMOD software is.
+
+So what does lack of funding mean? Lack of coordination. Difficult to arrange GMOD meetings and courses, Chado development has slowed, building "combined" tools has stalled, and slow to respond to emails.
+
+Looking for a meeting/course venue at the moment.
+
+Chado - foundational database schema. Organism-agnostic. It's for storing many different biological data types (sequence features, ontologies, dbxrefs, genotypes/phenotypes, etc.)
+
+Last release was Dec 2013; last schema change was Sept 2011 (which is good - you don't want to be updating the schema often)
+
+Things they'd like to get into Chado:
+* Handling subspecies in the organism table
+* Several prop and linking tables (currently some created by Tripal to make it "work"), things like feature_stock and contactprop.
+* Organism_relationship (but not for phylogeny)
+* Make feature.seqlen a bigint, due to huge chromosmes of pine trees (2 billion to 9 quintillion)
+* Bug fixes for associated tools
+
+* Adding types (cvterms) to linking tables?
+* Not a schema change, but rearrange table grouping
+* The "group" module for generic grouping of "items" (features, stocks, etc.)
+* Migrate code repo to GitHub
+
+
+
+
+W408 - Lacey-Anne Sanderson - KnowPulse: A Breeder-Focused Web Portal That Integrates Genetics and Genomics of Pulse Crops and Model Genomes
+
+What a site made with Tripal can look like
+
+KnowPulse is a web-based resource for pulse crops (chickpea, common bean, peild pea and lentil)
+
+Sequences
+Marker & Allele data
+BLAST that's very pulse-specific
+Jbroswe installation, one per crop
+
+Chado used for the backend, Tripal for the main site (feature, stock, natural diversity tables used the most)
+
+Tripal integrates drupal (content management system that's easy for non-technical users), visualization etc., and chado.
+
+Tripal extension handles variant and marker pages (variant show all markers, marker pages show just one)
+
+Genotype comparison tool - needed to be flexible with respect to which germplasms are displayed
+
+
+Question:
+Does any of an individual's data ever become public?
+A: Basically, no. She's gotten a lot of pushback on that. You can see the varieties, but you can't see the pedigrees.
+
+
+
+W409 - Richard D. Hayes - Phytozome Population Diversity Visualization in JBrowse: A very large Dataset Case Study
+
+JGI
+
+Samples associated with various rivers, so they can break down the SNPs based on what river they were detected in.
+
+Only data related to the current view is sent to users, and then rendered on the user's computer.
+Pulls things out in slices.
+
+For larger datasets, VCF causes some problems. Columns extend out for the full 549 sample set. Average chunk size is 5 Mb, so hundreds or thousands of complete data records per rendered track (too much for efficient client-side rendering). Could cause browser crashes.
+
+Hybrid solution:
+1. Modify VCF to remove all 549 sample columns
+2. Use JBrowse built-in asynchronous request structure to fill popup details form queries to Phytomine.
+Sample genotype details no only accessed when a user clicks on a feature and loads the popup window
+
+
+
+W410 - Vivek Krishnakumar - JBrowse within the Arabidopsis Information Portal
+
+One goal is to maintain a "gold standard" Col-0 annotation
+
+araport.org - arabadopsis portal. Portal is built to be very modular, from an architectural standpoint.
+Three layers:
+Outward-facing
+API layer (authentication, metering, logging , versioning, HTTPS, CORS)
+AgaveCore and ADAMA
+
+Tracks at araport are a combo of local and remotely located datasets.
+
+They developed the ComboTrackSelector. Tracks with a lot of metadata goes into the faceted selector, the rest go into the hierarchical selector.
+
+JBrowse didn't have a sequence viewer, but users wanted one. They needed a lightweight JS for ease of integration.
+Used BioJS to do so.
+
+That gave rise to SeqLighter, Lets a user retrofit a track to JBrowse and view the sequence (and toggle the annotation highlighting)
+
+github.com/Arabidopsis-Information-Portal
+
+Relevant repos:
+GMOD/jbrowse (fork)
+jbrowse-contrib
+
+Gettting screenshots from Jbrowse: Can disable nav/tracklist/ruler elements from the view, but setting appropriate URL parameters to "=0". Then it just shows the features.
+To generate screenshots programmatically - need nodejs and PhantomJS. Wrapped in command line toolkit, pageres.
+
+Streaming data files from iPlant - there are a couple ways to do it.
+
+
+
+W411 - Monica C. Munoz-Torres - Apollo + i5k: Collaborative Curation and Interactive Analysis of Genomes
+
+Auto annotation is imperfect, and now we're working with low-coverage genomes & the associated errors.
+
+So she's an evangelist for manual annotation - but it doesn't always scale.
+
+The solution is to give more people the power to curate (and credit curators for their work)
+
+i5k - 5,000 insects and related Arthropod species (well, not yet, but a little over 1,000 for now).
+
+General workflow: research plan combines with seq, assembly & annotation; calling all collaborators; selecting genes of interest; manual annotation; merge automated & manual annotations; update gene set for computational analysis; publication.
+
+To do all this, you have to enforce strict rules and formats.
+Metadata capture is a must.
+Investing time and effort into the annotation pays off - so they suggest iterative runs of maker.
+
+
+
+W412 - Arun S. Seetharam - Developing genomic resource for Teosinte, Streptochaeta and Seriola
+
+They're at the genome assembly step.
+
+They used MaSuRCA - hybrid assembler. Uses deBruijn graph to make super-reads.
+
+Also used ALLPATHS-LG (does well with animal genomes, some say - though didn't work well for them)
+Also RAY, a fast assembler. MPI enabled.
+
+Teosinte - says assembly is pretty good for how repetitive it is. Captures CEGMA genes well (those are the genes that should be in all eukaryotes).
+
+Seriola lalandi -
+160x coverage. ALLPATHS-LG and MaSuRCA both did well.
+
+Streptochaeta angustifolia - related to all modern grasses/cereals.
+47x coverage, expected genome size of 1.75 G bases.
+Looks like this one falls short in terms of total size and in CEGMA. That's with ALLPATHS-LG. 50-55% repeats, and ALLPATHS-LG apparently doens't do well with that (says it doesn't do well with plants, apparently)
+
+
+
+###################################
