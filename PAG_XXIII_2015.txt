@@ -2168,3 +2168,125 @@ Library Prep - NeoPrep library prep system. Idea is to be load-and-go. Currently
 BaseSpace - Genomics Cloud Computing (though can also be run onsite). Currently has over 50 apps, which have been used 39,000 times.
 
 
+
+###################################
+
+
+
+Wednesday Plenary Session
+
+
+
+G006 - Giles Oldroyd - Engineering Nitrogen-Fixing Symbiotic Associations in Cereals
+
+Nitrogenous fertilizer increases yield, but it can get into streams, lakes, etc., and cause algal blooms. It's also expensive.
+
+In the case of maize, the limiting factor for being able to grow it is lack of nutrients (nitrogen and phosphorus), not water.
+
+ENSA - engineering the nitrogen symbiosis for Africa (since we'd like them to be able to take advantage of nitrogen much more than what's currently being done)
+
+Plants have always had to deal with the nitrogen problem. Legumes do it by "nitrogen factory" nodes on the roots.
+So, he wants to harness this sort of thing for other crops (like cereals).
+Also says you don't need to recapitulate the nodule's complexity completely to be useful.
+
+You can get modest increases in nitrogen fixation that would be sufficient to substantially increase the yield in sub-Saharan Africa (SSA). That sort of thing won't eliminate the need for nitrogenous fertilizer around the world, but it'd be enough to help SSA.
+
+Flavonods from the plant and Nod factors from the bacteria - interplay to make those nodules.
+When Nod factor is recognized, the plant entraps the bacteria and forms a tube down - infection thread - to bring bacteria in and form symbiosomes (bacteria surrounded by a plant membrane).
+It's all very complex, so need to break it down into steps.
+1. Engineer rhizobial recognition into cereals
+2. Eng. nodule formation in cereals
+3. Eng. bacterial infection process (which he thinks will be the biggest challenge)
+4. Eng. the appropriate environment for N-fixation
+
+Focusing in the first step today.
+
+Forward genetics - nsp2-1 mutant can't make nodules. Used this to dissect the signal transduction pathway.
+
+Gain-of-functions in CCAMK autoactive nodulation - making nodules in a sterile plant. So CCaMK seems to be sufficient to coordinate the processes necessary to make a complex structure like a nodule.
+
+The core of the same pathway is also involed in mycorrhization, interaction with symbiotic fungi. So this is a "symbiosis pathway".
+
+Nodulators are pretty recently evolved. Arbuscular mycorrhizal symbiosis is really ancient, though (dawn of land plants), so it's basically ubiquitous in the plant kingdom.
+So what we're really looking at is a mycorrhizal pathway that's been recruited in legumes to make these nodes.
+
+What that means is that even cereals contain a functional symbiosis signaling pathway. 
+
+So what we really need to understand is how this pathway functions in mycorrhizal symbiosis.
+
+LCOs/COs - Legumes recognize both, non-legumes only really recognize COs.
+So, need to transfer that ability to recognize LCOs to cereal crops, so they can activate the symbiosis pathway.
+That means engineering the Nod factor receptor
+
+Stable expression of genes in cereal roots is tough - not a lot of promoters available to engineer with. 
+
+Complementation of ccamk using CCaMK driven by cereal promoters in a legume - counting number of nodules lets you see which cereal promoters work best for which genes in a legume (and presumably back in cereals).
+
+Golden Gate cloning facilitates multi-gene vector construction.
+
+Design/Build/Test cycle - they've got design and build down, but testing is really laborious. Current target is maize, but they're using barley for testing (greatest efficiency of transformation). They'll get a couple hundred constructs into barley.
+That's still not a rapid engineering cycle, though. And he says they should be working with 100,000 constructs, not 100. That's a big challenge.
+
+Currently looking at liverwort as a chassis for this cycle to try to speed things up.
+
+
+Questions:
+Have they tried to overexpress CCaMK in rice in rice?
+A: Yeah. You wouldn't expect them to give a nodule, and they don't.
+
+Why haven't cereals evolved a solution already?
+A: Evolution has to work with what it has, and cereals usually don't grow in low-nitrogen environments in the wild. Agriculturally, they've been selected for yield. 
+
+If the middle part of the pathway is common to micorrhizal and NFB symbiosis, how does the plant tell the difference?
+A: Don't know, but there has to be specificity.
+
+
+
+G007 - Christina Warinner - Reconstructing Our Ancient Microbial Self
+
+We know almost nothing about the evolution of the microbiome.
+But first, some background about the microbiome:
+
+Says there are 10x as many bacterial cells in your body than human cells (but remember that Mick Watson noted that's an overestimate - see http://academy.asm.org/images/stories/documents/FAQ_Human_Microbiome.pdf)
+
+Some animals - like cows, horses, koalas - eat foods that they lack the enzymes to digest or otherwise handle, so they rely on their microbes to provide those.
+
+Major difference in microbial diversity in hunter-gatherers and rural agriculturalists vs. urban-industrialists (urban has less diversity)
+
+Microbes also produce vitamins, educate immune system, defend against pathogens (or is a source of pathogens)
+
+Skeletons don't have microbiomes - but sometimes things DO preserve. Feces, if in dry or cold environs, can make coprolite (though very rare). But dental plaque also sticks around.
+
+First, coprolites. They see lots of plant material (even eating sticks, apparently). Very fibrous diets.
+Uses Bayesian program called "source tracker" to separate actual microbiome away from soil. Coprolites tend to mostly compost in place, though.
+
+But they also looked at coprolites from salt mines, and those are pretty good samples. Look similar to what's in our guts right now. Samples were Austria (iron age) and Iran (also iron age).
+Bifidobacterium - in milk-drinking populations. Found in the Austrian sample, but not Iran.
+Treponema - not found in urban-industrial species, though found in pretty much everyone else
+
+Dental calculus - it forms in layers, like an onion. They haven't taken advantage of that yet, but want to.
+
+Dentine SHOLD all be human DNA, but it decomposes quickly. Best sample they found was in Nepal.
+By looking in the dental calculus, you do got a lot of microbial DNA, which is nice.
+
+SEM - calculus stands up better than dentin.
+
+Calculus and dentin have radically different communities. Network analysis clusters them differently. Dentin is similar to oral an other body site samples and humans and animals. The dentin bit is similar to groundwater, soil, leaf litter, environmental samples.
+
+Mostly bacterial DNA recovered. Also recover proteins (some of which are human)
+
+Skeletal record matches bacterial abundance with respect to periodontal disease.
+
+Bacterial abundance in a german sample essentially matches the stereotypical modern german diet.
+
+Now talking about the milk protein information (see notes for talk W240)
+
+
+Questions:
+What about teeth brushing and tooth loss?
+A: Once you have grain, we lose a lot of teeth. Under 25 don't have much calculus, and over 45 don't have any teeth.
+
+Urban vs. Rural - what does it look like today?
+A: Most work have been done with saliva, but that's not a true microbiome. She'd like to look at dental calculus.
+
+
